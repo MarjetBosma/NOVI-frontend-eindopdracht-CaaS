@@ -1,10 +1,9 @@
 import React from 'react';
-import './Profile.css'
 
-function Profile() {
+function AuthContext() {
     return (
         <div></div>
     );
 }
 
-export default Profile;
+export default AuthContext;
