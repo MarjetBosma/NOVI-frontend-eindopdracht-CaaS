@@ -1,0 +1,18 @@
+.nav-menu {
+    display: flex;
+    width: 658px;
+    height: 117px;
+    padding: 0 2px 0 50px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    background: #0DD4EF;
+}
+
+.nav-object {
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

@@ -1,7 +1,8 @@
-#header {
+header {
     display: flex;
     flex-direction: row;
     width: 100vw;
+    height: 100px;
     justify-content: space-between;
     align-items: center;
     background: #0DD4EF;
@@ -11,10 +12,18 @@
 .logo-container {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .image-container {
     display: flex;
+    flex-direction: row;
+    height: 100px;
+}
+
+#logo-small {
+    height: 100%;
 }
 
 .logo-text-container {
@@ -22,10 +31,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
 }
 
-.caas-logo-text {
-    justify-content: flex-end;
-    align-items: center;
-    gap: 14px;
+#caas-small {
+    text-align: center;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-inline: 20px;
+    padding-top: 10px;
+
+}
+
+#cat-as-a-service-small {
+    color: #0E0F3B;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-inline: 20px;
+    padding-bottom: 20px;
 }

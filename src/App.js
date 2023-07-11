@@ -17,23 +17,14 @@ function App() {
       <header id="header" className="outer-content-container">
         <span className="logo-container">
             <span className="image-container">
-              <img src={logo} alt="logo"/>
-              </span>
+              <img id="logo-small" src={logo} alt="logo"/>
+            </span>
             <span className="logo-text-container">
-                <h3 id="caas-logo-text">CaaS</h3>
-                <p>Cat as a Service</p>
+                <h3 id="caas-small">CaaS</h3>
+                <p id="cat-as-a-service-small">Cat as a Service</p>
             </span>
         </span>
         <NavBar />
-      <span className="content">
-        {/*<Routes>*/}
-        {/*  <Route exact path="/" element={<Home />}/>*/}
-        {/*  <Route path="/signup" element={<SignUp />}/>*/}
-        {/*  <Route path="/signin" element={ <SignIn />} />*/}
-        {/*  <Route path="/profile" element={ isAuth ? <Profile /> : <Navigate to="/" />}/>*/}
-        {/*  <Route path="/images" element={ isAuth ? <Images /> : <Navigate to="/" />}/>*/}
-        {/*</Routes>*/}
-      </span>
       </header>
     </div>
   );
