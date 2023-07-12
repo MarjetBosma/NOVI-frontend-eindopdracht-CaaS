@@ -42,7 +42,6 @@ header {
     line-height: normal;
     padding-inline: 20px;
     padding-top: 10px;
-
 }
 
 #cat-as-a-service-small {
@@ -54,4 +53,8 @@ header {
     line-height: normal;
     padding-inline: 20px;
     padding-bottom: 20px;
+}
+
+.navbar-container {
+    display: flex;
 }

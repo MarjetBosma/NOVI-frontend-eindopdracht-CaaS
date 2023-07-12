@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import NavBar from './components/NavBar';
 import logo from './assets/caas-logo-no-text.jpg'
 import './App.css';
@@ -24,8 +24,19 @@ function App() {
                 <p id="cat-as-a-service-small">Cat as a Service</p>
             </span>
         </span>
-        <NavBar />
+        <span className="navbar-container">
+          <NavBar />
+        </span>
       </header>
+      <div className="content">
+        <Routes>
+          <Route exact path="/" element={<Home />}/>
+          <Route path="/signup" element={<SignUp />}/>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/images" element={<Images />}/>
+          <Route path="/profile" element={<Profile />}/>
+        </Routes>
+      </div>
     </div>
   );
 }
