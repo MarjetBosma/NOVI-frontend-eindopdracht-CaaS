@@ -13,8 +13,8 @@ function App() {
   //const { isAuth } = useContext(AuthContext);
 
   return (
-    <div>
-      <header id="header" className="outer-content-container">
+    <div className="outer-container">
+      <header>
         <span className="logo-container">
             <span className="image-container">
               <img id="logo-small" src={logo} alt="logo"/>
@@ -25,18 +25,23 @@ function App() {
             </span>
         </span>
         <span className="navbar-container">
-          <NavBar />
+          {/*<NavBar />*/}
         </span>
       </header>
       <div className="content">
-        <Routes>
-          <Route exact path="/" element={<Home />}/>
-          <Route path="/signup" element={<SignUp />}/>
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/images" element={<Images />}/>
-          <Route path="/profile" element={<Profile />}/>
-        </Routes>
+        {/*<Routes>*/}
+        {/*  <Route exact path="/" element={<Home />}/>*/}
+        {/*  <Route path="/signup" element={<SignUp />}/>*/}
+        {/*  <Route path="/signin" element={<SignIn />} />*/}
+        {/*  <Route path="/images" element={<Images />}/>*/}
+        {/*  <Route path="/profile" element={<Profile />}/>*/}
+        {/*</Routes>*/}
       </div>
+      <footer>
+        <p className="footer-text">
+            © Marjet Bosma, Eindopdracht Frontend, NOVI Hogeschool
+        </p>
+      </footer>
     </div>
   );
 }
