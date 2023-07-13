@@ -2,14 +2,17 @@ import React from 'react';
 import './SignUp.css'
 import { Link } from 'react-router-dom';
 import logo from "../../assets/caas-logo-no-text.jpg";
+import InputField from "../../components/InputField";
+import Button from "../../components/Button";
 
 function SignUp() {
     return (
         <div className="inner-container">
           <div className="sign-up-container">
-            {/*component invoervelden toevoegen*/}
-            <button type="button">Registreer</button>
-            {/*Button nog als component*/}
+            <InputField></InputField>
+            <InputField></InputField>
+            <InputField></InputField>
+            <Button type="button">Registreer</Button>
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
           </div>
           <div className="title-image-container">

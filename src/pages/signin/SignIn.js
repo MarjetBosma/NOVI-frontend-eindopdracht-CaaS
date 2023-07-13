@@ -2,14 +2,16 @@ import React from 'react';
 import './SignIn.css'
 import { Link } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
+import InputField from "../../components/InputField";
+import Button from "../../components/Button";
 
 function SignIn() {
     return (
         <div className="inner-container">
             <div className="sign-in-container">
-                {/*component invoervelden toevoegen*/}
-                <button type="button">Inloggen</button>
-                {/*Button nog als component*/}
+                <InputField></InputField>
+                <InputField></InputField>
+                <Button type="button">Inloggen</Button>
                 <p>Nog geen account? Registreer je <Link to="/signup">hier</Link>.</p>
             </div>
             <div className="title-image-container">

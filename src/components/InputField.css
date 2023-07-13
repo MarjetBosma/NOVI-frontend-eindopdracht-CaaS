@@ -1,0 +1,8 @@
+InputField {
+    display: flex;
+    width: 461px;
+    height: 66px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}

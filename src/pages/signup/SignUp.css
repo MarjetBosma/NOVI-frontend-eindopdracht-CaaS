@@ -7,10 +7,11 @@
 .sign-up-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     margin-right: 50px;
     flex-basis: 50%;
+    height: 500px;
 }
 
 .title-image-container {
@@ -20,6 +21,7 @@
     align-items: center;
     margin-left: 50px;
     flex-basis: 50%;
+    height: 500px;
 }
 
 .image-container-signup {
