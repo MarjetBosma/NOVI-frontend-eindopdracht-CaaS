@@ -1,16 +1,22 @@
 .inner-container {
     display: flex;
     flex-direction: row;
+    margin-inline: 150px;
 }
 
-.image-container {
+.image-container-home {
     display: flex;
     flex-direction: row;
+    height: 500px;
+    margin-right: 50px;
+    flex-basis: 50%;
 }
 
 .content-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    margin-left: 50px;
+    flex-basis: 50%;
 }

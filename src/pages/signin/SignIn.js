@@ -10,12 +10,12 @@ function SignIn() {
                 {/*component invoervelden toevoegen*/}
                 <button type="button">Inloggen</button>
                 {/*Button nog als component*/}
-                <p>Nog geen account? Registreer je <Link to="/signin">hier</Link>.</p>
+                <p>Nog geen account? Registreer je <Link to="/signup">hier</Link>.</p>
             </div>
             <div className="title-image-container">
-                <h2>Maak nu een account aan</h2>
+                <h2>Log in op je account</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
-                <div className="image-container">
+                <div className="image-container-signin">
                     <img id="logo-large" src={logo} alt="logo"/>
                 </div>
             </div>

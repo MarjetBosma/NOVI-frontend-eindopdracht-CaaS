@@ -24,7 +24,7 @@ header {
     align-items: center;
 }
 
-.image-container {
+.header-image-container {
     display: flex;
     flex-direction: row;
     height: 100px;

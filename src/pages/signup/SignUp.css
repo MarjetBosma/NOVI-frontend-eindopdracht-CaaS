@@ -1,18 +1,30 @@
 .inner-container {
     display: flex;
     flex-direction: row;
+    margin-inline: 150px;
 }
 
 .sign-up-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-right: 50px;
+    flex-basis: 50%;
 }
 
 .title-image-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    margin-left: 50px;
+    flex-basis: 50%;
+}
+
+.image-container-signup {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 300px;
 }

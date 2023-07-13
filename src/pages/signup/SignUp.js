@@ -15,9 +15,9 @@ function SignUp() {
           <div className="title-image-container">
             <h2>Maak nu een account aan</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
-              <div className="image-container">
-                <img id="logo-large" src={logo} alt="logo"/>
-              </div>
+            <div className="image-container-signup">
+              <img id="logo-large" src={logo} alt="logo"/>
+            </div>
           </div>
         </div>
     );

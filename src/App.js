@@ -16,7 +16,7 @@ function App() {
     <div className="outer-container">
       <header>
         <span className="logo-container">
-            <span className="image-container">
+            <span className="header-image-container">
               <img id="logo-small" src={logo} alt="logo"/>
             </span>
             <span className="logo-text-container">
@@ -25,17 +25,17 @@ function App() {
             </span>
         </span>
         <span className="navbar-container">
-          {/*<NavBar />*/}
+          <NavBar />
         </span>
       </header>
       <div className="content">
-        {/*<Routes>*/}
-        {/*  <Route exact path="/" element={<Home />}/>*/}
-        {/*  <Route path="/signup" element={<SignUp />}/>*/}
-        {/*  <Route path="/signin" element={<SignIn />} />*/}
-        {/*  <Route path="/images" element={<Images />}/>*/}
-        {/*  <Route path="/profile" element={<Profile />}/>*/}
-        {/*</Routes>*/}
+        <Routes>
+          <Route exact path="/" element={<Home />}/>
+          <Route path="/signup" element={<SignUp />}/>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/images" element={<Images />}/>
+          <Route path="/profile" element={<Profile />}/>
+        </Routes>
       </div>
       <footer>
         <p className="footer-text">
