@@ -1,0 +1,16 @@
+.inner-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
