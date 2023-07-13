@@ -1,18 +1,26 @@
 .nav-menu {
     display: flex;
-    width: 658px;
+    flex-wrap: wrap;
+    max-width: 700px;
+    min-width: 400px;
     height: 100px;
-    padding: 0 2px 0 50px;
+    padding-inline: 40px;
     justify-content: flex-end;
     align-items: center;
-    gap: 5px;
+    gap: 15px;
     background: #0DD4EF;
 }
 
 .nav-object {
     text-align: center;
+    color: #0E0F3B;
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    text-decoration: none;
+}
+
+.nav-object:hover {
+    color: #0A4C90;
 }
