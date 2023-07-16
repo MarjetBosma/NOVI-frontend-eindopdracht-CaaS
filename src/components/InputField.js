@@ -1,7 +1,7 @@
 import React from 'react';
 import './InputField.css'
 
-function InputField({ label, inputType, name, value, changeHandler}) {
+function InputField({ label, inputType, name, value, changeHandler }) {
     return (
         <div>
             <label htmlFor={`${name}-field`}>{label}</label>

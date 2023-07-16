@@ -11,7 +11,7 @@
     background: #0DD4EF;
 }
 
-.nav-object {
+.default-link {
     text-align: center;
     color: #0E0F3B;
     font-size: 20px;
@@ -21,6 +21,20 @@
     text-decoration: none;
 }
 
-.nav-object:hover {
+.default-link:hover {
+    color: #0A4C90;
+}
+
+.active-link {
+    text-align: center;
+    color: #F7931E;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.active-link:hover {
     color: #0A4C90;
 }

@@ -6,7 +6,7 @@ import './App.css';
 import Home from "./pages/home/Home";
 import SignUp from "./pages/signup/SignUp";
 import SignIn from "./pages/signin/SignIn";
-import Images from "./pages/assets/Images";
+import Images from "./pages/images/Images";
 import Profile from "./pages/profile/Profile";
 
 function App() {

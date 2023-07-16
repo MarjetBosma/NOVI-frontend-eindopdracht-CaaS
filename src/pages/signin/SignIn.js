@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './SignIn.css'
 import { Link } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
-// import { emailIcon } from "../../assets/email-icon.png";
-// import { passwordIcon } from "../../assets/password-icon.png";
-// import { visibilityIcon } from "../../assets/visibility-icon.png";
+import emailIcon from "../../assets/email-icon.png";
+import passwordIcon from "../../assets/password-icon.png";
+import visibilityIcon from "../../assets/visibility-icon.png";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 
@@ -23,7 +23,7 @@ function SignIn() {
                     value={email}
                     changeHandler={setEmail}
                 >
-                    {/*<img className="email-icon" src={emailIcon} alt="email icon"/>*/}
+                    <img className="email-icon" src={emailIcon} alt="email icon"/>
                 </InputField>
                 <InputField
                     name="password"
@@ -32,8 +32,8 @@ function SignIn() {
                     value={password}
                     changeHandler={setPassword}
                 >
-                    {/*<img className="password-icon" src={passwordIcon} alt="password icon"/>*/}
-                    {/*<img className="visibility-icon" src={visibilityIcon} alt="visibility icon"/>*/}
+                    <img className="password-icon" src={passwordIcon} alt="password icon"/>
+                    <img className="visibility-icon" src={visibilityIcon} alt="visibility icon"/>
                 </InputField>
                   <Button type="submit" className="button">Inloggen</Button>
               </form>
