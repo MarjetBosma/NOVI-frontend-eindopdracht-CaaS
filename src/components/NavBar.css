@@ -1,3 +1,5 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
 .nav-menu {
     display: flex;
     flex-wrap: wrap;
@@ -37,4 +39,14 @@
 
 .active-link:hover {
     color: #0A4C90;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .nav-menu {
+        display: none;
+    }
+
 }

@@ -46,12 +46,13 @@ function SignUp() {
                 <img className="password-icon" src={passwordIcon} alt="password icon"/>
                 <img className="visibility-icon" src={visibilityIcon} alt="visibility icon"/>
               </InputField>
-            </form>
-                <Button
+
+              <Button
                   type="submit"
                   className="button">
                   Registreer
               </Button>
+            </form>
 
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
           </section>

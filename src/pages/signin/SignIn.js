@@ -35,7 +35,11 @@ function SignIn() {
                     <img className="password-icon" src={passwordIcon} alt="password icon"/>
                     <img className="visibility-icon" src={visibilityIcon} alt="visibility icon"/>
                 </InputField>
-                  <Button type="submit" className="button">Inloggen</Button>
+                <Button
+                    type="submit"
+                    className="button">
+                    Log in
+                </Button>
               </form>
               <p>Nog geen account? Registreer je <Link to="/signup">hier</Link>.</p>
             </section>

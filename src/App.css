@@ -1,3 +1,5 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
 .outer-container {
     display: flex;
     flex-direction: column;
@@ -91,4 +93,18 @@ footer {
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+    padding: 20px;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+
+
+    .footer-text {
+        padding: 10px;
+        font-size: 10px;
+    }
+
 }

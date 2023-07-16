@@ -1,9 +1,18 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.inner-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 50px;
+    gap: 50px;
+}
+
 .signup-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-right: 50px;
     flex-basis: 50%;
 }
 
@@ -12,7 +21,9 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    gap: 30px;
     height: 300px;
+    padding-top: 30px;
 }
 
 .title-image-container {
@@ -20,7 +31,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-left: 50px;
     flex-basis: 50%;
     height: 500px;
     min-width: 300px;
@@ -51,3 +61,41 @@ a {
 a:hover {
     color: #0DD4EF;
 }
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .inner-container {
+        display: flex;
+        flex-direction: column-reverse;
+        flex-wrap: wrap-reverse;
+    }
+
+    .title-image-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+    }
+
+    .image-container-signup {
+        display: none;
+    }
+
+    .logo-large-signup {
+        display: none;
+    }
+
+    .signup-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        height: 300px;
+        padding-top: 0;
+    }
+
+}
+

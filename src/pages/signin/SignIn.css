@@ -1,9 +1,18 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.inner-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 50px;
+    gap: 50px;
+}
+
 .signin-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-left: 50px;
     flex-basis: 50%;
 }
 
@@ -20,7 +29,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-left: 50px;
     flex-basis: 50%;
     height: 500px;
     min-width: 300px;
@@ -50,4 +58,40 @@ a {
 
 a:hover {
     color: #0DD4EF;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .inner-container {
+        display: flex;
+        flex-direction: column-reverse;
+        flex-wrap: wrap-reverse;
+        justify-content: space-around;
+    }
+
+    .title-image-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+    }
+
+    .image-container-signin {
+        display: none;
+    }
+
+    .logo-large-signin {
+        display: none;
+    }
+
+    .signin-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 300px;
+    }
+
 }

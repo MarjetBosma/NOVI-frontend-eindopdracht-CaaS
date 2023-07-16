@@ -1,0 +1,16 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.inner-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 50px;
+    gap: 50px;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+
+}

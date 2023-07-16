@@ -1,14 +1,23 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.inner-container-home {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 50px;
+    gap: 50px;
+}
+
 .image-container-home {
     display: flex;
     flex-direction: row;
-    margin-right: 50px;
     flex-basis: 50%;
-    min-width: 400px;
+    padding: 50px;
 }
 
 .logo-large-home {
-    width: 100%;
-    height: auto;
+    width: 400px;
+    max-height: 400px;
     object-fit: cover;
     object-position: top;
 }
@@ -18,7 +27,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-left: 50px;
     flex-basis: 50%;
     height: 400px;
 }
@@ -30,4 +38,45 @@
 .button--button-link a:hover {
     text-decoration: none;
     color: #0A4C90;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .inner-container-home {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .image-container-home {
+        display: flex;
+        flex-direction: row;
+        flex-basis: auto;
+        padding: 0;
+    }
+
+    .logo-large-home {
+        height: 100%;
+        max-width: 300px;
+        object-position: top;
+    }
+
+    .content-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        flex-basis: 50%;
+        gap: 25px;
+        padding-bottom: 20px;
+        height: 400px;
+    }
+
+
 }

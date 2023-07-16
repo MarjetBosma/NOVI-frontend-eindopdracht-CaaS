@@ -1,3 +1,5 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
 Button {
     display: flex;
     flex-direction: column;
@@ -22,4 +24,11 @@ Button {
 
 Button:hover {
     color: #0A4C90;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+
 }

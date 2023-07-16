@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;0,700;0,900;1,100;1,300;1,700;1,900&display=swap');
 
+/* ------------------------------- Desktop versie -------------------------------- */
+
 * {
     margin: 0;
     padding: 0;
@@ -27,5 +29,26 @@ h2 {
 }
 
 p {
+    font-size: 16px;
     text-align: center;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    h1 {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
 }
