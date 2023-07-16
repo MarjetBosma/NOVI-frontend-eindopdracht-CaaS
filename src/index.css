@@ -15,3 +15,17 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Ravie', sans-serif;
     color: #0E0F3B;
 }
+
+h1 {
+    font-size: 48px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 36px;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}

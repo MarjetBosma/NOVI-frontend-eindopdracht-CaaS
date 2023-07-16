@@ -30,7 +30,7 @@ header {
     height: 100px;
 }
 
-#logo-small {
+.logo-small {
     height: 100%;
 }
 
@@ -39,10 +39,9 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
 }
 
-#caas-small {
+.caas-small {
     text-align: center;
     font-size: 36px;
     font-style: normal;
@@ -52,7 +51,7 @@ header {
     padding-top: 10px;
 }
 
-#cat-as-a-service-small {
+.cat-as-a-service-small {
     color: #0E0F3B;
     text-align: center;
     font-size: 16px;
@@ -66,6 +65,14 @@ header {
 .navbar-container {
     display: flex;
     flex-direction: row;
+}
+
+.inner-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 1200px;
+    margin-inline: 150px;
 }
 
 footer {

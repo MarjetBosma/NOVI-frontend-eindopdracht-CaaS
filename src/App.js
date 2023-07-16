@@ -6,7 +6,7 @@ import './App.css';
 import Home from "./pages/home/Home";
 import SignUp from "./pages/signup/SignUp";
 import SignIn from "./pages/signin/SignIn";
-import Images from "./pages/images/Images";
+import Images from "./pages/assets/Images";
 import Profile from "./pages/profile/Profile";
 
 function App() {
@@ -17,18 +17,18 @@ function App() {
       <header>
         <span className="logo-container">
             <span className="header-image-container">
-              <img id="logo-small" src={logo} alt="logo"/>
+              <img className="logo-small" src={logo} alt="logo"/>
             </span>
             <span className="logo-text-container">
-                <h3 id="caas-small">CaaS</h3>
-                <p id="cat-as-a-service-small">Cat as a Service</p>
+                <h3 className="caas-small">CaaS</h3>
+                <p className="cat-as-a-service-small">Cat as a Service</p>
             </span>
         </span>
         <span className="navbar-container">
           <NavBar />
         </span>
       </header>
-      <div className="content">
+      <div>
         <Routes>
           <Route exact path="/" element={<Home />}/>
           <Route path="/signup" element={<SignUp />}/>

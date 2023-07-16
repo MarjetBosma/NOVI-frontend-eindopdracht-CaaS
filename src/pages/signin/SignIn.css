@@ -1,10 +1,21 @@
-.inner-container {
+.signin-container {
     display: flex;
-    flex-direction: row;
-    margin-inline: 150px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 50px;
+    flex-basis: 50%;
 }
 
-.sign-in-container {
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 300px;
+}
+
+.title-image-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -12,21 +23,31 @@
     margin-left: 50px;
     flex-basis: 50%;
     height: 500px;
+    min-width: 300px;
 }
 
 .image-container-signin {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 300px;
+    max-height: 300px;
+    min-width: 300px;
+}
+
+.logo-large-signin {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    object-position: top;
 }
 
 a {
-    text-decoration: none;
-    color: #0A4C90
+    text-decoration: underline;
+    color: #0A4C90;
+    font-weight: 700;
 }
 
 a:hover {
-    text-decoration: none;
     color: #0DD4EF;
 }
