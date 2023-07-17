@@ -1,10 +1,12 @@
 /* ------------------------------- Desktop versie -------------------------------- */
 
-.inner-container {
+.inner-container-signup {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 50px;
+    max-width: 1200px;
+    margin-inline: 100px;
     gap: 50px;
 }
 
@@ -13,7 +15,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    flex-basis: 50%;
 }
 
 .signup-form {
@@ -22,64 +23,53 @@
     justify-content: space-around;
     align-items: center;
     gap: 30px;
-    height: 300px;
+    height: 400px;
     padding-top: 30px;
 }
 
-.title-image-container {
+.title-logo-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    flex-basis: 50%;
     height: 500px;
-    min-width: 300px;
 }
 
-.image-container-signup {
+.logo-container-signup {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    max-height: 300px;
     min-width: 300px;
 }
 
 .logo-large-signup {
     width: 100%;
-    height: auto;
     max-height: 300px;
     object-fit: cover;
     object-position: top;
-}
-
-a {
-    text-decoration: underline;
-    color: #0A4C90;
-    font-weight: 700;
-}
-
-a:hover {
-    color: #0DD4EF;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
 
-    .inner-container {
+    .inner-container-signup {
         display: flex;
         flex-direction: column-reverse;
         flex-wrap: wrap-reverse;
+        gap: 0;
+        margin-inline: 0;
     }
 
-    .title-image-container {
+    .title-logo-container {
         display: flex;
         flex-direction: column;
-        height: auto;
+        align-items: center;
         gap: 20px;
+        padding-right: 50px;
     }
 
-    .image-container-signup {
+    .logo-container-signup {
         display: none;
     }
 
@@ -93,8 +83,8 @@ a:hover {
         justify-content: flex-start;
         align-items: center;
         gap: 20px;
-        height: 300px;
-        padding-top: 0;
+        height: 320px;
+        padding-top: 10px;
     }
 
 }

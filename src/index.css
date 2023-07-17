@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;0,700;0,900;1,100;1,300;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;0,700;0,900;1,100;1,300;1,700;1,900&display=swap");
 
 /* ------------------------------- Desktop versie -------------------------------- */
 
@@ -9,12 +9,12 @@
 }
 
 body  {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     color: #0E0F3B;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Ravie', sans-serif;
+    font-family: "Ravie", sans-serif;
     color: #0E0F3B;
 }
 
@@ -31,6 +31,16 @@ h2 {
 p {
     font-size: 16px;
     text-align: center;
+}
+
+a {
+    text-decoration: underline;
+    color: #0A4C90;
+    font-weight: 700;
+}
+
+a:hover {
+    color: #0DD4EF;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */

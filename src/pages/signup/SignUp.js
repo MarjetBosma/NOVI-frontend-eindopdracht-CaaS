@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import './SignUp.css'
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "./SignUp.css"
+import { Link } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
 import userIcon from "../../assets/user-icon.png";
 import emailIcon from "../../assets/email-icon.png";
@@ -15,7 +15,7 @@ function SignUp() {
     const [password, setPassword] = useState('');
 
     return (
-        <div className="inner-container">
+        <div className="inner-container-signup">
           <section className="signup-container">
             <form className="signup-form">
               <InputField
@@ -57,10 +57,10 @@ function SignUp() {
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
           </section>
 
-          <section className="title-image-container">
+          <section className="title-logo-container">
             <h2>Maak nu een account aan</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
-            <div className="image-container-signup">
+            <div className="logo-container-signup">
               <img className="logo-large-signup" src={logo} alt="logo"/>
             </div>
           </section>

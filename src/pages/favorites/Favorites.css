@@ -1,16 +1,99 @@
 /* ------------------------------- Desktop versie -------------------------------- */
 
-.inner-container {
+.inner-container-favorites {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 50px;
+    max-width: 1200px;
+    margin-inline: 100px;
     gap: 50px;
 }
 
+.favorites-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.favorites-container {
+    display: grid;
+    grid-template-columns: 75px 75px 75px 75px 75px 75px;
+    grid-template-rows: 75px 75px 75px 75px;
+    grid-gap: 16px;
+    padding-block: 50px;
+}
+
+.thumbnail {
+    width: 75px;
+    height: 75px;
+    background: grey;
+}
+
+.title-logo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 500px;
+    min-width: 300px;
+}
+
+.logo-container-favorites {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.logo-large-favorites {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    object-position: top;
+}
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
 
+    .inner-container-favorites {
+        display: flex;
+        flex-direction: column-reverse;
+        flex-wrap: wrap-reverse;
+        align-items: center;
+        padding: 20px;
+        margin-inline: 0;
+        gap: 0;
+    }
 
+    .favorites-container {
+        display: grid;
+        grid-template-columns: 45px 45px 45px 45px;
+        grid-template-rows: 45px 45px 45px 45px 45px 45px;
+        grid-gap: 12px;
+        padding-top: 0;
+        padding-bottom: 12px;
+    }
+
+    .thumbnail {
+        width: 45px;
+        height: 45px;
+        background: grey;
+    }
+
+    .title-logo-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+        margin-bottom: -20px;
+    }
+
+    .logo-container-favorites {
+        display: none;
+    }
+
+    .logo-large-favorites {
+        display: none;
+    }
 }

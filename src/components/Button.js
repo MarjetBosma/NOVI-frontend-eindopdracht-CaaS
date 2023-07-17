@@ -1,5 +1,5 @@
-import React from 'react';
-import './Button.css'
+import React from "react";
+import "./Button.css"
 
 function Button({ clickHandler, type, disabled, children, className}) {
     return (

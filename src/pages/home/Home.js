@@ -1,5 +1,5 @@
-import React from 'react';
-import './Home.css'
+import React from "react";
+import "./Home.css"
 import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";

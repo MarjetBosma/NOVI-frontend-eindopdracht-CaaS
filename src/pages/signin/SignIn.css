@@ -1,10 +1,12 @@
 /* ------------------------------- Desktop versie -------------------------------- */
 
-.inner-container {
+.inner-container-signin {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 50px;
+    max-width: 1200px;
+    margin-inline: 100px;
     gap: 50px;
 }
 
@@ -13,7 +15,6 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    flex-basis: 50%;
 }
 
 .signin-form {
@@ -24,22 +25,19 @@
     height: 300px;
 }
 
-.title-image-container {
+.title-logo-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    flex-basis: 50%;
     height: 500px;
     min-width: 300px;
 }
 
-.image-container-signin {
+.logo-container-signin {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    max-height: 300px;
-    min-width: 300px;
+    justify-content: center;;
 }
 
 .logo-large-signin {
@@ -50,35 +48,27 @@
     object-position: top;
 }
 
-a {
-    text-decoration: underline;
-    color: #0A4C90;
-    font-weight: 700;
-}
-
-a:hover {
-    color: #0DD4EF;
-}
-
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
 
-    .inner-container {
+    .inner-container-signin {
         display: flex;
         flex-direction: column-reverse;
         flex-wrap: wrap-reverse;
-        justify-content: space-around;
+        gap: 0;
+        margin-inline: 0;
     }
 
-    .title-image-container {
+    .title-logo-container {
         display: flex;
         flex-direction: column;
-        height: auto;
+        align-items: center;
         gap: 20px;
+        padding-right: 50px;
     }
 
-    .image-container-signin {
+    .logo-container-signin {
         display: none;
     }
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import './InputField.css'
+import React from "react";
+import "./InputField.css"
 
 function InputField({ label, inputType, name, value, changeHandler }) {
     return (
