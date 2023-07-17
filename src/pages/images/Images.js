@@ -22,7 +22,7 @@ function Images() {
                 </div>
                 <p>Eerder opgeslagen afbeeldingen bekijken? Ga naar je <Link to="/favorites">favorieten</Link>!</p>
             </section>
-            <section className="title-logo-container">
+            <section className="title-logo-container-images">
                 <h2>Vraag hier een kat op</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
                 <div className="logo-container-images">

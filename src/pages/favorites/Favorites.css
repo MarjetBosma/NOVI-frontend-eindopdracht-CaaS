@@ -30,13 +30,12 @@
     background: grey;
 }
 
-.title-logo-container {
+.title-logo-container-favorites {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 500px;
-    min-width: 300px;
+    padding-bottom: 20px;
 }
 
 .logo-container-favorites {

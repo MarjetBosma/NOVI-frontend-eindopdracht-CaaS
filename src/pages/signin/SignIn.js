@@ -44,7 +44,7 @@ function SignIn() {
               <p>Nog geen account? Registreer je <Link to="/signup">hier</Link>.</p>
             </section>
 
-            <section className="title-logo-container">
+            <section className="title-logo-container-signin">
                 <h2>Log in op je account</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
                 <div className="logo-container-signin">

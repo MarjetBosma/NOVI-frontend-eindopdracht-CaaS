@@ -38,7 +38,7 @@ function Favorites() {
                 </Button>
 
             </section>
-            <section className="title-logo-container">
+            <section className="title-logo-container-favorites">
                 <h2>Jouw favoriete katten</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
                 <div className="logo-container-favorites">

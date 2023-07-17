@@ -30,7 +30,7 @@
     gap: 30px;
 }
 
-.title-logo-container {
+.title-logo-container-images {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -61,7 +61,7 @@
         display: flex;
         flex-direction: column-reverse;
         flex-wrap: wrap-reverse;
-        gap: 0;
+        gap: 30px;
         margin-inline: 0;
     }
 
@@ -73,19 +73,23 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        height: 360px;
+        height: 380px;
         gap: 0;
+        padding-bottom: 20px;
     }
 
     .inner-button-container {
         gap: 10px;
     }
 
-    .title-logo-container {
+    .title-logo-container-images {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        padding-bottom: 30px;
+        padding-right: 30px;
+        height: 150px;
+        padding-bottom: 20px;
+        padding-top: 50px;
     }
 
     .logo-container-images {

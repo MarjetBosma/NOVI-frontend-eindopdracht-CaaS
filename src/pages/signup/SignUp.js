@@ -57,7 +57,7 @@ function SignUp() {
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
           </section>
 
-          <section className="title-logo-container">
+          <section className="title-logo-container-signup">
             <h2>Maak nu een account aan</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
             <div className="logo-container-signup">
