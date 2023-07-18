@@ -1,15 +1,5 @@
 /* ------------------------------- Desktop versie -------------------------------- */
 
-.inner-container-signin {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 50px;
-    max-width: 1200px;
-    margin-inline: 100px;
-    gap: 50px;
-}
-
 .signin-container {
     display: flex;
     flex-direction: column;
@@ -25,67 +15,13 @@
     height: 300px;
 }
 
-.title-logo-container-signin {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 500px;
-    min-width: 300px;
-}
-
-.logo-container-signin {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.logo-large-signin {
-    width: 100%;
-    height: auto;
-    max-height: 300px;
-    object-fit: cover;
-    object-position: top;
-}
 
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
 
-    .inner-container-signin {
-        display: flex;
-        flex-direction: column-reverse;
-        flex-wrap: wrap-reverse;
-        gap: 0;
-        margin-inline: 0;
-    }
-
-    .title-logo-container-signin {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        padding-right: 30px;
-        height: 100px;
-        padding-bottom: 40px;
-    }
-
-    .logo-container-signin {
-        display: none;
-    }
-
-    .logo-large-signin {
-        display: none;
-    }
-
-    .signin-form {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        height: 300px;
-        padding-top: 10px;
-        padding-right: 25px;
+    .signin-container {
+        gap: 10px;
     }
 
 }

@@ -1,15 +1,5 @@
 /* ------------------------------- Desktop versie -------------------------------- */
 
-.inner-container-signup {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 50px;
-    max-width: 1200px;
-    margin-inline: 100px;
-    gap: 50px;
-}
-
 .signup-container {
     display: flex;
     flex-direction: column;
@@ -22,72 +12,19 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    gap: 30px;
-    height: 400px;
-    padding-top: 30px;
-}
-
-.title-logo-container-signup {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 500px;
-}
-
-.logo-container-signup {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    min-width: 300px;
-}
-
-.logo-large-signup {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    object-position: top;
+    height: 375px;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
 
-    .inner-container-signup {
-        display: flex;
-        flex-direction: column-reverse;
-        flex-wrap: wrap-reverse;
-        gap: 0;
-        margin-inline: 0;
-    }
-
-    .title-logo-container-signup {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .signup-container {
         gap: 20px;
-        padding-right: 30px;
-        height: 100px;
-        padding-bottom: 40px;
-    }
-
-    .logo-container-signup {
-        display: none;
-    }
-
-    .logo-large-signup {
-        display: none;
     }
 
     .signup-form {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        gap: 20px;
-        height: 320px;
-        padding-top: 10px;
-        padding-right: 25px;
+        height: 325px;
     }
 
 }

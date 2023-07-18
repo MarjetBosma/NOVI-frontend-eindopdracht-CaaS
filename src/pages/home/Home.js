@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 
 function Home() {
     return (
-        <div className="inner-container-home">
-          <section className="image-container-home">
-            <img className="logo-large-home" src={logo} alt="logo"/>
+        <div className="inner-container">
+          <section className="logo-container--logo-container-home">
+            <img className="logo-large--logo-large-home" src={logo} alt="logo"/>
           </section>
 
           <section className="content-container">

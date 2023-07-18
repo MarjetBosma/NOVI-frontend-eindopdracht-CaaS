@@ -15,7 +15,7 @@ function SignUp() {
     const [password, setPassword] = useState('');
 
     return (
-        <div className="inner-container-signup">
+        <div className="inner-container">
           <section className="signup-container">
             <form className="signup-form">
               <InputField
@@ -53,15 +53,14 @@ function SignUp() {
                   Registreer
               </Button>
             </form>
-
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
           </section>
 
-          <section className="title-logo-container-signup">
+          <section className="title-logo-container">
             <h2>Maak nu een account aan</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
-            <div className="logo-container-signup">
-              <img className="logo-large-signup" src={logo} alt="logo"/>
+            <div className="logo-container">
+              <img className="logo-large" src={logo} alt="logo"/>
             </div>
           </section>
         </div>

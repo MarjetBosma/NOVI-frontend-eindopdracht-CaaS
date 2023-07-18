@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 
 function Favorites() {
     return (
-        <div className="inner-container-favorites">
+        <div className="inner-container">
             <section className="favorites-button-container">
                 <div className="favorites-container">
                   <article className="thumbnail tn-1"></article>
@@ -38,11 +38,11 @@ function Favorites() {
                 </Button>
 
             </section>
-            <section className="title-logo-container-favorites">
+            <section className="title-logo-container">
                 <h2>Jouw favoriete katten</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
-                <div className="logo-container-favorites">
-                    <img className="logo-large-favorites" src={logo} alt="logo"/>
+                <div className="logo-container">
+                    <img className="logo-large" src={logo} alt="logo"/>
                 </div>
             </section>
         </div>

@@ -1,27 +1,18 @@
 /* ------------------------------- Desktop versie -------------------------------- */
-.inner-container-images {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 50px;
-    max-width: 1200px;
-    margin-inline: 100px;
-    gap: 50px;
-}
 
 .image-request-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding-right: 50px;
 }
 
 .button-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 30px;
+    padding-bottom: 30px;
 }
 
 .inner-button-container {
@@ -30,50 +21,14 @@
     gap: 30px;
 }
 
-.title-logo-container-images {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 500px;
-    padding-left: 50px;
-}
-
-.logo-container-images {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    min-width: 300px;
-}
-
-.logo-large-images {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    object-position: top;
-}
-
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
 
-    .inner-container-images {
-        display: flex;
-        flex-direction: column-reverse;
-        flex-wrap: wrap-reverse;
-        gap: 30px;
-        margin-inline: 0;
-    }
-
-    .image-request-container {
-       padding-left: 60px;
-    }
-
     .button-container {
-        display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        height: 380px;
+        justify-content: space-between;
+        height: 370px;
         gap: 0;
         padding-bottom: 20px;
     }

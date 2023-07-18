@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 function Profile() {
     return (
-        <div className="inner-container-profile">
+        <div className="inner-container">
             <section className="profile-container">
                 <article className="picture-button-container">
                     <div className="picture-container">
@@ -32,11 +32,11 @@ function Profile() {
                 </article>
 
             </section>
-            <section className="title-logo-container-profile">
+            <section className="title-logo-container">
                 <h2>Jouw profiel</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
-                <div className="logo-container-profile">
-                    <img className="logo-large-profile" src={logo} alt="logo"/>
+                <div className="logo-container">
+                    <img className="logo-large" src={logo} alt="logo"/>
                 </div>
             </section>
         </div>

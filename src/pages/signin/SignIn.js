@@ -13,7 +13,7 @@ function SignIn() {
     const [password, setPassword] = useState('');
 
     return (
-        <div className="inner-container-signin">
+        <div className="inner-container">
             <section className="signin-container">
               <form className="signin-form">
                 <InputField
@@ -44,11 +44,11 @@ function SignIn() {
               <p>Nog geen account? Registreer je <Link to="/signup">hier</Link>.</p>
             </section>
 
-            <section className="title-logo-container-signin">
+            <section className="title-logo-container">
                 <h2>Log in op je account</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
-                <div className="logo-container-signin">
-                    <img className="logo-large-signin" src={logo} alt="logo"/>
+                <div className="logo-container">
+                    <img className="logo-large" src={logo} alt="logo"/>
                 </div>
             </section>
         </div>

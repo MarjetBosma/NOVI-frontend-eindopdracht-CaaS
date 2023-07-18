@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 
 function Images() {
     return (
-        <div className="inner-container-images">
+        <div className="inner-container">
             <section className="image-request-container">
                 <div className="button-container">
                     <div className="inner-button-container">
@@ -22,11 +22,11 @@ function Images() {
                 </div>
                 <p>Eerder opgeslagen afbeeldingen bekijken? Ga naar je <Link to="/favorites">favorieten</Link>!</p>
             </section>
-            <section className="title-logo-container-images">
+            <section className="title-logo-container">
                 <h2>Vraag hier een kat op</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
-                <div className="logo-container-images">
-                    <img className="logo-large-images" src={logo} alt="logo"/>
+                <div className="logo-container">
+                    <img className="logo-large" src={logo} alt="logo"/>
                 </div>
 
             </section>
