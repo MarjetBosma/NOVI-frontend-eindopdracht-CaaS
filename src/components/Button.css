@@ -1,0 +1,38 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+Button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 60px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: #F7931E;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 16px;
+    font-style: normal;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px ;
+    line-height: normal;
+    color: white;
+    box-shadow: 0 -8px 10px 0 rgba(0, 0, 0, 0.20) inset, 0 4px 4px 0 rgba(255, 255, 255, 0.50) inset;
+}
+
+Button:hover {
+    color: #0A4C90;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    Button {
+        width: 250px;
+        height: 50px;
+        font-size: 14px;
+    }
+}

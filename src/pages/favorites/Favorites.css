@@ -1,0 +1,40 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.favorites-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.favorites-container {
+    display: grid;
+    grid-template-columns: 75px 75px 75px 75px 75px 75px;
+    grid-template-rows: 75px 75px 75px 75px;
+    grid-gap: 16px;
+    padding-block: 50px;
+}
+
+.thumbnail {
+    width: 75px;
+    height: 75px;
+    background: grey;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .favorites-container {
+        grid-template-columns: 45px 45px 45px 45px;
+        grid-template-rows: 45px 45px 45px 45px 45px 45px;
+        grid-gap: 12px;
+        padding-top: 0;
+        padding-bottom: 20px;
+    }
+
+    .thumbnail {
+        width: 45px;
+        height: 45px;
+        background: grey;
+    }
+}

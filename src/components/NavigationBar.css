@@ -1,0 +1,56 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 700px;
+    min-width: 400px;
+    height: 100px;
+    padding-inline: 40px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    background: #0DD4EF;
+}
+
+.default-link {
+    text-align: center;
+    color: #0E0F3B;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.default-link:hover {
+    color: #0A4C90;
+}
+
+.active-link {
+    text-align: center;
+    color: #F7931E;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.active-link:hover {
+    color: #0A4C90;
+}
+
+.hamburger-menu {
+    display: none;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .nav-menu {
+        display: none;
+    }
+
+}

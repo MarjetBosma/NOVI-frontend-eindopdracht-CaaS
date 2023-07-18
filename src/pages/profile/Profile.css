@@ -1,0 +1,71 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.picture-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.picture-container {
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    border: 1px solid #0E0F3B;
+    gap: 20px;
+}
+
+.profile-pic-placeholder {
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.info-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    border: 2px solid #0E0F3B;
+    width: 250px;
+    height: 310px;
+    padding-block: 10px;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .info-container {
+        width: 200px;
+        height: auto;
+        gap: 5px;
+    }
+
+    .picture-container {
+        width: 150px;
+    }
+
+
+
+}

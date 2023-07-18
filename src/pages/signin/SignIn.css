@@ -1,0 +1,27 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.signin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 300px;
+}
+
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .signin-container {
+        gap: 10px;
+    }
+
+}

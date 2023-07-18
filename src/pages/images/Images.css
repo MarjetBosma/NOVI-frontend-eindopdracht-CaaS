@@ -1,0 +1,57 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.image-request-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+    padding-bottom: 30px;
+}
+
+.inner-button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .button-container {
+        flex-direction: column;
+        justify-content: space-between;
+        height: 370px;
+        gap: 0;
+        padding-bottom: 20px;
+    }
+
+    .inner-button-container {
+        gap: 10px;
+    }
+
+    .title-logo-container-images {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-right: 30px;
+        height: 150px;
+        padding-bottom: 20px;
+        padding-top: 50px;
+    }
+
+    .logo-container-images {
+        display: none;
+    }
+
+    .logo-large-images {
+        display: none;
+    }
+}
