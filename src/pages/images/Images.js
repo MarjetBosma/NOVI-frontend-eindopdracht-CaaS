@@ -24,7 +24,7 @@ function Images() {
             </section>
             <section className="title-logo-container">
                 <h2>Vraag hier een kat op</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
+                <p>Een wereld aan kattenplaatjes is slechts een muisklik van je verwijderd... Welke katten maken jou blij vandaag? </p>
                 <div className="logo-container">
                     <img className="logo-large" src={logo} alt="logo"/>
                 </div>

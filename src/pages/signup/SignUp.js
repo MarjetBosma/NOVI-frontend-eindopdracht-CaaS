@@ -58,7 +58,7 @@ function SignUp() {
 
           <section className="title-logo-container">
             <h2>Maak nu een account aan</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
+            <p>Je hebt een account nodig om gebruik te kunnen maken van CaaS. Schrijf je nu in! </p>
             <div className="logo-container">
               <img className="logo-large" src={logo} alt="logo"/>
             </div>

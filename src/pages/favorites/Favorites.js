@@ -40,7 +40,7 @@ function Favorites() {
             </section>
             <section className="title-logo-container">
                 <h2>Jouw favoriete katten</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
+                <p>Bewaar hier jouw lievelingsplaatjes en bekijk ze opnieuw wanneer je maar wilt! </p>
                 <div className="logo-container">
                     <img className="logo-large" src={logo} alt="logo"/>
                 </div>

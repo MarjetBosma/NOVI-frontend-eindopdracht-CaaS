@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import NavigationBar from "./components/NavigationBar";
+import HamburgerMenu from "./components/HamburgerMenu";
 import logo from "./assets/caas-logo-no-text.jpg"
 import hamburgerMenuIcon from "./assets/hamburger-menu-icon.png"
 import "./App.css";
@@ -27,7 +28,7 @@ function App() {
             </span>
         </span>
         <span className="navbar-container">
-          <NavBar />
+          <NavigationBar />
         </span>
         <span className="hamburger-menu-container">
             <img className="hamburger-menu-icon" src={hamburgerMenuIcon} alt="hamburger menu icon"/>

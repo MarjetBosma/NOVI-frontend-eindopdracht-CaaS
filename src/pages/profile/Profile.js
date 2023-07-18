@@ -34,7 +34,7 @@ function Profile() {
             </section>
             <section className="title-logo-container">
                 <h2>Jouw profiel</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
+                <p>Bekijk of wijzig hier je gegevens.</p>
                 <div className="logo-container">
                     <img className="logo-large" src={logo} alt="logo"/>
                 </div>

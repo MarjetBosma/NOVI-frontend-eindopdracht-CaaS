@@ -41,6 +41,10 @@
     color: #0A4C90;
 }
 
+.hamburger-menu {
+    display: none;
+}
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {

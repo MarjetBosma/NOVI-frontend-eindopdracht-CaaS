@@ -13,7 +13,7 @@ function Home() {
 
           <section className="content-container">
             <h1>Welkom</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolore enim hic perferendis repellat. Ex perspiciatis unde vitae. Aliquam aliquid aperiam cum cumque doloremque modi necessitatibus nobis recusandae rem repudiandae.</p>
+            <p>Cat as a Service is er voor die momenten dat je wel wat harige afleiding en ontspanning kunt gebruiken, maar er geen echte kat in de buurt is. Laat je verrassen, vertederen en aan het lachen brengen door de leukste kattenplaatjes. CaaS staat geheel tot je dienst!</p>
             <Button type="button" className="button--button-link">
                 <Link to="/signin">Inloggen</Link>
             </Button>
