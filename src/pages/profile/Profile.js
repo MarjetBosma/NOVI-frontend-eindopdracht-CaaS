@@ -10,7 +10,7 @@ function Profile() {
             <section className="profile-container">
                 <article className="picture-button-container">
                     <div className="picture-container">
-                        <img className="profile-pic-placeholder" src={profilePicPlaceholder} alt="profile picture placeholder image"/>
+                        <img className="profile-pic-placeholder" src={profilePicPlaceholder} alt="profile picture placeholder"/>
                     </div>
                     <div className="button-container-profile">
                         <Button>Upload/wijzig foto</Button>

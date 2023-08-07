@@ -41,7 +41,7 @@
     color: #0A4C90;
 }
 
-.hamburger-menu {
+.nav-menu-hamburger{
     display: none;
 }
 
@@ -49,8 +49,13 @@
 
 @media screen and (max-width: 576px) {
 
-    .nav-menu {
-        display: none;
+    .hamburger-menu-icon-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .hamburger-menu-icon {
+        height: 60px;
     }
 
 }

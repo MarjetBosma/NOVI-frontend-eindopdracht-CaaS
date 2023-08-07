@@ -1,1 +1,24 @@
-/* Hier de stylingregels */
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.hamburger-menu-container {
+    display: none;
+}
+
+.nav-menu-hamburger {
+    display: none;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .hamburger-menu-container {
+        display: flex;
+    }
+
+    .nav-menu-hamburger {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
