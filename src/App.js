@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
+import HamburgerMenu from "./components/HamburgerMenu";
 import logo from "./assets/caas-logo-no-text.jpg"
 import hamburgerMenuIcon from "./assets/hamburger-menu-icon.png"
 import "./App.css";
@@ -10,7 +11,7 @@ import SignIn from "./pages/signin/SignIn";
 import Images from "./pages/images/Images";
 import Profile from "./pages/profile/Profile";
 import Favorites from "./pages/favorites/Favorites";
-import HamburgerMenu from "./components/HamburgerMenu";
+
 
 function App() {
   //const { isAuth } = useContext(AuthContext);

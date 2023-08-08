@@ -21,4 +21,13 @@
         flex-direction: column;
     }
 
+    .hamburger-menu-icon-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .hamburger-menu-icon {
+        height: 60px;
+    }
+
 }
