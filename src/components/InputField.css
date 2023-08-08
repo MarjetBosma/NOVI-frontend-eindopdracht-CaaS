@@ -33,17 +33,15 @@ label {
     z-index: 1;
 }
 
+
 /* ------------------------------- Media Queries -------------------------------- */
 
-@media screen and (max-width: 576px) {
-    input {
-        font-size: 14px;
-        width: 270px;
-        height: 45px;
-    }
+input {
+    font-size: 14px;
+    width: 270px;
+    height: 45px;
+}
 
-    label {
-        font-size: 14px;
-    }
-
+label {
+    font-size: 14px;
 }

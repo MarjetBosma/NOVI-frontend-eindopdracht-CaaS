@@ -32,8 +32,6 @@ function SignIn() {
                     value={password}
                     changeHandler={setPassword}
                 >
-                    <img className="password-icon" src={passwordIcon} alt="password icon"/>
-                    <img className="visibility-icon" src={visibilityIcon} alt="visibility icon"/>
                 </InputField>
                 <Button
                     type="submit"

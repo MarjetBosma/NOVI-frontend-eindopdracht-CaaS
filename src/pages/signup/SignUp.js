@@ -1,58 +1,117 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import axios from 'axios';
 import "./SignUp.css"
-import { Link } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
-import userIcon from "../../assets/user-icon.png";
-import emailIcon from "../../assets/email-icon.png";
-import passwordIcon from "../../assets/password-icon.png";
-import visibilityIcon from "../../assets/visibility-icon.png";
-import InputField from "../../components/InputField";
 import Button from "../../components/Button";
+import InputField from "../../components/InputField";
 
 function SignUp() {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+    const navigate = useNavigate();
+
+    async function onSubmit(e, data) {
+        e.preventDefault();
+        toggleError(false);
+        toggleLoading(true);
+
+        try {
+            const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
+                email: email,
+                password: password,
+                username: username,
+                role: ["user"]
+            });
+            setSuccessMessage("Registratie gelukt, je kunt nu inloggen");
+            setErrorMessage("")
+            console.log(response.data);
+            navigate("/signin");
+        } catch(e) {
+            console.error("Registratie mislukt", e)
+            setErrorMessage("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
+            setSuccessMessage("");
+            toggleError(true);
+        }
+        toggleLoading(false);
+    }
 
     return (
         <div className="inner-container">
           <section className="signup-container">
-            <form className="signup-form">
-              <InputField
-                name="username"
-                label="Gebruikersnaam"
-                inputType="text"
-                value={username}
-                changeHandler={setUsername}
-              >
-                <img className="user-icon" src={userIcon} alt="user icon"/>
-              </InputField>
-              <InputField
-                  name="email"
-                  label="E-mailadres"
+
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            {successMessage && <div className="success-message">{successMessage}</div>}
+
+            <form className="signup-form"
+                  onSubmit={handleSubmit(onSubmit)}>
+
+              <InputField>
                   inputType="text"
-                  value={email}
-                  changeHandler={setEmail}
-              >
-                <img className="email-icon" src={emailIcon} alt="email icon"/>
+                  inputName="username"
+                  inputLabel="Gebruikersnaam"
+                  validationRules={{
+                    required: {
+                      value: true,
+                      message: "Dit veld is verplicht",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "De gebruikersnaam moet minimaal 3 karakters bevatten",
+                    }
+
+                  }}
+                  register={register}
+                  errors={errors}
               </InputField>
-              <InputField
-                  name="password"
-                  label="Wachtwoord"
-                  inputType="text"
-                  value={password}
-                  changeHandler={setPassword}
-              >
-                <img className="password-icon" src={passwordIcon} alt="password icon"/>
-                <img className="visibility-icon" src={visibilityIcon} alt="visibility icon"/>
+
+              <InputField>
+                  inputType="email"
+                  inputName="email"
+                  inputLabel="Email"
+                  validationRules={{
+                    required: {
+                      value: true,
+                      message: "Dit veld is verplicht",
+                    },
+                    validate: (value) => value.includes('@') || "Emailadres moet een @ bevatten",
+              }}
+              register={register}
+              errors={errors}
+              </InputField>
+
+              <InputField>
+                  inputType="password"
+                  inputName="username"
+                  inputLabel="Wachtwoord"
+                  validationRules={{
+                  required: "Dit veld is verplicht",
+                  minLength: {
+                      value: 3,
+                      message: "Het wachtwoord moet minimaal 6 karakters bevatten",
+                  }
+              }}
+                  register={register}
+                  errors={errors}
               </InputField>
 
               <Button
                   type="submit"
-                  className="button">
+                  className="button"
+                  disabled={loading}>
                   Registreer
               </Button>
             </form>
+
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
           </section>
 
