@@ -11,7 +11,7 @@ import SignIn from "./pages/signin/SignIn";
 import Images from "./pages/images/Images";
 import Profile from "./pages/profile/Profile";
 import Favorites from "./pages/favorites/Favorites";
-
+import NotFound from "./pages/notFound/NotFound";
 
 function App() {
   //const { isAuth } = useContext(AuthContext);
@@ -43,6 +43,7 @@ function App() {
           <Route path="/images" element={<Images />}/>
           <Route path="/profile" element={<Profile />}/>
           <Route path="/favorites" element={<Favorites />}/>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>
       <footer>
