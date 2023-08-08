@@ -22,14 +22,19 @@ De kern van deze webapplicatie wordt gevormd door een REST API genaamd CATAAS (C
 ## Project opstarten
 
 1. Download of clone de repository met de broncode van GitHub [hier](https://github.com/MarjetBosma/NOVI-frontend-eindopdracht-CaaS).
-    a. Download: Ga op GitHub naar Code (groene knop) en kies voor Download ZIP. Pak het zip-bestand uit op je eigen apparaat, en open het in WebStorm via File, Open.
-    b. Clone: Ga op GitHub naar Code (groene knop) en kies voor Clone en SSH. Kopieer de SSH key. Open WebStorm, ga naar File, New, Porject from Version Control. Er verschijnt een pop-up venster. Plak de SHH-key in het veld URL en open het project.
+    
+   a. Download: Ga op GitHub naar Code (groene knop) en kies voor Download ZIP. Pak het zip-bestand uit op je eigen apparaat, en open het in WebStorm via File, Open.
+
+   b. Clone: Ga op GitHub naar Code (groene knop) en kies voor Clone en SSH. Kopieer de SSH key. Open WebStorm, ga naar File, New, Porject from Version Control. Er verschijnt een pop-up venster. Plak de SHH-key in het veld URL en open het project.
+
+
 2. WebStorm zal nu vragen om de dependencies te installeren, klik op Yes. Of open de terminal en geef zelf het commando: 
 
     ```shell
     npm install
     ```
-   
+ 
+  
 3. Start vervolgens de applicatie met het volgende commando:
 
     ```shell
@@ -37,7 +42,10 @@ De kern van deze webapplicatie wordt gevormd door een REST API genaamd CATAAS (C
     ```
     De applicatie zal nu openen in de browser.
 
+
 4. Volg de stappen op de registratie- en inlogpagina's. Daarna kun je alle mogelijkheden van de app verkennen! Bij inloggen wordt er een autorisatietoken aangemaakt, waarmee de gebruiker een uur lang blijft ingelogd. NB: Aangemaakte gebruikersgegevens worden ongeveer een uur bewaard op de server waarop de NOVI backend draait.
+
+
 5. Geniet van je dosis kattenliefde! :-)
 
 ## Verantwoording afbeelding logo
