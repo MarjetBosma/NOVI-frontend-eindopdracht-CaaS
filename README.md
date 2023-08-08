@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# CaaS - Cat as a Service
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Inleiding
 
-## Available Scripts
+Als je van katten houdt, kan het aaien van zo'n pluizge viervoeter ontspannend en stressverlagend werken. Instant stress-relief op pootjes! Maar ja, op het werk, op school, in de trein etc. heb je meestal geen kat bij de hand. Gelukkig is uit onderzoek gebleken dat het kijken naar kattenfilmpjes of -plaatjes ook werkt. Deze applicatie biedt de gebruiker een wereld aan leuke, gezellige en schattige afbeeldingen van katten. Precies voor die momenten waarop je wel even wat harige afleiding en ontspanning kunt gebruiken, maar er geen echte kat in de buurt is!
 
-In the project directory, you can run:
+*** screenshot belangrijkste pagina ***
+![screenshot](src/assets/screenshot.png)
 
-### `npm start`
+Om gebruik te kunnen maken van alle functies in de app, dient een gebruiker zich te registreren en vervolgens in te loggen.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+*** beschrijving belangrijkste functionaliteit ***
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Benodigdheden
 
-### `npm test`
+Allereerst is een IDE nodig, zoals WebStorm, om de broncode te kunnen bekijken en de applicatie lokaal te laten draaien. De instructies verderop zijn geënt op WebStorm, maar bij een andere IDE zal dit op een vergelijkbare manier gaan.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Voor het registreren en ophalen van gebruikersgegevens wordt gebruikt gemaakt van de NOVI Educational Backend. Documentatie en link naar de server is [hier](https://github.com/hogeschoolnovi/novi-educational-backend-documentation) te vinden.
 
-### `npm run build`
+De kern van deze webapplicatie wordt gevormd door een REST API genaamd CATAAS (Cat as a Service). Meer informatie en documentatie over deze API vind je [hier](https://cataas.com/#/). De API geeft de opgevraagde afbeeldingen op grond van verschillende endpoints. Er is geen API key nodig.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project opstarten
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Download of clone de repository met de broncode van GitHub [hier](https://github.com/MarjetBosma/NOVI-frontend-eindopdracht-CaaS).
+    a. Download: Ga op GitHub naar Code (groene knop) en kies voor Download ZIP. Pak het zip-bestand uit op je eigen apparaat, en open het in WebStorm via File, Open.
+    b. Clone: Ga op GitHub naar Code (groene knop) en kies voor Clone en SSH. Kopieer de SSH key. Open WebStorm, ga naar File, New, Porject from Version Control. Er verschijnt een pop-up venster. Plak de SHH-key in het veld URL en open het project.
+2. WebStorm zal nu vragen om de dependencies te installeren, klik op Yes. Of open de terminal en geef zelf het commando: 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```shell
+    npm install
+    ```
+   
+3. Start vervolgens de applicatie met het volgende commando:
 
-### `npm run eject`
+    ```shell
+    npm start
+    ```
+    De applicatie zal nu openen in de browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Volg de stappen op de registratie- en inlogpagina's. Daarna kun je alle mogelijkheden van de app verkennen! Bij inloggen wordt er een autorisatietoken aangemaakt, waarmee de gebruiker een uur lang blijft ingelogd. NB: Aangemaakte gebruikersgegevens worden ongeveer een uur bewaard op de server waarop de NOVI backend draait.
+5. Geniet van je dosis kattenliefde! :-)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Verantwoording afbeelding logo
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+De afbeelding van het CaaS logo is afkomstig van Freepik (zie [hier](https://www.freepik.com/free-vector/flat-design-creative-nerd-logo-template_20827096.htm#page=9&query=cat%20logo&position=23&from_view=search&track=ais)), waarbij ik zelf een andere tekst heb bedacht en opgemaakt.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    
