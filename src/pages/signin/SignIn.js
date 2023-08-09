@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./SignIn.css"
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
@@ -6,9 +6,11 @@ import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import {AuthContext} from "../../context/AuthContext";
 
 function SignIn() {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { login } = useContext(AuthContext);
 
     // const [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
@@ -24,6 +26,8 @@ function SignIn() {
     async function onSubmit(data) {
         toggleError(false);
         toggleLoading(true);
+        console.log(data);
+        login();
 
         try {
             const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {

@@ -5,10 +5,30 @@ import axios from 'axios';
 export const AuthContext = createContext({})
 
 function AuthContextProvider ({ children }) {
+    const [isAuth, toggleAuth] = useState(false);
+    const navigate = useNavigate();
+
+    function login() {
+        console.log('Gebruiker is ingelogd!');
+        toggleAuth(true);
+        navigate('/profile');
+    }
+
+    function logout() {
+        console.log('Gebruiker is uitgelogd!');
+        toggleAuth(false);
+        navigate('/');
+    }
+
+    const contextData = {
+        isAuth: isAuth,
+        login: login,
+        logout: logout,
+    };
 
     return (
-        <AuthContext.Provider value={}>
-            { isAuth.status === 'done' ? children : <h3 className="loading-message">Loading...</h3>}
+        <AuthContext.Provider value={contextData}>
+            {children}
         </AuthContext.Provider>
     );
 }

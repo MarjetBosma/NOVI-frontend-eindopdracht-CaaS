@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import HamburgerMenu from "./components/HamburgerMenu";
 import Home from "./pages/home/Home";
@@ -9,7 +9,7 @@ import Images from "./pages/images/Images";
 import Profile from "./pages/profile/Profile";
 import Favorites from "./pages/favorites/Favorites";
 import NotFound from "./pages/notFound/NotFound";
-import { AuthContext } from './context/AuthContext';
+import { AuthContext } from "./context/AuthContext";
 import logo from "./assets/caas-logo-no-text.jpg"
 import "./App.css";
 function App() {
@@ -40,8 +40,8 @@ function App() {
           <Route path="/signup" element={<SignUp />}/>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/images" element={<Images />}/>
-          <Route path="/profile" element={<Profile />}/>
-          <Route path="/favorites" element={<Favorites />}/>
+          <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to="/" />}/>
+          <Route path="/favorites" element={isAuth ? <Favorites /> : <Navigate to="/" />}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>

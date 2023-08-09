@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
@@ -9,6 +9,7 @@ import InputField from "../../components/InputField";
 
 function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
+
     // const [username, setUsername] = useState("");
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
@@ -23,6 +24,7 @@ function SignUp() {
     async function onSubmit(data) {
         toggleError(false);
         toggleLoading(true);
+        console.log(data);
 
         try {
             const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
