@@ -15,6 +15,13 @@
     height: 375px;
 }
 
+.error-message {
+    font-size: 14px;
+    color: #F7931E;
+    padding-block: 20px;
+    text-align: center
+}
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {

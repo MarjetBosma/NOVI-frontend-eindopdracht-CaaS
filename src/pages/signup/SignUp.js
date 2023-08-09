@@ -20,8 +20,7 @@ function SignUp() {
     const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
 
-    async function onSubmit(e, data) {
-        e.preventDefault();
+    async function onSubmit(data) {
         toggleError(false);
         toggleLoading(true);
 
@@ -36,6 +35,7 @@ function SignUp() {
             setErrorMessage("")
             console.log(response.data);
             navigate("/signin");
+
         } catch(e) {
             console.error("Registratie mislukt", e)
             setErrorMessage("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
@@ -55,7 +55,7 @@ function SignUp() {
             <form className="signup-form"
                   onSubmit={handleSubmit(onSubmit)}>
 
-              <InputField>
+              <InputField
                   inputType="text"
                   inputName="username"
                   inputLabel="Gebruikersnaam"
@@ -72,26 +72,26 @@ function SignUp() {
                   }}
                   register={register}
                   errors={errors}
-              </InputField>
+              />
 
-              <InputField>
+              <InputField
                   inputType="email"
                   inputName="email"
-                  inputLabel="Email"
+                  inputLabel="E-mailadres"
                   validationRules={{
                     required: {
                       value: true,
                       message: "Dit veld is verplicht",
                     },
-                    validate: (value) => value.includes('@') || "Emailadres moet een @ bevatten",
+                    validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
               }}
               register={register}
               errors={errors}
-              </InputField>
+              />
 
-              <InputField>
+              <InputField
                   inputType="password"
-                  inputName="username"
+                  inputName="password"
                   inputLabel="Wachtwoord"
                   validationRules={{
                   required: "Dit veld is verplicht",
@@ -102,7 +102,7 @@ function SignUp() {
               }}
                   register={register}
                   errors={errors}
-              </InputField>
+              />
 
               <Button
                   type="submit"

@@ -4,17 +4,18 @@ import "./InputField.css"
 function InputField({ inputLabel, inputType, inputName, inputValue, validationRules, register, errors }) {
 
     return (
-        <div>
+        <div className="input-container">
           <label htmlFor={`${inputName}-field`}>
             {inputLabel}
-            <input
-                type={inputType}
-                name={inputName}
-                value={inputValue}
-                id={`${inputName}-input`}
-                {...register(inputName, validationRules)}
-            />
           </label>
+          <input
+            type={inputType}
+            name={inputName}
+            value={inputValue}
+            id={`${inputName}-input`}
+            {...register(inputName, validationRules)}
+          />
+
             {errors[inputName] && <p>{errors[inputName].message}</p>}
         </div>
     );
