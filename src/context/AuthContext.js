@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { createContext, useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function AuthContext() {
+export const AuthContext = createContext({})
+
+function AuthContextProvider ({ children }) {
 
     return (
-        <div>
-
-        </div>
+        <AuthContext.Provider value={}>
+            { isAuth.status === 'done' ? children : <h3 className="loading-message">Loading...</h3>}
+        </AuthContext.Provider>
     );
 }
 
-export default AuthContext;
+export default AuthContextProvider;

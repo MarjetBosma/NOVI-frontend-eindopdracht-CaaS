@@ -9,9 +9,9 @@ import InputField from "../../components/InputField";
 
 function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    // const [username, setUsername] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
 
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -26,10 +26,6 @@ function SignUp() {
 
         try {
             const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
-                email: email,
-                password: password,
-                username: username,
-                role: ["user"]
             });
             setSuccessMessage("Registratie gelukt, je kunt nu inloggen");
             setErrorMessage("")
@@ -60,10 +56,7 @@ function SignUp() {
                   inputName="username"
                   inputLabel="Gebruikersnaam"
                   validationRules={{
-                    required: {
-                      value: true,
-                      message: "Dit veld is verplicht",
-                    },
+                    required: "Dit veld is verplicht",
                     minLength: {
                       value: 3,
                       message: "De gebruikersnaam moet minimaal 3 karakters bevatten",
@@ -79,10 +72,7 @@ function SignUp() {
                   inputName="email"
                   inputLabel="E-mailadres"
                   validationRules={{
-                    required: {
-                      value: true,
-                      message: "Dit veld is verplicht",
-                    },
+                    required: "Dit veld is verplicht",
                     validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
               }}
               register={register}

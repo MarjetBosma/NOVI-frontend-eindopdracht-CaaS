@@ -10,13 +10,11 @@ function InputField({ inputLabel, inputType, inputName, inputValue, validationRu
           </label>
           <input
             type={inputType}
-            name={inputName}
             value={inputValue}
             id={`${inputName}-input`}
             {...register(inputName, validationRules)}
           />
-
-            {errors[inputName] && <p>{errors[inputName].message}</p>}
+          {errors[inputName] && <p>{errors[inputName].message}</p>}
         </div>
     );
 }

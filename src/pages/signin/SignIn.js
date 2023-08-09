@@ -9,8 +9,10 @@ import axios from "axios";
 
 function SignIn() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+
 
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -25,15 +27,14 @@ function SignIn() {
 
         try {
             const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {
-                email: email,
-                password: password,
-                role: ["user"]
             });
+
             setSuccessMessage("Je bent ingelogd");
             setErrorMessage("")
             console.log(response.data);
             navigate("/images");
         } catch(e) {
+
             console.error("Inloggen mislukt", e)
             setErrorMessage("Inloggen mislukt. Controleer je invoer en probeer het opnieuw.");
             setSuccessMessage("");
@@ -56,10 +57,7 @@ function SignIn() {
                   inputName="email"
                   inputLabel="E-mailadres"
                   validationRules={{
-                      required: {
-                          value: true,
-                          message: "Dit veld is verplicht",
-                      },
+                      required: "Dit veld is verplicht",
                       validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
                   }}
                   register={register}
@@ -82,7 +80,8 @@ function SignIn() {
 
                 <Button
                     type="submit"
-                    className="button">
+                    className="button"
+                    disabled={loading}>
                     Log in
                 </Button>
               </form>

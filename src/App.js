@@ -9,10 +9,11 @@ import Images from "./pages/images/Images";
 import Profile from "./pages/profile/Profile";
 import Favorites from "./pages/favorites/Favorites";
 import NotFound from "./pages/notFound/NotFound";
+import { AuthContext } from './context/AuthContext';
 import logo from "./assets/caas-logo-no-text.jpg"
 import "./App.css";
 function App() {
-  //const { isAuth } = useContext(AuthContext);
+  const { isAuth } = useContext(AuthContext);
 
   return (
     <div className="outer-container">
