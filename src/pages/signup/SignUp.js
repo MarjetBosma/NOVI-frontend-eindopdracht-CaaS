@@ -62,7 +62,7 @@ function SignUp() {
                     required: "Dit veld is verplicht",
                     minLength: {
                       value: 3,
-                      message: "De gebruikersnaam moet minimaal 3 karakters bevatten",
+                      message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
                     }
 
                   }}
