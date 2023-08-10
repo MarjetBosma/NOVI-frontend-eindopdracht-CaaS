@@ -39,9 +39,9 @@ function App() {
           <Route exact path="/" element={<Home />}/>
           <Route path="/signup" element={<SignUp />}/>
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/images" element={<Images />}/>
-          <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to="/" />}/>
-          <Route path="/favorites" element={isAuth ? <Favorites /> : <Navigate to="/" />}/>
+          <Route path="/images" element={isAuth ? <Images /> : <Navigate to="/login" />}/>
+          <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to="/login" />}/>
+          <Route path="/favorites" element={isAuth ? <Favorites /> : <Navigate to="/login" />}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>
