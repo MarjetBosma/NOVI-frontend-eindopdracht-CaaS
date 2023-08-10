@@ -22,28 +22,41 @@ label {
 input {
     width: 400px;
     height: 50px;
+    color: #0A4C90;
     border-radius: 8px;
     border-color: #0A4C90;
     background-color: transparent;
     margin-top: -12px;
     font-family: inherit;
     font-size: 16px;
-    color: #0E0F3B;
     padding-left: 10px;
     position: relative;
     z-index: 0;
 }
 
+.error-message {
+    font-size: 14px;
+    color: #F7931E;
+    padding-block: 10px;
+}
 
 
 /* ------------------------------- Media Queries -------------------------------- */
 
-input {
-    font-size: 14px;
-    width: 270px;
-    height: 45px;
-}
+@media screen and (max-width: 576px) {
 
-label {
-    font-size: 14px;
+    input {
+        font-size: 14px;
+        width: 270px;
+        height: 45px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    .error-message {
+        font-size: 12px;
+    }
+
 }

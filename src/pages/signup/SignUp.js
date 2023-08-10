@@ -32,6 +32,7 @@ function SignUp() {
             setSuccessMessage("Registratie gelukt, je kunt nu inloggen");
             setErrorMessage("")
             console.log(response.data);
+            console.log("Gebruiker is geregistreerd")
             navigate("/signin");
 
         } catch(e) {

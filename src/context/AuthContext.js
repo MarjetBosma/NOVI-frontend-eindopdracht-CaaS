@@ -9,15 +9,15 @@ function AuthContextProvider ({ children }) {
     const navigate = useNavigate();
 
     function login() {
-        console.log('Gebruiker is ingelogd!');
+        console.log("Gebruiker is ingelogd");
         toggleAuth(true);
-        navigate('/profile');
+        navigate("/profile");
     }
 
     function logout() {
-        console.log('Gebruiker is uitgelogd!');
+        console.log("Gebruiker is uitgelogd");
         toggleAuth(false);
-        navigate('/');
+        navigate("/");
     }
 
     const contextData = {

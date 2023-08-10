@@ -36,6 +36,7 @@ function SignIn() {
             setSuccessMessage("Je bent ingelogd");
             setErrorMessage("")
             console.log(response.data);
+            login()
             navigate("/images");
         } catch(e) {
 

@@ -25,6 +25,9 @@ Button {
 Button:hover {
     color: #0A4C90;
 }
+Button:disabled {
+    opacity: 50%;
+}
 
 /* ------------------------------- Media Queries -------------------------------- */
 
