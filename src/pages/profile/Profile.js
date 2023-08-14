@@ -5,6 +5,9 @@ import profilePicPlaceholder from "../../assets/profile-pic-placeholder.png"
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 function Profile() {
+
+
+
     return (
         <div className="inner-container">
             <section className="profile-container">

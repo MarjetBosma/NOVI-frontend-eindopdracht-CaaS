@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
@@ -10,39 +10,43 @@ import InputField from "../../components/InputField";
 function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    // const [username, setUsername] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
 
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
+
+    const controller = new AbortController();
     const navigate = useNavigate();
 
-    async function onSubmit(data) {
-        toggleError(false);
-        toggleLoading(true);
-        console.log(data);
-
-        try {
-            const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
-            });
-            setSuccessMessage("Registratie gelukt, je kunt nu inloggen");
-            setErrorMessage("")
-            console.log(response.data);
-            console.log("Gebruiker is geregistreerd")
-            navigate("/signin");
-
-        } catch(e) {
-            console.error("Registratie mislukt", e)
-            setErrorMessage("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
-            setSuccessMessage("");
-            toggleError(true);
+    useEffect(() => {
+        return function cleanup() {
+            controller.abort();
         }
-        toggleLoading(false);
-    }
+    }, []);
+
+        async function onSubmit(data) {
+            toggleError(false);
+            toggleLoading(true);
+            console.log(data);
+
+            try {
+                const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
+                });
+                setSuccessMessage("Registratie gelukt, je kunt nu inloggen");
+                setErrorMessage("")
+                console.log(response.data);
+                console.log("Gebruiker is geregistreerd")
+                navigate("/signin");
+
+            } catch(e) {
+                console.error("Registratie mislukt", e)
+                setErrorMessage("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
+                setSuccessMessage("");
+                toggleError(true);
+            }
+            toggleLoading(false);
+        }
 
     return (
         <div className="inner-container">
@@ -89,7 +93,7 @@ function SignUp() {
                   validationRules={{
                   required: "Dit veld is verplicht",
                   minLength: {
-                      value: 3,
+                      value: 6,
                       message: "Het wachtwoord moet minimaal 6 karakters bevatten",
                   }
               }}

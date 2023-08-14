@@ -9,22 +9,22 @@ function Images({ endpoint }) {
     const [cat, setCat] = useState();
 
 
-        useEffect(() => {
-        console.log(endpoint);
-
-        async function fetchCatData() {
-            try {
-                const { catData } = await axios.get(endpoint);
-                setCat(catData);
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        if (endpoint) {
-            fetchCatData();
-        }
-    }, [endpoint]);
+    //     useEffect(() => {
+    //     console.log(endpoint);
+    //
+    //     async function fetchCatData() {
+    //         try {
+    //             const { catData } = await axios.get(endpoint);
+    //             setCat(catData);
+    //         } catch (e) {
+    //             console.error(e);
+    //         }
+    //     }
+    //
+    //     if (endpoint) {
+    //         fetchCatData();
+    //     }
+    // }, [endpoint]);
 
 
 
@@ -34,7 +34,8 @@ function Images({ endpoint }) {
                 <div className="button-container">
                     <div className="inner-button-container">
                       <Button
-                          type="submit"
+                          type="button"
+                          // onClick={fetchCatData}
                           >
                           Random
                       </Button>

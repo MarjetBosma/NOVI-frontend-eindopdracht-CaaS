@@ -40,6 +40,11 @@ input {
     padding-block: 10px;
 }
 
+.succes-message {
+    font-size: 14px;
+    color: #0DD4EF;
+    padding-block: 10px;
+}
 
 /* ------------------------------- Media Queries -------------------------------- */
 

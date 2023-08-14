@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./SignIn.css"
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 
@@ -12,41 +12,45 @@ function SignIn() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { login } = useContext(AuthContext);
 
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-
-
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
 
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
+
+    const controller = new AbortController();
     const navigate = useNavigate();
 
-    async function onSubmit(data) {
-        toggleError(false);
-        toggleLoading(true);
-        console.log(data);
-        login();
-
-        try {
-            const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {
-            });
-
-            setSuccessMessage("Je bent ingelogd");
-            setErrorMessage("")
-            console.log(response.data);
-            login()
-            navigate("/images");
-        } catch(e) {
-
-            console.error("Inloggen mislukt", e)
-            setErrorMessage("Inloggen mislukt. Controleer je invoer en probeer het opnieuw.");
-            setSuccessMessage("");
-            toggleError(true);
+    useEffect(() => {
+        return function cleanup() {
+            controller.abort();
         }
-        toggleLoading(false);
-    }
+    }, []);
+
+        async function onSubmit(data) {
+            toggleError(false);
+            toggleLoading(true);
+            console.log(data);
+            login();
+
+            try {
+                const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {
+                });
+
+                setSuccessMessage("Je bent ingelogd");
+                setErrorMessage("")
+                console.log(response.data);
+                login()
+                navigate("/images");
+            } catch(e) {
+
+                console.error("Inloggen mislukt", e)
+                setErrorMessage("Inloggen mislukt. Controleer je invoer en probeer het opnieuw.");
+                setSuccessMessage("");
+                toggleError(true);
+            }
+            toggleLoading(false);
+        }
 
     return (
         <div className="inner-container">
@@ -75,7 +79,7 @@ function SignIn() {
                     validationRules={{
                         required: "Dit veld is verplicht",
                         minLength: {
-                            value: 3,
+                            value: 6,
                             message: "Het wachtwoord moet minimaal 6 karakters bevatten",
                         }
                     }}
