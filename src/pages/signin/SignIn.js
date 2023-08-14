@@ -9,7 +9,7 @@ import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 
 function SignIn() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
     const { login } = useContext(AuthContext);
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -90,7 +90,7 @@ function SignIn() {
                 <Button
                     type="submit"
                     className="button"
-                    disabled={loading}>
+                    disabled={loading || !isDirty || !isValid}>
                     Log in
                 </Button>
               </form>

@@ -8,7 +8,7 @@ import Button from "../../components/Button";
 import InputField from "../../components/InputField";
 
 function SignUp() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -104,7 +104,7 @@ function SignUp() {
               <Button
                   type="submit"
                   className="button"
-                  disabled={loading}>
+                  disabled={loading || !isDirty || !isValid}>
                   Registreer
               </Button>
             </form>

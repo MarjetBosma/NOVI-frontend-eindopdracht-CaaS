@@ -1,11 +1,42 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Profile.css"
 import logo from "../../assets/caas-logo-no-text.jpg";
 import profilePicPlaceholder from "../../assets/profile-pic-placeholder.png"
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
+import axios from "axios"
+import { AuthContext } from "../../context/AuthContext";
+
 function Profile() {
 
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        async function fetchProfileData() {
+            const token = localStorage.getItem("token");
+
+            try {
+                const response = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user/', {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    signal: controller.signal
+                });
+                console.log(response.data);
+
+            } catch(e) {
+                console.error("Profielgegevens ophalen mislukt", e);
+            }
+        }
+        void fetchProfileData();
+
+        return function cleanup() {
+            controller.abort();
+        }
+    }, []);
 
 
     return (
@@ -22,11 +53,11 @@ function Profile() {
                 <article className="info-button-container">
                     <div className="info-container">
                         <p><strong>Gebruikersnaam: </strong></p>
-                        <p>Marjet</p>
+                        <p>{user.username}</p>
                         <p><strong>E-mailadres: </strong></p>
-                        <p>marjet_bosma@hotmail.com</p>
+                        <p>{user.email}</p>
                         <p><strong>Wachtwoord: </strong></p>
-                        <p>Firsa2006</p>
+                        <p>{user.password}</p>
                         <p><strong>Bekijk je <Link to="/favorites">favorieten</Link>.</strong></p>
                     </div>
                     <div className="button-container-profile">

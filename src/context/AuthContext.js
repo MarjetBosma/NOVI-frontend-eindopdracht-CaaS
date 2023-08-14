@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import jwt_decode from "jwt-decode"
 import checkTokenValidity from "../helper/checkTokenValidity";
 export const AuthContext = createContext({})
@@ -9,7 +9,7 @@ function AuthContextProvider ({ children }) {
     const [isAuth, toggleIsAuth] = useState({
         isAuth: false,
         user: null,
-        status: 'pending',
+        status: "pending",
     });
     const navigate = useNavigate();
 
@@ -26,14 +26,13 @@ function AuthContextProvider ({ children }) {
 
 function login(accessToken) {
 
-    localStorage.setItem('token', accessToken);
+    localStorage.setItem("token", accessToken);
     const decodedToken = jwt_decode(accessToken)
 
     void fetchUserData(decodedToken.sub, accessToken, "/images");
     navigate("/images");
     console.log("Gebruiker is ingelogd");
 }
-
 
 function logout() {
     toggleIsAuth({
@@ -63,7 +62,7 @@ function logout() {
                     email: response.data.email,
                     id: response.data.id,
                 },
-                status: 'done',
+                status: "done",
             } );
 
             if (redirectUrl) {
@@ -75,7 +74,7 @@ function logout() {
             toggleIsAuth( {
                 isAuth: false,
                 user: null,
-                status: 'done',
+                status: "done",
             } );
         }
     }
@@ -88,7 +87,7 @@ const contextData = {
 
 return (
         <AuthContext.Provider value={contextData}>
-            { isAuth.status === 'done' ? children : <h2 className="loading-message">Loading...</h2>}
+            { isAuth.status === "done" ? children : <h2 className="loading-message">Loading...</h2>}
         </AuthContext.Provider>
     );
 }
