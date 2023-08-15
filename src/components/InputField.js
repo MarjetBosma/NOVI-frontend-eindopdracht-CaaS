@@ -1,17 +1,21 @@
 import React from "react";
 import "./InputField.css"
 
-function InputField({ label, inputType, name, value, changeHandler }) {
+function InputField({ inputLabel, inputType, inputName, inputValue, onInput, validationRules, register, errors }) {
+
     return (
-        <div>
-            <label htmlFor={`${name}-field`}>{label}</label>
-            <input
-                type={inputType}
-                id={`${name}-input`}
-                name={name}
-                value={value}
-                onChange={(e) => changeHandler(e.target.value)}
-            />
+        <div className="input-container">
+          <label htmlFor={`${inputName}-field`}>
+            {inputLabel}
+          </label>
+          <input
+            type={inputType}
+            value={inputValue}
+            onInput={onInput}
+            id={`${inputName}-input`}
+            {...register(inputName, validationRules)}
+          />
+          {errors[inputName] && <p className="error-message">{errors[inputName].message}</p>}
         </div>
     );
 }

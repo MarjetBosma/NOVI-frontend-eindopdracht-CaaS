@@ -1,15 +1,31 @@
 /* ------------------------------- Desktop versie -------------------------------- */
 
-input {
+.input-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+}
+
+label {
+    margin-left: 8px;
+    padding-inline: 4px;
+    color: #0A4C90;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    background-color: #FFFFFF;
+    position: relative;
+    z-index: 1;
+}
+
+input {
     width: 400px;
     height: 50px;
     color: #0A4C90;
     border-radius: 8px;
     border-color: #0A4C90;
+    background-color: transparent;
     margin-top: -12px;
     font-family: inherit;
     font-size: 16px;
@@ -18,24 +34,22 @@ input {
     z-index: 0;
 }
 
-label {
-    display: inline-flex;
-    align-items: flex-start;
-    margin-left: 10px;
-    padding-inline: 4px;
-    color: #0A4C90;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%;
-    background: #FFFFFF;
-    position: relative;
-    z-index: 1;
+.error-message {
+    font-size: 14px;
+    color: #F7931E;
+    padding-block: 10px;
+}
+
+.succes-message {
+    font-size: 14px;
+    color: #0DD4EF;
+    padding-block: 10px;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
+
     input {
         font-size: 14px;
         width: 270px;
@@ -44,6 +58,10 @@ label {
 
     label {
         font-size: 14px;
+    }
+
+    .error-message {
+        font-size: 12px;
     }
 
 }
