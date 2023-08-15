@@ -31,7 +31,6 @@ function SignIn() {
             toggleError(false);
             toggleLoading(true);
             console.log(data);
-            login();
 
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {
@@ -39,8 +38,8 @@ function SignIn() {
 
                 setSuccessMessage("Je bent ingelogd");
                 setErrorMessage("")
-                console.log(response.data);
-                login()
+                console.log(response.data.accessToken);
+                login(response.data.accessToken)
                 navigate("/images");
             } catch(e) {
 
@@ -62,19 +61,22 @@ function SignIn() {
             <form className="signin-form"
                   onSubmit={handleSubmit(onSubmit)}>
               <InputField
-                  inputType="email"
-                  inputName="email"
-                  inputLabel="E-mailadres"
+                  inputType="username"
+                  inputName="username"
+                  inputLabel="Gebruikersnaam"
                   validationRules={{
                       required: "Dit veld is verplicht",
-                      validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
-                  }}
+                      minLength: {
+                          value: 6,
+                          message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
+
+                  }}}
                   register={register}
                   errors={errors}
                 />
                 <InputField
                     inputType="password"
-                    inputName="username"
+                    inputName="password"
                     inputLabel="Wachtwoord"
                     validationRules={{
                         required: "Dit veld is verplicht",

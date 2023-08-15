@@ -12,30 +12,31 @@ function Profile() {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        const controller = new AbortController();
+        console.log(user)
+        // const controller = new AbortController();
 
-        async function fetchProfileData() {
-            const token = localStorage.getItem("token");
+        // async function fetchProfileData() {
+        //     const token = localStorage.getItem("token");
+        //
+        //     try {
+        //         const response = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user/', {
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //                 Authorization: `Bearer ${token}`,
+        //             },
+        //             signal: controller.signal
+        //         });
+        //         console.log(response.data);
+        //
+        //     } catch(e) {
+        //         console.error("Profielgegevens ophalen mislukt", e);
+        //     }
+        // }
+        // void fetchProfileData();
 
-            try {
-                const response = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user/', {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                    signal: controller.signal
-                });
-                console.log(response.data);
-
-            } catch(e) {
-                console.error("Profielgegevens ophalen mislukt", e);
-            }
-        }
-        void fetchProfileData();
-
-        return function cleanup() {
-            controller.abort();
-        }
+    //     return function cleanup() {
+    //         controller.abort();
+    //     }
     }, []);
 
 

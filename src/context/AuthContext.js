@@ -18,7 +18,7 @@ function AuthContextProvider ({ children }) {
 
         if (token && checkTokenValidity(token)) {
             const decoded = jwt_decode(token);
-            void fetchUserData(decoded.sub, token);
+            fetchUserData(token, "/");
         } else {
             toggleIsAuth({
                 isAuth: false,
@@ -33,7 +33,7 @@ function AuthContextProvider ({ children }) {
         localStorage.setItem("token", accessToken);
         const decodedToken = jwt_decode(accessToken)
 
-        void fetchUserData(decodedToken.sub, accessToken, "/images");
+        fetchUserData(accessToken, "/images");
         navigate("/images");
         console.log("Gebruiker is ingelogd");
     }
@@ -57,6 +57,7 @@ function AuthContextProvider ({ children }) {
                     Authorization: `Bearer ${token}`,
                 },
             } );
+            console.log(response.data.username);
 
             toggleIsAuth( {
                 ...isAuth,
@@ -83,8 +84,14 @@ function AuthContextProvider ({ children }) {
         }
     }
 
+    useEffect( () => {
+        console.log(isAuth);
+    }, [isAuth])
+
+
     const contextData = {
         isAuth: isAuth.isAuth,
+        user: isAuth.user,
         login: login,
         logout: logout,
     };
