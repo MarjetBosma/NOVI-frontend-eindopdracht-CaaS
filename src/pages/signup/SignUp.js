@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from 'axios';
+import axios from "axios";
 import "./SignUp.css"
 import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";

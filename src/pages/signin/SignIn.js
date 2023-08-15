@@ -6,7 +6,7 @@ import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 function SignIn() {
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
