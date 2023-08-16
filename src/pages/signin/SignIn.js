@@ -44,9 +44,9 @@ function SignIn() {
             } catch(e) {
 
                 console.error("Inloggen mislukt", e)
+                toggleError(true);
                 setErrorMessage("Inloggen mislukt. Controleer je invoer en probeer het opnieuw.");
                 setSuccessMessage("");
-                toggleError(true);
             }
             toggleLoading(false);
         }

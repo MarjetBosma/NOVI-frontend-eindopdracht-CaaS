@@ -41,9 +41,9 @@ function SignUp() {
 
             } catch(e) {
                 console.error("Registratie mislukt", e)
+                toggleError(true);
                 setErrorMessage("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
                 setSuccessMessage("");
-                toggleError(true);
             }
             toggleLoading(false);
         }
@@ -65,7 +65,7 @@ function SignUp() {
                   validationRules={{
                     required: "Dit veld is verplicht",
                     minLength: {
-                      value: 3,
+                      value: 6,
                       message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
                     }
 

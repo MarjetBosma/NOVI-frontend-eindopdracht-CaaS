@@ -25,8 +25,13 @@ Button {
 Button:hover {
     color: #0A4C90;
 }
+
 Button:disabled {
     opacity: 50%;
+}
+
+Button:active {
+    background-color: #0DD4EF;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
