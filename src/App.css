@@ -127,6 +127,10 @@ footer {
     padding: 20px;
 }
 
+.loading-message {
+    padding: 20px;
+}
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {

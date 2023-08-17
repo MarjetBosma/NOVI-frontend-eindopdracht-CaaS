@@ -10,7 +10,7 @@ const endpointUrls = {
     randomKitten: "https://cataas.com/cat/kitten",
     randomTwoCats: "https://cataas.com/cat/twocats",
     randomGifCat: "https://cataas.com/cat/gif",
-    randomCatSaysMeow: "https://cataas.com/cat/says:miauw",
+    randomCatSaysMeow: "https://cataas.com/cat/says/miauw",
     randomCatImageFiltered: "https://cataas.com/cat/cat?filter=paint",
 }
 
@@ -27,10 +27,36 @@ function Images() {
             toggleError(false);
             toggleLoading(true);
 
-            const response = await axios.get(endpointUrls[endpoint]);
-            const imageUrl = response.config.url;
-            window.open(imageUrl, "_blank");
-            console.log(response)
+            const response = await axios.get(endpointUrls[endpoint], {responseType: "arraybuffer"} );
+            // const imageUrl = response.config.url;
+            console.log(response.data)
+            const imageBlob = new Blob([response.data], { type: response.headers["content-type"] });
+            const imageUrl = URL.createObjectURL(imageBlob);
+
+            const imageWindow = window.open("", "_blank");
+            const imageContainer = document.createElement("div");
+            const imgElement = document.createElement("img");
+            imgElement.src = imageUrl;
+            const saveButton = document.createElement("button");
+            saveButton.classList.add("save-as-favorite-button");
+            saveButton.textContent = "Opslaan in Favorieten";
+            saveButton.addEventListener("click", () => {
+                const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+                if (!favorites.includes(imageUrl)) {
+                    favorites.push(imageUrl);
+                    localStorage.setItem("favorites", JSON.stringify(favorites));
+                }
+            });
+
+            imageContainer.appendChild(imgElement);
+            imageContainer.appendChild(saveButton);
+            imageWindow.document.body.appendChild(imageContainer);
+
+            // const parentElement = document.getElementById("imageContainer");
+            // parentElement.appendChild(saveButton);
+
+            console.log(response.data);
+
         } catch(e) {
             console.error("Fout bij het ophalen van afbeelding", e);
             toggleError(true )
@@ -38,6 +64,15 @@ function Images() {
         }
         toggleLoading(false);
     };
+
+     const saveImageAsFavorite = (imageUrl) => {
+         const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+         if (!favorites.includes(imageUrl)) {
+            favorites.push(imageUrl);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+         }
+     }
+
 
     useEffect(() => {
         return function cleanup() {
@@ -57,34 +92,34 @@ function Images() {
                         <Button
                             type="button"
                             disabled={loading}
-                            onClick={() => fetchCatImage("randomCatImage")}>Kat
+                            clickHandler={() => fetchCatImage("randomCatImage")}>Kat
                         </Button>
                         <Button
                             type="button"
                             disabled={loading}
-                            onClick={() => fetchCatImage("randomKitten")}>Kitten
+                            clickHandler={() => fetchCatImage("randomKitten")}>Kitten
                         </Button>
                         <Button
                             type="button"
                             disabled={loading}
-                            onClick={() => fetchCatImage("randomTwoCats")}>Twee katten
+                            clickHandler={() => fetchCatImage("randomTwoCats")}>Twee katten
                         </Button>
                     </div>
                     <div className="inner-button-container">
                         <Button
                             type="button"
                             disabled={loading}
-                            onClick={() => fetchCatImage("randomGifCat")}>GIF afbeelding kat
+                            clickHandler={() => fetchCatImage("randomGifCat")}>GIF afbeelding kat
                         </Button>
                         <Button
                             type="button"
                             disabled={loading}
-                            onClick={() => fetchCatImage("randomCatSaysMeow")}>Kat die "miauw" zegt
+                            clickHandler={() => fetchCatImage("randomCatSaysMeow")}>Kat die "miauw" zegt
                         </Button>
                         <Button
                             type="button"
                             disabled={loading}
-                            onClick={() => fetchCatImage("randomCatImageFiltered")}>Kat met schilderij-filter
+                            clickHandler={() => fetchCatImage("randomCatImageFiltered")}>Kat met schilderij-filter
                         </Button>
                     </div>
                 </div>
