@@ -67,9 +67,11 @@ function Images() {
 
      const saveImageAsFavorite = (imageUrl) => {
          const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-         if (!favorites.includes(imageUrl)) {
+         if (favorites.length < 24 && !favorites.includes(imageUrl)) {
             favorites.push(imageUrl);
             localStorage.setItem("favorites", JSON.stringify(favorites));
+         } else {
+             console.log("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.");
          }
      }
 
