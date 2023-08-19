@@ -4,14 +4,16 @@ import "./Images.css"
 import { Link } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
+import InputField from "../../components/InputField";
 
 const endpointUrls = {
     randomCatImage: "https://cataas.com/cat",
     randomKitten: "https://cataas.com/cat/kitten",
-    randomTwoCats: "https://cataas.com/cat/twocats",
     randomGifCat: "https://cataas.com/cat/gif",
-    randomCatSaysMeow: "https://cataas.com/cat/says/miauw",
-    randomCatImageFiltered: "https://cataas.com/cat/cat?filter=paint",
+    // randomCatSepiaFilter: "https://cataas.com/cat/cat?filter=sepia",
+    // randomCatPaintFilter: "https://cataas.com/cat/cat?filter=paint",
+    randomCatFilter: "https://cataas.com/cat/cat?filter=:filter",
+    randomCatSays: "https://cataas.com/cat/says/:text",
 }
 
 function Images() {
@@ -19,6 +21,8 @@ function Images() {
     const [error, toggleError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [loading, toggleLoading] = useState(false);
+    const [userInput, setUserInput] = useState("");
+    const [selectedFilter, setSelectedFilter] = useState("");
 
     const controller = new AbortController();
 
@@ -52,9 +56,6 @@ function Images() {
             imageContainer.appendChild(saveButton);
             imageWindow.document.body.appendChild(imageContainer);
 
-            // const parentElement = document.getElementById("imageContainer");
-            // parentElement.appendChild(saveButton);
-
             console.log(response.data);
 
         } catch(e) {
@@ -64,6 +65,13 @@ function Images() {
         }
         toggleLoading(false);
     };
+    const handleFetchRandomCatSays = () => {
+        const catSaysUrl = endpointUrls.randomCatSays.replace(":text", userInput);
+        fetchCatImage(catSaysUrl);
+
+    const handleFetchRandomCatFilter = () => {
+        const catFilterUrl = endpointUrls.randomCatSays.replace(":filter", selectedFilter);
+        fetchCatImage(catFilterUrl);
 
      const saveImageAsFavorite = (imageUrl) => {
          const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -71,10 +79,11 @@ function Images() {
             favorites.push(imageUrl);
             localStorage.setItem("favorites", JSON.stringify(favorites));
          } else {
-             console.log("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.");
+             console.log("Maximum aantal afbeeldingen overschreden");
+             toggleError(true);
+             setErrorMessage("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.")
          }
      }
-
 
     useEffect(() => {
         return function cleanup() {
@@ -94,34 +103,57 @@ function Images() {
                         <Button
                             type="button"
                             disabled={loading}
-                            clickHandler={() => fetchCatImage("randomCatImage")}>Kat
+                            clickHandler={() => fetchCatImage("randomCatImage")}>Random kat
                         </Button>
                         <Button
                             type="button"
                             disabled={loading}
-                            clickHandler={() => fetchCatImage("randomKitten")}>Kitten
+                            clickHandler={() => fetchCatImage("randomKitten")}>Random kitten
                         </Button>
-                        <Button
-                            type="button"
-                            disabled={loading}
-                            clickHandler={() => fetchCatImage("randomTwoCats")}>Twee katten
-                        </Button>
-                    </div>
-                    <div className="inner-button-container">
                         <Button
                             type="button"
                             disabled={loading}
                             clickHandler={() => fetchCatImage("randomGifCat")}>GIF afbeelding kat
                         </Button>
+                    </div>
+                    <div className="inner-button-container">
+                        {/*<Button*/}
+                        {/*    type="button"*/}
+                        {/*    disabled={loading}*/}
+                        {/*    clickHandler={() => fetchCatImage("randomCatSepiaFilter")}>Kat met sepia-filter*/}
+                        {/*</Button>*/}
+                        {/*<Button*/}
+                        {/*    type="button"*/}
+                        {/*    disabled={loading}*/}
+                        {/*    clickHandler={() => fetchCatImage("randomCatPaintFilter")}>Kat met schilderij-filter*/}
+                        {/*</Button>*/}
+                        <select
+                            value={selectedFilter}
+                            onChange={(e) => setSelectedFilter(e.target.value)}
+                        >
+                            <option value="">Kies een filter</option>
+                            <option value="blur">Blur</option>
+                            <option value="mono">Mono</option>
+                            <option value="sepia">Sepia</option>
+                            <option value="negative">Negative</option>
+                            <option value="paint">Paint</option>
+                            <option value="pixel">Pixel</option>
+                        </select>
                         <Button
                             type="button"
                             disabled={loading}
-                            clickHandler={() => fetchCatImage("randomCatSaysMeow")}>Kat die "miauw" zegt
+                            clickHandler={() => handleFetchRandomCatFilter()}>Kat met filter
                         </Button>
+                        <InputField
+                            type="text"
+                            value={userInput}
+                            onInput={setUserInput}
+                            placeholder="Vul je eigen tekst in"
+                        />
                         <Button
                             type="button"
                             disabled={loading}
-                            clickHandler={() => fetchCatImage("randomCatImageFiltered")}>Kat met schilderij-filter
+                            clickHandler={() => handleFetchRandomCatSays()}>Kat met jouw tekst
                         </Button>
                     </div>
                 </div>
@@ -138,8 +170,8 @@ function Images() {
             </section>
         </div>
     )
-}
-    export default Images;
+}}}
+ export default Images;
 
 
 
