@@ -149,7 +149,13 @@ function Images() {
                             value={userInput}
                             onInput={setUserInput}
                             placeholder="Vul je eigen tekst in"
-                        />
+                            validationRules={{
+                                required: "Dit veld is verplicht",
+                                maxLength: {
+                                value: 50,
+                                message: "De tekst mag maximaal 50 karakters lang zijn",
+                                }}}
+                            />
                         <Button
                             type="button"
                             disabled={loading}

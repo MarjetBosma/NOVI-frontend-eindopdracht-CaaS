@@ -66,8 +66,8 @@
         top: 0;
         right: 0;
         width: 180px;
-        border-left: 1px solid #0E0F3B;
-        border-right: 1px solid #0E0F3B;
+        border-top: 1px solid #0E0F3B;
+        border-bottom: 1px solid #0E0F3B;
     }
 
     .hamburger-menu-icon-container {
@@ -82,14 +82,17 @@
     }
 
     .default-link {
-        padding: 10px;
+        padding: 16px;
         text-align: center;
         color: #0E0F3B;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 500;
         text-decoration: none;
         transition: color 0.3s ease;
-        border: 1px solid #0E0F3B;
+        border-right: 2px solid #0E0F3B;
+        border-left: 2px solid #0E0F3B;
+        border-top: 1px solid #0E0F3B;
+        border-bottom: 1px solid #0E0F3B;
     }
 
     .default-link:hover {
