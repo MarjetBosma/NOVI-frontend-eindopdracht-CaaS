@@ -4,6 +4,8 @@
 
 Als je van katten houdt, kan het aaien van zo'n pluizge viervoeter ontspannend en stressverlagend werken. Instant stress-relief op pootjes! Maar ja, op het werk, op school, in de trein etc. heb je meestal geen kat bij de hand. Gelukkig is uit onderzoek gebleken dat het kijken naar kattenfilmpjes of -plaatjes ook werkt. Deze applicatie biedt de gebruiker een wereld aan leuke, gezellige en schattige afbeeldingen van katten. Precies voor die momenten waarop je wel even wat harige afleiding en ontspanning kunt gebruiken, maar er geen echte kat in de buurt is!
 
+Deze applicatie is gemaakt als integrale eindopdracht voor de leerlijn Frontend van de NOVI Hogeschool te Utrecht.
+
 *** screenshot belangrijkste pagina ***
 ![screenshot](src/assets/screenshot.png)
 
@@ -60,4 +62,5 @@ De afbeelding van het CaaS logo is afkomstig van Freepik (zie [hier](https://www
 ## Contact
 
 Vragen of opmerkingen? Laat een comment achter in de repository op GitHub (zie [hier](https://github.com/MarjetBosma/NOVI-frontend-eindopdracht-CaaS)) of stuur mij een e-mail op marjet_bosma@hotmail.com.
-    
+
+© Marjet Bosma, Eindopdracht Frontend, NOVI Hogeschool

@@ -11,7 +11,6 @@ function SignUp() {
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
     const [errorMessage, setErrorMessage] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
 
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
@@ -33,7 +32,6 @@ function SignUp() {
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
                 });
-                setSuccessMessage("Registratie gelukt, je kunt nu inloggen");
                 setErrorMessage("")
                 console.log(response.data);
                 console.log("Gebruiker is geregistreerd")
@@ -43,7 +41,6 @@ function SignUp() {
                 console.error("Registratie mislukt", e)
                 toggleError(true);
                 setErrorMessage("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
-                setSuccessMessage("");
             }
             toggleLoading(false);
         }
@@ -53,7 +50,6 @@ function SignUp() {
           <section className="signup-container">
 
             {errorMessage && <div className="error-message">{errorMessage}</div>}
-            {successMessage && <div className="success-message">{successMessage}</div>}
 
             <form className="signup-form"
                   onSubmit={handleSubmit(onSubmit)}>
