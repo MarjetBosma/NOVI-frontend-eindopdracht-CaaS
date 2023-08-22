@@ -9,7 +9,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 function Profile() {
 
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
     const [newEmail, setNewEmail] = useState("");
@@ -108,7 +108,7 @@ function Profile() {
                     <div className="button-container-profile">
                         <Button
                             clickHandler={() => setShowModal(true)}>Wijzig gegevens
-                            >Wijzig gegevens</Button>
+                        </Button>
                     </div>
                 </article>
             </section>

@@ -3,7 +3,7 @@
 .nav-menu {
     display: flex;
     flex-wrap: wrap;
-    max-width: 700px;
+    max-width: 800px;
     min-width: 400px;
     height: 100px;
     padding-inline: 40px;
@@ -68,6 +68,7 @@
         width: 180px;
         border-top: 1px solid #0E0F3B;
         border-bottom: 1px solid #0E0F3B;
+        z-index: 1;
     }
 
     .hamburger-menu-icon-container {

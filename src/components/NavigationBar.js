@@ -6,14 +6,14 @@ import hamburgerMenuIcon from "../assets/hamburger-menu-icon.png";
 
 function NavigationBar() {
     const { logout } = useContext(AuthContext);
-    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isMobileMenuOpen, toggleIsMobileMenuOpen] = useState(false);
 
     const mobileMenuRef = useRef(null);
 
     useEffect(() => {
         const handleClick = (event) => {
             if (isMobileMenuOpen && mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
-                setMobileMenuOpen(false);
+                toggleIsMobileMenuOpen(false);
             }
         };
 
@@ -26,17 +26,31 @@ function NavigationBar() {
 
     const toggleMobileMenu = (event) => {
         event.stopPropagation();
-        setMobileMenuOpen(!isMobileMenuOpen);
+        toggleIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
     const closeMobileMenu = () => {
-        setMobileMenuOpen(false);
+        toggleIsMobileMenuOpen(false);
     };
 
     return (
         <div>
-            <nav className={isMobileMenuOpen ? "nav-menu-hamburger" : "nav-menu"}>
-                {/* ... your NavLink elements */}
+            <nav className="nav-menu">
+                <NavLink className={({ isActive }) => isActive === true ? "active-link" : "default-link"} to="/">Home
+                </NavLink>
+                <NavLink className={({ isActive }) => isActive === true ? "active-link" : "default-link"} to="/signup">Registreren
+                </NavLink>
+                <NavLink className={({ isActive }) => isActive === true ? "active-link" : "default-link"} to="/signin">Inloggen
+                </NavLink>
+                <NavLink className={({ isActive }) => isActive === true ? "active-link" : "default-link"} to="/images">Afbeeldingen
+                </NavLink>
+                <NavLink className={({ isActive }) => isActive === true ? "active-link" : "default-link"} to="/favorites">Favorieten
+                </NavLink>
+                <NavLink className={({ isActive }) => isActive === true ? "active-link" : "default-link"} to="/profile">Profiel
+                </NavLink>
+                <NavLink className="default-link" to="/"
+                         onClick={logout}>Uitloggen
+                </NavLink>
             </nav>
 
             <div className="hamburger-menu-icon-container">
@@ -62,6 +76,9 @@ function NavigationBar() {
                     </NavLink>
                     <NavLink className="default-link" to="/images" onClick={closeMobileMenu}>
                         Afbeeldingen
+                    </NavLink>
+                    <NavLink className="default-link" to="/favorites" onClick={closeMobileMenu}>
+                        Favorieten
                     </NavLink>
                     <NavLink className="default-link" to="/profile" onClick={closeMobileMenu}>
                         Profiel
