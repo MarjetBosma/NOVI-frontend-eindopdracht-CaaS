@@ -1,13 +1,15 @@
-import React, {useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Favorites.css"
 import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
-import {Link, useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function Favorites() {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     const navigate = useNavigate();
+
+    const [selectedImages, setSelectedImages] = useState([]);
 
     useEffect(() => {
         console.log(favorites);
@@ -18,19 +20,40 @@ function Favorites() {
         navigate(imgUrl)
     }
 
+    function handleImageSelection(index) {
+        if (selectedImages.includes(index)) {
+            setSelectedImages(selectedImages.filter((item) => item !== index));
+        } else {
+            setSelectedImages([...selectedImages, index]);
+        }
+    }
+
+    function handleDeleteSelection() {
+        const updatedFavorites = favorites.filter((item, index) => !selectedImages.includes(index));
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+        setSelectedImages([]);
+    }
+
+
     return (
         <div className="inner-container">
             <section className="favorites-button-container">
                 <ul className="favorites-container">
                     {favorites.map((imageUrl, index) => (
-                        <li key={index} className="thumbnail">
+                        <li
+                            key={index}
+                            className={`thumbnail ${selectedImages.includes(index) ? "selected" : ""}`}>
                                 <img src={imageUrl} alt={`Favorite ${index}`}
                                      onClick={() => handleImageClick(index)}
+                                     onDoubleClick={() => handleImageSelection(index)}
                                 />
                         </li>
                     ))}
                 </ul>
-                <Button type="submit">
+                <Button
+                    type="submit"
+                    onClick={handleDeleteSelection}
+                    disabled={selectedImages.length === 0}>
                     Verwijder selectie
                 </Button>
 

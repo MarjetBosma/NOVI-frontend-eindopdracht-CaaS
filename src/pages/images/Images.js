@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form"
 import axios from "axios"
 import "./Images.css"
 import { Link } from "react-router-dom";
@@ -10,13 +11,19 @@ const endpointUrls = {
     randomCatImage: "https://cataas.com/cat",
     randomKitten: "https://cataas.com/cat/kitten",
     randomGifCat: "https://cataas.com/cat/gif",
-    // randomCatSepiaFilter: "https://cataas.com/cat/cat?filter=sepia",
-    // randomCatPaintFilter: "https://cataas.com/cat/cat?filter=paint",
     randomCatFilter: "https://cataas.com/cat/cat?filter=:filter",
     randomCatSays: "https://cataas.com/cat/says/:text",
 }
 
 function Images() {
+
+    const { register, formState: { errors } } = useForm();
+
+    useEffect(() => {
+        return function cleanup() {
+            controller.abort();
+        }
+    }, []);
 
     const [error, toggleError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -65,13 +72,16 @@ function Images() {
         }
         toggleLoading(false);
     };
+
     const handleFetchRandomCatSays = () => {
         const catSaysUrl = endpointUrls.randomCatSays.replace(":text", userInput);
         fetchCatImage(catSaysUrl);
+    }
 
     const handleFetchRandomCatFilter = () => {
         const catFilterUrl = endpointUrls.randomCatSays.replace(":filter", selectedFilter);
         fetchCatImage(catFilterUrl);
+    }
 
      const saveImageAsFavorite = (imageUrl) => {
          const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -84,13 +94,6 @@ function Images() {
              setErrorMessage("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.")
          }
      }
-
-    useEffect(() => {
-        return function cleanup() {
-            controller.abort();
-        }
-    }, []);
-
 
     return (
         <div className="inner-container">
@@ -117,16 +120,6 @@ function Images() {
                         </Button>
                     </div>
                     <div className="inner-button-container">
-                        {/*<Button*/}
-                        {/*    type="button"*/}
-                        {/*    disabled={loading}*/}
-                        {/*    clickHandler={() => fetchCatImage("randomCatSepiaFilter")}>Kat met sepia-filter*/}
-                        {/*</Button>*/}
-                        {/*<Button*/}
-                        {/*    type="button"*/}
-                        {/*    disabled={loading}*/}
-                        {/*    clickHandler={() => fetchCatImage("randomCatPaintFilter")}>Kat met schilderij-filter*/}
-                        {/*</Button>*/}
                         <select
                             value={selectedFilter}
                             onChange={(e) => setSelectedFilter(e.target.value)}
@@ -155,6 +148,8 @@ function Images() {
                                 value: 50,
                                 message: "De tekst mag maximaal 50 karakters lang zijn",
                                 }}}
+                            register={register}
+                            errors={errors}
                             />
                         <Button
                             type="button"
@@ -176,7 +171,7 @@ function Images() {
             </section>
         </div>
     )
-}}}
+}
  export default Images;
 
 

@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useForm } from "react-hook-form"
 import "./Profile.css"
 import logo from "../../assets/caas-logo-no-text.jpg";
 import profilePicPlaceholder from "../../assets/profile-pic-placeholder.png"
 import Button from "../../components/Button";
+import InputField from "../../components/InputField";
 import { Link } from "react-router-dom";
 import axios from "axios"
 import { AuthContext } from "../../context/AuthContext";
@@ -10,6 +12,8 @@ import { AuthContext } from "../../context/AuthContext";
 function Profile() {
 
     const { user } = useContext(AuthContext);
+    const { handleSubmit, register, formState: { errors } } = useForm();
+
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
     const [newEmail, setNewEmail] = useState("");
@@ -19,84 +23,83 @@ function Profile() {
     const [successMessage, setSuccessMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
 
+    const handleProfilePictureUpload = (e) => {
+        const selectedFile = e.target.files[0];
+        setProfilePicture(selectedFile);
+    };
+
+    const handleUpdateUserInfo = async () => {
+        const token = localStorage.getItem("token");
+        const updatedInfo = {};
+
+        if (newUsername) {
+            updatedInfo.username = newUsername;
+        }
+        if (newEmail) {
+            updatedInfo.email = newEmail;
+        }
+        if (newPassword) {
+            updatedInfo.password = newPassword;
+        }
+
+        const formData = new FormData();
+        if (newUsername) {
+            formData.append("username", newUsername);
+        }
+        if (newEmail) {
+            formData.append("email", newEmail);
+        }
+        if (newPassword) {
+            formData.append("password", newPassword);
+        }
+        if (profilePicture) {
+            formData.append("profilePicture", newProfilePicture);
+        }
+
+        try {
+
+            const response = await axios.put("https://frontend-educational-backend.herokuapp.com/api/user/",
+                updatedInfo,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            console.log(response.data, "Gebruikersgegevens gewijzigd");
+            setSuccessMessage("Gebruikersgegevens gewijzigd");
+
+        } catch (e) {
+            console.error("Wijzigen gebruikersgegevens mislukt", e);
+            setErrorMessage("Wijzigen gebruikersgegevens mislukt");
+        }
+    };
+
+
     useEffect(() => {
         console.log(user)
         const controller = new AbortController();
 
-        const handleProfilePictureUpload = (event) => {
-            const selectedFile = event.target.files[0];
-            setProfilePicture(selectedFile);
-        };
-
-        const handleUpdateUserInfo = async () => {
-            const token = localStorage.getItem("token");
-            const updatedInfo = {};
-
-            if (newUsername) {
-                updatedInfo.username = newUsername;
-            }
-            if (newEmail) {
-                updatedInfo.email = newEmail;
-            }
-            if (newPassword) {
-                updatedInfo.password = newPassword;
-            }
-
-            const formData = new FormData();
-            if (newUsername) {
-                formData.append("username", newUsername);
-            }
-            if (newEmail) {
-                formData.append("email", newEmail);
-            }
-            if (newPassword) {
-                formData.append("password", newPassword);
-            }
-            if (profilePicture) {
-                formData.append("profilePicture", newProfilePicture);
-            }
-
-
-            try {
-                const response = await axios.put('https://frontend-educational-backend.herokuapp.com/api/user/', updatedInfo, FormData, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                    signal: controller.signal
-                });
-                console.log(response.data, "Gebruikersgegevens gewijzigd");
-                setSuccessMessage("Gebruikersgegevens gewijzigd")
-
-            } catch (e) {
-                console.error("Wijzigen gebruikersgegevens mislukt", e);
-                setErrorMessage("Wijzigen gebruikersgegevens mislukt")
-            }
-        }
-
         return function cleanup() {
             controller.abort();
         }
-    }, [user]);
+    }, [newEmail, newPassword, newProfilePicture, newUsername, profilePicture, user]);
 
 
     return (
         <div className="inner-container">
-            <section className="profile-container">
-                <article className="picture-button-container">
-                    <div className="picture-container">
+            <section className="profile-button-container">
+              <div className="profile-container">
+                <article className="picture-container">
                         <img
                             className="profile-pic-placeholder"
                             src={profilePicture ? URL.createObjectURL(profilePicture) : profilePicPlaceholder}
                             alt="profile picture"
                         />
-                    </div>
-                    <div className="button-container-profile">
-                        <Button>Upload/wijzig foto</Button>
-                    </div>
                 </article>
-                <article className="info-button-container">
-                    <div className="info-container">
+                <article className="info-container">
                         <p><strong>Gebruikersnaam: </strong></p>
                         <p>{user.username}</p>
                         <p><strong>E-mailadres: </strong></p>
@@ -104,13 +107,13 @@ function Profile() {
                         <p><strong>Wachtwoord: </strong></p>
                         <p>{user.password}</p>
                         <p><strong>Bekijk je <Link to="/favorites">favorieten</Link>.</strong></p>
-                    </div>
-                    <div className="button-container-profile">
-                        <Button
-                            clickHandler={() => setShowModal(true)}>Wijzig gegevens
-                        </Button>
-                    </div>
                 </article>
+              </div>
+                <div className="button-container-profile">
+                    <Button
+                        clickHandler={() => setShowModal(true)}>Wijzig gegevens
+                    </Button>
+                </div>
             </section>
 
             <section className="title-logo-container">
@@ -127,36 +130,68 @@ function Profile() {
                         <span className="close" onClick={() => setShowModal(false)}>
                             &times;
                         </span>
+                        {errorMessage && <div className="error-message">{errorMessage}</div>}
                         <h2>Wijzig gegevens</h2>
-                        <input
-                            type="text"
-                            placeholder="Nieuwe gebruikersnaam"
-                            value={newUsername}
-                            onChange={(e) => setNewUsername(e.target.value)}
+                        <form onSubmit={handleSubmit(handleUpdateUserInfo)}>
+                        <InputField
+                            inputType="text"
+                            inputName="username"
+                            inputLabel="Gebruikersnaam"
+                            inputValue={newUsername}
+                            placeholder={"Nieuwe gebruikersnaam"}
+                            validationRules={{
+                                required: "Dit veld is verplicht",
+                                minLength: {
+                                    value: 6,
+                                    message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
+                                }}}
+                            register={register}
+                            errors={errors}
                         />
-                        <input
-                            type="text"
-                            placeholder="Nieuw e-mailadres"
-                            value={newEmail}
-                            onChange={(e) => setNewEmail(e.target.value)}
+                        <InputField
+                            inputType="email"
+                            inputName="email"
+                            inputLabel="E-mailadres"
+                            inputValue={newEmail}
+                            placeholder = {"Nieuw e-mailadres"}
+                            validationRules={{
+                                required: "Dit veld is verplicht",
+                                validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
+                            }}
+                            register={register}
+                            errors={errors}
                         />
-                        <input
-                            type="text"
-                            placeholder="Nieuw wachtwoord"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
+                        <InputField
+                            inputType="password"
+                            inputName="username"
+                            inputLabel="Wachtwoord"
+                            inputValue={newPassword}
+                            placeholder={"Nieuw wachtwoord"}
+                            validationRules={{
+                                required: "Dit veld is verplicht",
+                                minLength: {
+                                    value: 6,
+                                    message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
+                                }}}
+                            register={register}
+                            errors={errors}
                         />
-                        <input
-                            type="file"
-                            accept="image/*"
+                        <InputField
+                            inputType="file"
+                            inputName="newProfilePicture"
+                            inputLabel="Profielfoto"
+                            validationRules={{
+                                validate: (value) =>
+                                    value || "Selecteer een afbeelding voor je profielfoto",
+                            }}
                             onChange={handleProfilePictureUpload}
+                            register={register}
+                            errors={errors}
                         />
-                        <Button clickHandler={handleUpdateUserInfo}>
-                            Opslaan
-                        </Button>
+                        <Button type="submit">Opslaan</Button>
+                        </form>
                     </div>
                 </div>
-
             )}
         </div>
     );

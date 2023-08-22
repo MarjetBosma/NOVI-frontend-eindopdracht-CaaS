@@ -21,6 +21,10 @@
     list-style-type: none;
 }
 
+.thumbnail.selected {
+    border: 2px #F7931E;
+}
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
