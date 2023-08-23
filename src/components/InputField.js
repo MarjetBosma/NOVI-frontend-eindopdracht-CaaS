@@ -15,6 +15,7 @@ function InputField({ inputLabel, inputType, inputName, inputValue, onChange, va
             id={`${inputName}-input`}
             onChange={onChange}
             {...register(inputName, validationRules)}
+            className={`input-field ${errors[inputName] ? "input-error" : ""}`}
           />
           {errors[inputName] && <p className="error-message">{errors[inputName].message}</p>}
         </div>

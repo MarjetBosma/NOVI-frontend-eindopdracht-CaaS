@@ -42,6 +42,30 @@
     padding-block: 10px;
 }
 
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 475px;
+}
+
+.update-userdata-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+}
+
+.input-label-profile-pic {
+    font-weight: 700;
+}
+
+.error-message-container {
+    height: 40px; /* You can adjust this height based on your design */
+    overflow: hidden;
+}
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
@@ -68,7 +92,5 @@
     .picture-container {
         width: 150px;
     }
-
-
 
 }

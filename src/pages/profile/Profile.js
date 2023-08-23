@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useForm } from "react-hook-form"
+import { useForm, useFormState } from "react-hook-form"
 import "./Profile.css"
 import logo from "../../assets/caas-logo-no-text.jpg";
 import profilePicPlaceholder from "../../assets/profile-pic-placeholder.png"
@@ -12,7 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 function Profile() {
 
     const { user } = useContext(AuthContext);
-    const { handleSubmit, register, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
@@ -111,10 +111,92 @@ function Profile() {
               </div>
                 <div className="button-container-profile">
                     <Button
-                        clickHandler={() => setShowModal(true)}>Wijzig gegevens
+                        clickHandler={() => setShowModal(true)}
+                        disabled={showModal}
+                    >Wijzig gegevens
                     </Button>
                 </div>
             </section>
+
+            {showModal && (
+                <div className="modal">
+                   <span className="close" onClick={() => setShowModal(false)}>
+                            &times;
+                        </span>
+                    <div className="modal-content">
+                        <div className="error-message-container">
+                            {errorMessage && <div className="error-message">{errorMessage}</div>}
+                        </div>
+                        {/*<h3>Wijzig gegevens</h3>*/}
+                        <form
+                            className="update-userdata-form"
+                            onSubmit={handleSubmit(handleUpdateUserInfo)}>
+                            <InputField
+                                inputType="text"
+                                inputName="username"
+                                inputLabel="Gebruikersnaam"
+                                inputValue={newUsername}
+                                placeholder={"Nieuwe gebruikersnaam"}
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    minLength: {
+                                        value: 6,
+                                        message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
+                                    }}}
+                                register={register}
+                                errors={errors}
+                            />
+                            <InputField
+                                inputType="email"
+                                inputName="email"
+                                inputLabel="E-mailadres"
+                                inputValue={newEmail}
+                                placeholder = {"Nieuw e-mailadres"}
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
+                                }}
+                                register={register}
+                                errors={errors}
+                            />
+                            <InputField
+                                inputType="password"
+                                inputName="username"
+                                inputLabel="Wachtwoord"
+                                inputValue={newPassword}
+                                placeholder={"Nieuw wachtwoord"}
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    minLength: {
+                                        value: 6,
+                                        message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
+                                    }}}
+                                register={register}
+                                errors={errors}
+                            />
+                            <label className="input-label-profile-pic">Profielfoto
+                            </label>
+                            <InputField
+                                inputType="file"
+                                inputName="newProfilePicture"
+                                validationRules={{
+                                    validate: (value) =>
+                                        value || "Selecteer een afbeelding voor je profielfoto",
+                                }}
+                                onChange={handleProfilePictureUpload}
+                                register={register}
+                                errors={errors}
+                            />
+
+                            <Button
+                                type="submit"
+                                disabled={!isDirty || !isValid}>Opslaan
+                            </Button>
+                        </form>
+                    </div>
+                </div>
+
+            )}
 
             <section className="title-logo-container">
                 <h2>Jouw profiel</h2>
@@ -124,75 +206,7 @@ function Profile() {
                 </div>
             </section>
 
-            {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={() => setShowModal(false)}>
-                            &times;
-                        </span>
-                        {errorMessage && <div className="error-message">{errorMessage}</div>}
-                        <h2>Wijzig gegevens</h2>
-                        <form onSubmit={handleSubmit(handleUpdateUserInfo)}>
-                        <InputField
-                            inputType="text"
-                            inputName="username"
-                            inputLabel="Gebruikersnaam"
-                            inputValue={newUsername}
-                            placeholder={"Nieuwe gebruikersnaam"}
-                            validationRules={{
-                                required: "Dit veld is verplicht",
-                                minLength: {
-                                    value: 6,
-                                    message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
-                                }}}
-                            register={register}
-                            errors={errors}
-                        />
-                        <InputField
-                            inputType="email"
-                            inputName="email"
-                            inputLabel="E-mailadres"
-                            inputValue={newEmail}
-                            placeholder = {"Nieuw e-mailadres"}
-                            validationRules={{
-                                required: "Dit veld is verplicht",
-                                validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
-                            }}
-                            register={register}
-                            errors={errors}
-                        />
-                        <InputField
-                            inputType="password"
-                            inputName="username"
-                            inputLabel="Wachtwoord"
-                            inputValue={newPassword}
-                            placeholder={"Nieuw wachtwoord"}
-                            validationRules={{
-                                required: "Dit veld is verplicht",
-                                minLength: {
-                                    value: 6,
-                                    message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
-                                }}}
-                            register={register}
-                            errors={errors}
-                        />
-                        <InputField
-                            inputType="file"
-                            inputName="newProfilePicture"
-                            inputLabel="Profielfoto"
-                            validationRules={{
-                                validate: (value) =>
-                                    value || "Selecteer een afbeelding voor je profielfoto",
-                            }}
-                            onChange={handleProfilePictureUpload}
-                            register={register}
-                            errors={errors}
-                        />
-                        <Button type="submit">Opslaan</Button>
-                        </form>
-                    </div>
-                </div>
-            )}
+
         </div>
     );
 }
