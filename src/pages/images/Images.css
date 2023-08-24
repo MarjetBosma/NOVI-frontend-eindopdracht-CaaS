@@ -15,10 +15,24 @@
     padding-bottom: 30px;
 }
 
-.inner-button-container {
+.inner-button-container-left {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
+}
+
+.inner-button-container-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.images-to-favorites-link {
+    padding-top: 60px;
+}
+
+.error-message {
+    padding-top:200px;
 }
 
 .save-as-favorite-button {

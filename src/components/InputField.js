@@ -1,7 +1,7 @@
 import React from "react";
 import "./InputField.css"
 
-function InputField({ inputLabel, inputType, inputName, inputValue, onChange, validationRules, placeholder, register, errors}) {
+function InputField({ inputLabel, inputType, inputName, inputValue, onChange, onInput, validationRules, placeholder, register, errors}) {
 
     return (
         <div className="input-container">
@@ -14,6 +14,7 @@ function InputField({ inputLabel, inputType, inputName, inputValue, onChange, va
             placeholder={placeholder}
             id={`${inputName}-input`}
             onChange={onChange}
+            onInput={onInput}
             {...register(inputName, validationRules)}
             className={`input-field ${errors[inputName] ? "input-error" : ""}`}
           />

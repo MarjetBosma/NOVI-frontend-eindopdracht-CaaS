@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useForm, useFormState } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import "./Profile.css"
 import logo from "../../assets/caas-logo-no-text.jpg";
 import profilePicPlaceholder from "../../assets/profile-pic-placeholder.png"
@@ -12,80 +12,101 @@ import { AuthContext } from "../../context/AuthContext";
 function Profile() {
 
     const { user } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
+    const { register, setValue, formState: { errors, isDirty, isValid } } = useForm();
 
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
+    const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
     const [newProfilePicture, setNewProfilePicture] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
 
-    const handleProfilePictureUpload = (e) => {
-        const selectedFile = e.target.files[0];
-        setProfilePicture(selectedFile);
-    };
-
-    const handleUpdateUserInfo = async () => {
+    const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
-        const updatedInfo = {};
 
-        if (newUsername) {
-            updatedInfo.username = newUsername;
+        const updatedUserData = {};
+        if (data.username) {
+            updatedUserData.username = data.username;
         }
-        if (newEmail) {
-            updatedInfo.email = newEmail;
+        if (data.email) {
+            updatedUserData.email = data.email;
         }
-        if (newPassword) {
-            updatedInfo.password = newPassword;
-        }
-
-        const formData = new FormData();
-        if (newUsername) {
-            formData.append("username", newUsername);
-        }
-        if (newEmail) {
-            formData.append("email", newEmail);
-        }
-        if (newPassword) {
-            formData.append("password", newPassword);
-        }
-        if (profilePicture) {
-            formData.append("profilePicture", newProfilePicture);
+        if (data.password && data.repeatedPassword) {
+            updatedUserData.password = data.password;
+            updatedUserData.repeatedPassword = data.repeatedPassword;
         }
 
         try {
-
-            const response = await axios.put("https://frontend-educational-backend.herokuapp.com/api/user/",
-                updatedInfo,
-                formData,
+            const response = await axios.put(
+                "https://frontend-educational-backend.herokuapp.com/api/user/",
+                updatedUserData,
                 {
                     headers: {
-                        "Content-Type": "multipart/form-data",
+                        "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                     },
                 }
             );
             console.log(response.data, "Gebruikersgegevens gewijzigd");
             setSuccessMessage("Gebruikersgegevens gewijzigd");
-
         } catch (e) {
             console.error("Wijzigen gebruikersgegevens mislukt", e);
             setErrorMessage("Wijzigen gebruikersgegevens mislukt");
         }
     };
 
+    const handleProfilePictureUpload = (e) => {
+        const selectedFile = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const base64String = event.target.result;
+            setProfilePicture(selectedFile); // Store the selected file in state
+            setNewProfilePicture(base64String); // Store the base64-encoded image data in state
+        };
+        reader.readAsDataURL(selectedFile);
+    };
+
+    const handleUpdateProfilePicture = async () => {
+        const token = localStorage.getItem("token");
+
+        try {
+            const response = await axios.post(
+                "https://frontend-educational-backend.herokuapp.com/api/user/image",
+                {
+                    image: newProfilePicture,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            console.log(response.data, "Profielfoto gewijzigd");
+            setSuccessMessage("Profielfoto gewijzigd");
+        } catch (e) {
+            console.error("Wijzigen profielfoto mislukt", e);
+            setErrorMessage("Wijzigen profielfoto mislukt");
+        }
+    };
+
+
+    const handleSubmit = async (data) => {
+        await Promise.all([handleUpdateUserData(data), handleUpdateProfilePicture()]);
+        console.log(data);
+    };
+
 
     useEffect(() => {
-        console.log(user)
-        const controller = new AbortController();
+        console.log(user, newEmail, newPassword, newProfilePicture, newUsername, profilePicture);
 
         return function cleanup() {
-            controller.abort();
         }
-    }, [newEmail, newPassword, newProfilePicture, newUsername, profilePicture, user]);
+
+    }, [user, newEmail, newPassword, newProfilePicture, newUsername, profilePicture]);
 
 
     return (
@@ -104,9 +125,7 @@ function Profile() {
                         <p>{user.username}</p>
                         <p><strong>E-mailadres: </strong></p>
                         <p>{user.email}</p>
-                        <p><strong>Wachtwoord: </strong></p>
-                        <p>{user.password}</p>
-                        <p><strong>Bekijk je <Link to="/favorites">favorieten</Link>.</strong></p>
+                        <p className="profile-to-favorites-link"><strong>Bekijk je <Link to="/favorites">favorieten</Link>.</strong></p>
                 </article>
               </div>
                 <div className="button-container-profile">
@@ -127,10 +146,15 @@ function Profile() {
                         <div className="error-message-container">
                             {errorMessage && <div className="error-message">{errorMessage}</div>}
                         </div>
-                        {/*<h3>Wijzig gegevens</h3>*/}
                         <form
                             className="update-userdata-form"
-                            onSubmit={handleSubmit(handleUpdateUserInfo)}>
+                            onSubmit={handleSubmit((data) => {
+                                handleUpdateUserData(data);
+                                if (profilePicture) {
+                                    handleUpdateProfilePicture();
+                                }
+                            })}
+                        >
                             <InputField
                                 inputType="text"
                                 inputName="username"
@@ -161,7 +185,7 @@ function Profile() {
                             />
                             <InputField
                                 inputType="password"
-                                inputName="username"
+                                inputName="password"
                                 inputLabel="Wachtwoord"
                                 inputValue={newPassword}
                                 placeholder={"Nieuw wachtwoord"}
@@ -170,7 +194,28 @@ function Profile() {
                                     minLength: {
                                         value: 6,
                                         message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
-                                    }}}
+                                    },
+                                    validate: (value) =>
+                                        value === newPasswordRepeat || "Wachtwoorden komen niet overeen",
+                                }}
+                                register={register}
+                                errors={errors}
+                            />
+                            <InputField
+                                inputType="password"
+                                inputName="repeatedPassword"
+                                inputLabel="Herhaal wachtwoord"
+                                inputValue={newPasswordRepeat}
+                                placeholder={"Herhaal het nieuwe wachtwoord"}
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    minLength: {
+                                        value: 6,
+                                        message: "Het wachtwoord moet minimaal 6 karakters bevatten",
+                                    },
+                                    validate: (value) =>
+                                        value === newPassword || "Wachtwoorden komen niet overeen",
+                                }}
                                 register={register}
                                 errors={errors}
                             />
@@ -183,14 +228,18 @@ function Profile() {
                                     validate: (value) =>
                                         value || "Selecteer een afbeelding voor je profielfoto",
                                 }}
-                                onChange={handleProfilePictureUpload}
+                                onChange={(e) => {
+                                    setValue("newProfilePicture", e.target.files[0]);
+                                    handleProfilePictureUpload(e);
+                                }}
                                 register={register}
                                 errors={errors}
                             />
-
                             <Button
                                 type="submit"
-                                disabled={!isDirty || !isValid}>Opslaan
+                                className="save-profile-changes-button"
+                                disabled={!isDirty || !isValid}>
+                                Opslaan
                             </Button>
                         </form>
                     </div>
@@ -205,8 +254,6 @@ function Profile() {
                     <img className="logo-large" src={logo} alt="logo"/>
                 </div>
             </section>
-
-
         </div>
     );
 }

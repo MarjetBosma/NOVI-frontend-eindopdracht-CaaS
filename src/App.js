@@ -8,6 +8,7 @@ import Images from "./pages/images/Images";
 import Profile from "./pages/profile/Profile";
 import Favorites from "./pages/favorites/Favorites";
 import FavoriteImageDetail from "./components/FavoriteImageDetail";
+import FetchedImageDetail from "./components/FetchedImageDetail";
 import NotFound from "./pages/notFound/NotFound";
 import { AuthContext } from "./context/AuthContext";
 import logo from "./assets/caas-logo-no-text.jpg"
@@ -40,6 +41,7 @@ function App() {
           <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to="/signin" />}/>
           <Route path="/favorites" element={isAuth ? <Favorites /> : <Navigate to="/signin" />}/>
           <Route path="/favorites/:index" element={<FavoriteImageDetail/>}/>
+          <Route path="/./components/FetchedImageDetail" element={<FetchedImageDetail/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>

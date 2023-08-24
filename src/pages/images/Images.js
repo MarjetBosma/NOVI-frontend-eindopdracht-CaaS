@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
+import FetchedImageDetail from "../../components/FetchedImageDetail";
 
 const endpointUrls = {
     randomCatImage: "https://cataas.com/cat",
@@ -45,6 +46,7 @@ function Images() {
             const imageUrl = URL.createObjectURL(imageBlob);
 
             const imageWindow = window.open("", "_blank");
+            // const imageWindow = window.open(./components/FetchedImageDetail");
             const imageContainer = document.createElement("div");
             const imgElement = document.createElement("img");
             imgElement.src = imageUrl;
@@ -83,8 +85,10 @@ function Images() {
         fetchCatImage(catFilterUrl);
     }
 
+    const [favorites, updateFavorites] = useState(
+        JSON.parse(localStorage.getItem("favorites")) || []  )
      const saveImageAsFavorite = (imageUrl) => {
-         const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
          if (favorites.length < 24 && !favorites.includes(imageUrl)) {
             favorites.push(imageUrl);
             localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -102,7 +106,7 @@ function Images() {
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
 
                 <div className="button-container">
-                    <div className="inner-button-container">
+                    <div className="inner-button-container-left">
                         <Button
                             type="button"
                             disabled={loading}
@@ -119,7 +123,7 @@ function Images() {
                             clickHandler={() => fetchCatImage("randomGifCat")}>GIF afbeelding kat
                         </Button>
                     </div>
-                    <div className="inner-button-container">
+                    <div className="inner-button-container-right">
                         <select
                             value={selectedFilter}
                             onChange={(e) => setSelectedFilter(e.target.value)}
@@ -138,8 +142,10 @@ function Images() {
                             clickHandler={() => handleFetchRandomCatFilter()}>Kat met filter
                         </Button>
                         <InputField
-                            type="text"
-                            value={userInput}
+                            inputType="text"
+                            inputName="image-text"
+                            inputLabel="Jouw tekst"
+                            inputValue={userInput}
                             onInput={setUserInput}
                             placeholder="Vul je eigen tekst in"
                             validationRules={{
@@ -158,7 +164,7 @@ function Images() {
                         </Button>
                     </div>
                 </div>
-                <p>Eerder opgeslagen afbeeldingen bekijken? Ga naar je <Link to="/favorites">favorieten</Link>!</p>
+                <p className="images-to-favorites-link">Eerder opgeslagen afbeeldingen bekijken? Ga naar je <Link to="/favorites">favorieten</Link>!</p>
             </section>
             <section className="title-logo-container">
                 <h2>Vraag hier een kat op</h2>

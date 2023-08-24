@@ -39,6 +39,8 @@ function AuthContextProvider ({ children }) {
     }
 
     function logout() {
+        localStorage.removeItem("favorites");
+
         toggleIsAuth({
             ...isAuth,
             isAuth: false,
