@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form"
 import axios from "axios"
 import "./Images.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
-import FetchedImageDetail from "../../components/FetchedImageDetail";
 
 const endpointUrls = {
     randomCatImage: "https://cataas.com/cat",
@@ -34,6 +33,7 @@ function Images() {
 
     const controller = new AbortController();
 
+    const navigate = useNavigate()
     const fetchCatImage = async(endpoint) => {
         try {
             toggleError(false);
@@ -45,25 +45,27 @@ function Images() {
             const imageBlob = new Blob([response.data], { type: response.headers["content-type"] });
             const imageUrl = URL.createObjectURL(imageBlob);
 
-            const imageWindow = window.open("", "_blank");
-            // const imageWindow = window.open(./components/FetchedImageDetail");
-            const imageContainer = document.createElement("div");
-            const imgElement = document.createElement("img");
-            imgElement.src = imageUrl;
-            const saveButton = document.createElement("button");
-            saveButton.classList.add("save-as-favorite-button");
-            saveButton.textContent = "Opslaan in Favorieten";
-            saveButton.addEventListener("click", () => {
-                const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-                if (!favorites.includes(imageUrl)) {
-                    favorites.push(imageUrl);
-                    localStorage.setItem("favorites", JSON.stringify(favorites));
+
+            // const imageContainer = document.createElement("div");
+            // const imgElement = document.createElement("img");
+            // imgElement.src = imageUrl;
+            // const saveButton = document.createElement("button");
+            // saveButton.classList.add("save-as-favorite-button");
+            // saveButton.textContent = "Opslaan in Favorieten";
+            // saveButton.addEventListener("click", () => {
+            //     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            //     if (!favorites.includes(imageUrl)) {
+            //         favorites.push(imageUrl);
+            //         localStorage.setItem("favorites", JSON.stringify(favorites));
+            //     }
+            // });
+            navigate("/cat", {
+                state: {
+                    imageUrl: imageUrl
                 }
             });
-
-            imageContainer.appendChild(imgElement);
-            imageContainer.appendChild(saveButton);
-            imageWindow.document.body.appendChild(imageContainer);
+            // imageContainer.appendChild(imgElement);
+            // imageContainer.appendChild(saveButton);
 
             console.log(response.data);
 
@@ -85,19 +87,19 @@ function Images() {
         fetchCatImage(catFilterUrl);
     }
 
-    const [favorites, updateFavorites] = useState(
-        JSON.parse(localStorage.getItem("favorites")) || []  )
-     const saveImageAsFavorite = (imageUrl) => {
-
-         if (favorites.length < 24 && !favorites.includes(imageUrl)) {
-            favorites.push(imageUrl);
-            localStorage.setItem("favorites", JSON.stringify(favorites));
-         } else {
-             console.log("Maximum aantal afbeeldingen overschreden");
-             toggleError(true);
-             setErrorMessage("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.")
-         }
-     }
+    // const [favorites, updateFavorites] = useState(
+    //     JSON.parse(localStorage.getItem("favorites")) || []  )
+    //
+    //
+    //      if (favorites.length < 24 && !favorites.includes(imageUrl)) {
+    //         favorites.push(imageUrl);
+    //         localStorage.setItem("favorites", JSON.stringify(favorites));
+    //      } else {
+    //          console.log("Maximum aantal afbeeldingen overschreden");
+    //          toggleError(true);
+    //          setErrorMessage("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.")
+    //      }
+    //  }
 
     return (
         <div className="inner-container">

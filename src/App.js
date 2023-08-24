@@ -41,7 +41,7 @@ function App() {
           <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to="/signin" />}/>
           <Route path="/favorites" element={isAuth ? <Favorites /> : <Navigate to="/signin" />}/>
           <Route path="/favorites/:index" element={<FavoriteImageDetail/>}/>
-          <Route path="/./components/FetchedImageDetail" element={<FetchedImageDetail/>}/>
+          <Route path="/cat" element={<FetchedImageDetail/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>

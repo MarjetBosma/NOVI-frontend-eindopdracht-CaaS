@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 
 function Favorites() {
+
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     const navigate = useNavigate();
-
     const [selectedImages, setSelectedImages] = useState([]);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function Favorites() {
 
     function handleImageSelection(index) {
         if (selectedImages.includes(index)) {
-            setSelectedImages(selectedImages.filter((item) => item !== index));
+            setSelectedImages(selectedImages.filter((i) => i !== index));
         } else {
             setSelectedImages([...selectedImages, index]);
         }
@@ -34,7 +34,6 @@ function Favorites() {
         setSelectedImages([]);
     }
 
-
     return (
         <div className="inner-container">
             <section className="favorites-button-container">
@@ -43,11 +42,13 @@ function Favorites() {
                         <li
                             key={index}
                             className={`thumbnail ${selectedImages.includes(index) ? "selected" : ""}`}>
-                                <img src={imageUrl} alt={`Favorite ${index}`}
-                                     onClick={() => handleImageClick(index)}
-                                     onDoubleClick={() => handleImageSelection(index)}
+                                <img className="cat-image"
+                                     src={imageUrl} alt={`Favorite ${index}`}
+                                     onDoubleClick={() => handleImageClick(index)}
+                                     onClick={() => handleImageSelection(index)}
                                 />
                         </li>
+
                     ))}
                 </ul>
                 <Button

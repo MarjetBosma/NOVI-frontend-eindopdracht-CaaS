@@ -12,7 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 function Profile() {
 
     const { user } = useContext(AuthContext);
-    const { register, setValue, formState: { errors, isDirty, isValid } } = useForm();
+    const { register, setValue, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
@@ -94,10 +94,10 @@ function Profile() {
     };
 
 
-    const handleSubmit = async (data) => {
-        await Promise.all([handleUpdateUserData(data), handleUpdateProfilePicture()]);
-        console.log(data);
-    };
+    // const handleSubmitAll = async (data) => {
+    //     await Promise.all([handleUpdateUserData(data), handleUpdateProfilePicture()]);
+    //     console.log(data);
+    // };
 
 
     useEffect(() => {
@@ -167,6 +167,7 @@ function Profile() {
                                         value: 6,
                                         message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
                                     }}}
+
                                 register={register}
                                 errors={errors}
                             />

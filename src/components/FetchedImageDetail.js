@@ -1,8 +1,54 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import {useLocation} from "react-router-dom";
+import Button from "./Button";
+import "./FetchedImageDetail.css"
 function FetchedImageDetail() {
+    const location = useLocation();
+
+    const [ catImage, setCatImage ] = useState()
+    let cat = location.state
+    console.log(cat)
+
+
+    useEffect(() => {
+        setCatImage(cat.imageUrl)
+
+    }, [cat]);
+
+    const [error, toggleError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+
+    const [favorites, updateFavorites] = useState(
+        JSON.parse(localStorage.getItem("favorites")) || []  )
+
+        const saveImageAsFavorite = (imageUrl) => {
+
+        if (favorites.length < 24 && !favorites.includes(imageUrl)) {
+            favorites.push(imageUrl);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            setSuccessMessage("Afbeelding toegevoegd aan favorieten")
+            console.log("Afbeelding opgeslagen")
+        } else {
+            console.log("Maximum aantal afbeeldingen overschreden");
+            toggleError(true);
+            setErrorMessage("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.")
+        }
+    }
+
     return (
-        <div></div>
+        <div className="fetched-image-button-container">
+            <div className="fetched-image-container">
+                <img className="fetched-image" src={catImage} alt="random cat" />
+            </div>
+            <Button
+                className="add-to-favorites-button"
+                clickHandler={() => saveImageAsFavorite(catImage)}
+                disabled={favorites.length >= 24 || favorites.includes(catImage)}
+            >
+                Toevoegen aan favorieten
+            </Button>
+        </div>
     );
 }
 
