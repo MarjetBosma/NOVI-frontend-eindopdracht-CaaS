@@ -89,7 +89,7 @@ function Images() {
 
     // const [favorites, updateFavorites] = useState(
     //     JSON.parse(localStorage.getItem("favorites")) || []  )
-    //
+    //  const saveImageAsFavorite = (imageUrl) => {
     //
     //      if (favorites.length < 24 && !favorites.includes(imageUrl)) {
     //         favorites.push(imageUrl);
@@ -126,44 +126,48 @@ function Images() {
                         </Button>
                     </div>
                     <div className="inner-button-container-right">
-                        <select
-                            value={selectedFilter}
-                            onChange={(e) => setSelectedFilter(e.target.value)}
-                        >
-                            <option value="">Kies een filter</option>
-                            <option value="blur">Blur</option>
-                            <option value="mono">Mono</option>
-                            <option value="sepia">Sepia</option>
-                            <option value="negative">Negative</option>
-                            <option value="paint">Paint</option>
-                            <option value="pixel">Pixel</option>
-                        </select>
-                        <Button
-                            type="button"
-                            disabled={loading}
-                            clickHandler={() => handleFetchRandomCatFilter()}>Kat met filter
-                        </Button>
-                        <InputField
-                            inputType="text"
-                            inputName="image-text"
-                            inputLabel="Jouw tekst"
-                            inputValue={userInput}
-                            onInput={setUserInput}
-                            placeholder="Vul je eigen tekst in"
-                            validationRules={{
-                                required: "Dit veld is verplicht",
-                                maxLength: {
-                                value: 50,
-                                message: "De tekst mag maximaal 50 karakters lang zijn",
-                                }}}
-                            register={register}
-                            errors={errors}
-                            />
-                        <Button
-                            type="button"
-                            disabled={loading}
-                            clickHandler={() => handleFetchRandomCatSays()}>Kat met jouw tekst
-                        </Button>
+                        <div className="select-menu-button-container">
+                            <select
+                                value={selectedFilter}
+                                onChange={(e) => setSelectedFilter(e.target.value)}
+                            >
+                                <option value="">Kies een filter</option>
+                                <option value="blur">Blur</option>
+                                <option value="mono">Mono</option>
+                                <option value="sepia">Sepia</option>
+                                <option value="negative">Negative</option>
+                                <option value="paint">Paint</option>
+                                <option value="pixel">Pixel</option>
+                            </select>
+                            <Button
+                                type="button"
+                                disabled={loading}
+                                clickHandler={() => handleFetchRandomCatFilter()}>Kat met filter
+                            </Button>
+                         </div>
+                        <div className="text-field-button-container">
+                            <InputField
+                                inputType="text"
+                                inputName="image-text"
+                                inputLabel="Jouw tekst"
+                                inputValue={userInput}
+                                onInput={setUserInput}
+                                placeholder="Vul je eigen tekst in"
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    maxLength: {
+                                    value: 50,
+                                    message: "De tekst mag maximaal 50 karakters lang zijn",
+                                    }}}
+                                register={register}
+                                errors={errors}
+                                />
+                            <Button
+                                type="button"
+                                disabled={loading}
+                                clickHandler={() => handleFetchRandomCatSays()}>Kat met jouw tekst
+                            </Button>
+                        </div>
                     </div>
                 </div>
                 <p className="images-to-favorites-link">Eerder opgeslagen afbeeldingen bekijken? Ga naar je <Link to="/favorites">favorieten</Link>!</p>

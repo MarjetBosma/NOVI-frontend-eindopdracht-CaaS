@@ -15,6 +15,9 @@
     height: 300px;
 }
 
+.title-logo-container {
+    padding-inline: 100px;
+}
 
 /* ------------------------------- Media Queries -------------------------------- */
 

@@ -12,7 +12,7 @@ function SignIn() {
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
     const { login } = useContext(AuthContext);
 
-    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessageSignin, setErrorMessageSignin] = useState("");
 
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
@@ -35,7 +35,7 @@ function SignIn() {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {
                 });
 
-                setErrorMessage("")
+                setErrorMessageSignin("")
                 console.log(response.data.accessToken);
                 login(response.data.accessToken)
                 navigate("/images");
@@ -43,7 +43,7 @@ function SignIn() {
 
                 console.error("Inloggen mislukt", e)
                 toggleError(true);
-                setErrorMessage("Inloggen mislukt. Controleer je invoer en probeer het opnieuw.");
+                setErrorMessageSignin("Inloggen mislukt. Controleer je invoer en probeer het opnieuw.");
             }
             toggleLoading(false);
         }
@@ -52,7 +52,7 @@ function SignIn() {
         <div className="inner-container">
           <section className="signin-container">
 
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            {errorMessageSignin && <div className="error-message">{errorMessageSignin}</div>}
 
             <form className="signin-form"
                   onSubmit={handleSubmit(onSubmit)}>

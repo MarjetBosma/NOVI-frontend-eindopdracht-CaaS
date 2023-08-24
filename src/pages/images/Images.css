@@ -18,13 +18,28 @@
 .inner-button-container-left {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     gap: 50px;
 }
 
 .inner-button-container-right {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    gap: 40px;
+}
+
+.select-menu-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     gap: 20px;
+}
+
+.text-field-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .images-to-favorites-link {
@@ -35,40 +50,6 @@
     padding-top:200px;
 }
 
-.save-as-favorite-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    height: 60px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    background: #F7931E;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 16px;
-    font-style: normal;
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 1px ;
-    line-height: normal;
-    color: white;
-    box-shadow: 0 -8px 10px 0 rgba(0, 0, 0, 0.20) inset, 0 4px 4px 0 rgba(255, 255, 255, 0.50) inset;
-}
-
-.save-as-favorite-button:hover {
-    color: #0A4C90;
-}
-
-.save-as-favorite-button:disabled {
-    opacity: 50%;
-}
-
-.save-as-favorite-button:active {
-    background-color: #0DD4EF;
-}
-
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
@@ -77,13 +58,26 @@
         flex-direction: column;
         justify-content: space-between;
         height: 370px;
-        gap: 0;
+        gap: 45px;
         padding-bottom: 20px;
     }
 
-    .inner-button-container {
+    .inner-button-container-left {
+        gap: 20px;
+    }
+
+    .inner-button-container-right {
+        gap: 20px;
+    }
+
+    .select-menu-button-container {
         gap: 10px;
     }
+
+    .text-field-button-container {
+        gap: 0;
+    }
+
 
     .title-logo-container-images {
         display: flex;
@@ -95,10 +89,8 @@
         padding-top: 50px;
     }
 
-    .save-as-favorite-button {
-        width: 250px;
-        height: 50px;
-        font-size: 14px;
+    .images-to-favorites-link {
+        padding-top: 150px;
     }
 
     .logo-container-images {

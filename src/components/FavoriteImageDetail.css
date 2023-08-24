@@ -19,7 +19,7 @@
 }
 
 .remove-from-favorites-button {
-    margin-top: 40px;
+    margin-block: 20px;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
@@ -36,6 +36,7 @@
     }
 
     .remove-from-favorites-button {
+        margin-bottom: 0;
         margin-top: 20px;
     }
 

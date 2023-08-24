@@ -39,16 +39,16 @@ label {
 .input-field.input-error {
     border-color: #F7931E;
     border-style: solid;
-    height: 50px;
+    /*height: 50px;*/
 }
 
 .error-message {
     font-size: 14px;
     color: #F7931E;
     padding-block: 5px;
-    margin-top: 65px;
     min-height: 30px;
     position: absolute;
+    margin-top: 280px;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
