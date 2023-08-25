@@ -11,7 +11,6 @@ import { AuthContext } from "../../context/AuthContext";
 function Profile() {
 
     const { user } = useContext(AuthContext);
-    // const { register, setValue, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");

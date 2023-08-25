@@ -51,6 +51,12 @@ label {
     margin-top: 280px;
 }
 
+.input-error-message {
+    font-size: 14px;
+    color: #F7931E;
+}
+
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
@@ -66,6 +72,10 @@ label {
     }
 
     .error-message {
+        font-size: 12px;
+    }
+
+    .input-error-message {
         font-size: 12px;
     }
 

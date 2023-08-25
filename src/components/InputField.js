@@ -12,7 +12,7 @@ function InputField({ inputLabel, inputType, inputName, inputValue, onChange, er
                 onChange={onChange}
                 className={`input-field ${errors[inputName] ? "input-error" : ""}`}
             />
-            {errors[inputName] && <p className="error-message">{errors[inputName].message}</p>}
+            {errors[inputName] && <p className="input-error-message">{errors[inputName].message}</p>}
         </div>
     );
 }
