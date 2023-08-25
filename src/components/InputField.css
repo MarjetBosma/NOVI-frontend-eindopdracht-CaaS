@@ -39,7 +39,6 @@ label {
 .input-field.input-error {
     border-color: #F7931E;
     border-style: solid;
-    /*height: 50px;*/
 }
 
 .error-message {
@@ -78,5 +77,4 @@ label {
     .input-error-message {
         font-size: 12px;
     }
-
 }

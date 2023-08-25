@@ -34,11 +34,11 @@ function SignIn() {
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {
                 });
-
                 setErrorMessageSignin("")
                 console.log(response.data.accessToken);
                 login(response.data.accessToken)
                 navigate("/images");
+
             } catch(e) {
 
                 console.error("Inloggen mislukt", e)
@@ -51,8 +51,6 @@ function SignIn() {
     return (
         <div className="inner-container">
           <section className="signin-container">
-
-            {errorMessageSignin && <div className="error-message">{errorMessageSignin}</div>}
 
             <form className="signin-form"
                   onSubmit={handleSubmit(onSubmit)}>
@@ -88,12 +86,15 @@ function SignIn() {
                 <Button
                     type="submit"
                     className="button"
-                    disabled={loading || !isDirty || !isValid}>
+                    // disabled={loading || !isDirty || !isValid}
+                >
                     Log in
                 </Button>
               </form>
 
               <p>Nog geen account? Registreer je <Link to="/signup">hier</Link>.</p>
+              {errorMessageSignin && <div className="error-message error-message--signin">{errorMessageSignin}</div>}
+
             </section>
 
             <section className="title-logo-container">

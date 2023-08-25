@@ -19,6 +19,11 @@
     padding-inline: 100px;
 }
 
+.error-message--signin {
+    padding-top: 150px;
+}
+
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
@@ -26,5 +31,10 @@
     .signin-container {
         gap: 10px;
     }
+
+    .error-message--signin {
+        padding-top: 100px;
+    }
+
 
 }

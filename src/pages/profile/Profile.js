@@ -19,8 +19,8 @@ function Profile() {
     const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
     const [newProfilePicture, setNewProfilePicture] = useState(null);
     const [errors, setErrors] = useState({})
-    const [errorMessage, setErrorMessage] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessageProfile, setErrorMessageProfile] = useState("");
+    const [successMessageProfile, setSuccessMessageProfile] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -51,10 +51,10 @@ function Profile() {
                 }
             );
             console.log(response.data, "Gebruikersgegevens gewijzigd");
-            setSuccessMessage("Gebruikersgegevens gewijzigd");
+            setSuccessMessageProfile("Gebruikersgegevens gewijzigd");
         } catch (e) {
             console.error("Wijzigen gebruikersgegevens mislukt", e);
-            setErrorMessage("Wijzigen gebruikersgegevens mislukt");
+            setErrorMessageProfile("Wijzigen gebruikersgegevens mislukt");
         }
     };
 
@@ -86,10 +86,10 @@ function Profile() {
                 }
             );
             console.log(response.data, "Profielfoto gewijzigd");
-            setSuccessMessage("Profielfoto gewijzigd");
+            setSuccessMessageProfile("Profielfoto gewijzigd");
         } catch (e) {
             console.error("Wijzigen profielfoto mislukt", e);
-            setErrorMessage("Wijzigen profielfoto mislukt");
+            setErrorMessageProfile("Wijzigen profielfoto mislukt");
         }
     };
 
@@ -188,7 +188,8 @@ useEffect(() => {
                         </span>
                     <div className="modal-content">
                         <div className="error-message-container">
-                            {errorMessage && <div className="error-message">{errorMessage}</div>}
+                            {errorMessageProfile && <div className="error-message">{errorMessageProfile}</div>}
+                            {successMessageProfile && <div className="error-message error-message--signup">{successMessageProfile}</div>}
                         </div>
                         <form
                             className="update-userdata-form"
@@ -247,7 +248,7 @@ useEffect(() => {
                             <Button
                                 type="submit"
                                 className="save-profile-changes-button"
-                                disabled={!isFormValid}
+                                // disabled={!isFormValid}
                                 >
                                 Opslaan
                             </Button>

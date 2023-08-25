@@ -146,6 +146,18 @@ footer {
     100% { transform: rotate(360deg); }
 }
 
+.error-message {
+    font-size: 14px;
+    color: #F7931E;
+    min-height: 30px;
+}
+
+
+.input-error-message {
+    font-size: 14px;
+    color: #F7931E;
+}
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
@@ -192,4 +204,16 @@ footer {
         font-size: 10px;
     }
 
+    .loading-animation {
+        width: 150px;
+        height: 150px;
+    }
+
+    .error-message {
+        font-size: 12px;
+    }
+
+    .input-error-message {
+        font-size: 12px;
+    }
 }

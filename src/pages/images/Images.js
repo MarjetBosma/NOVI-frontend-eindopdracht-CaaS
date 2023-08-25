@@ -23,10 +23,10 @@ function Images() {
     }, []);
 
     const [error, toggleError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
-    const [inputError, setInputError] = useState("");
+    const [errorMessageImages, setErrorMessageImages] = useState("");
+    const [inputErrorCatSays, setInputErrorCatSays] = useState("");
     const [loading, toggleLoading] = useState(false);
-    const [userInput, setUserInput] = useState("");
+    const [userInputCatSays, setUserInputCatSays] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
 
     const controller = new AbortController();
@@ -60,26 +60,26 @@ function Images() {
         } catch(e) {
             console.error("Error fetching image", e);
             toggleError(true )
-            setErrorMessage("Ophalen van afbeelding mislukt.");
+            setErrorMessageImages("Ophalen van afbeelding mislukt.");
         }
         toggleLoading(false);
     };
 
     const handleFetchRandomCatSays = () => {
 
-        if (!userInput) {
-            setInputError("Dit veld is verplicht");
+        if (!userInputCatSays) {
+            setInputErrorCatSays("Dit veld is verplicht");
             return;
         }
-        setInputError("")
+        setInputErrorCatSays("")
 
-        console.log("User input before fetch:", userInput);
+        console.log("User input before fetch:", userInputCatSays);
 
-        const catSaysUrl = endpointUrls.randomCatSays.replace(":text", userInput);
+        const catSaysUrl = endpointUrls.randomCatSays.replace(":text", userInputCatSays);
         fetchCatImage(catSaysUrl);
         console.log(catSaysUrl)
 
-        console.log("User input after fetch:", userInput);
+        console.log("User input after fetch:", userInputCatSays);
     }
 
     const handleFetchRandomCatFilter = () => {
@@ -93,7 +93,7 @@ function Images() {
         <div className="inner-container">
             <section className="image-request-container">
 
-                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {errorMessageImages && <div className="error-message">{errorMessageImages}</div>}
 
                 <div className="button-container">
                     <div className="inner-button-container-left">
@@ -138,15 +138,15 @@ function Images() {
                                 inputType="text"
                                 inputName="image-text"
                                 inputLabel="Jouw tekst"
-                                inputValue={userInput}
+                                inputValue={userInputCatSays}
                                 placeholder="Vul je eigen tekst in"
-                                onChange={(e) => setUserInput(e.target.value)}
-                                errors={{ "image-text" : inputError }}
+                                onChange={(e) => setUserInputCatSays(e.target.value)}
+                                errors={{ "image-text" : inputErrorCatSays }}
                             />
-                            {inputError && <p className="error-message">{inputError}</p>}
+                            {inputErrorCatSays && <p className="error-message">{inputErrorCatSays}</p>}
                             <Button
                                 type="button"
-                                disabled={loading || !userInput || inputError}
+                                disabled={loading || !userInputCatSays || inputErrorCatSays}
                                 clickHandler={() => handleFetchRandomCatSays()}>Kat met jouw tekst
                             </Button>
                         </div>

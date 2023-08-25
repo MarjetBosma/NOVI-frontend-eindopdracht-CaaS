@@ -15,6 +15,10 @@
     height: 375px;
 }
 
+.error-message--signup {
+    padding-top: 200px;
+}
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
@@ -27,6 +31,9 @@
         height: 325px;
     }
 
+    .error-message--signup {
+
+    }
 }
 
 

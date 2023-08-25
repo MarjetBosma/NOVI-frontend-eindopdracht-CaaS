@@ -87,10 +87,6 @@
     font-weight: 700;
 }
 
-/*.error-message-container {*/
-/*    height: 40px;*/
-/*    overflow: hidden;*/
-/*}*/
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {

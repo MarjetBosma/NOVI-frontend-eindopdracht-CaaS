@@ -10,7 +10,7 @@ import InputField from "../../components/InputField";
 function SignUp() {
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
-    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessageSignup, setErrorMessageSignup] = useState("");
 
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
@@ -32,7 +32,7 @@ function SignUp() {
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
                 });
-                setErrorMessage("")
+                setErrorMessageSignup("")
                 console.log(response.data);
                 console.log("Gebruiker is geregistreerd")
                 navigate("/signin");
@@ -40,7 +40,7 @@ function SignUp() {
             } catch(e) {
                 console.error("Registratie mislukt", e)
                 toggleError(true);
-                setErrorMessage("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
+                setErrorMessageSignup("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
             }
             toggleLoading(false);
         }
@@ -49,7 +49,7 @@ function SignUp() {
         <div className="inner-container">
           <section className="signup-container">
 
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}
 
             <form className="signup-form"
                   onSubmit={handleSubmit(onSubmit)}>
@@ -64,7 +64,6 @@ function SignUp() {
                       value: 6,
                       message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
                     }
-
                   }}
                   register={register}
                   errors={errors}
@@ -99,17 +98,19 @@ function SignUp() {
 
               <Button
                   type="submit"
-                  className="button"
-                  disabled={loading || !isDirty || !isValid}>
+                  className="button">
+                  {/*// disabled={loading || !isDirty || !isValid}>*/}
                   Registreer
               </Button>
             </form>
 
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
+            {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}
+
           </section>
 
           <section className="title-logo-container">
-            <h2>Maak nu een account aan</h2>
+            <h2>Maak een account</h2>
             <p>Je hebt een account nodig om gebruik te kunnen maken van CaaS. Schrijf je nu in! </p>
             <div className="logo-container">
               <img className="logo-large" src={logo} alt="logo"/>
