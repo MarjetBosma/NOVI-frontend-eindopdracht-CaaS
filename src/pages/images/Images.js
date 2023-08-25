@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form"
 import axios from "axios"
 import "./Images.css"
 import { Link, useNavigate } from "react-router-dom";
@@ -17,8 +16,6 @@ const endpointUrls = {
 
 function Images() {
 
-    const { register, formState: { errors } } = useForm();
-
     useEffect(() => {
         return function cleanup() {
             controller.abort();
@@ -27,6 +24,7 @@ function Images() {
 
     const [error, toggleError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [inputError, setInputError] = useState("");
     const [loading, toggleLoading] = useState(false);
     const [userInput, setUserInput] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
@@ -36,41 +34,31 @@ function Images() {
     const navigate = useNavigate()
     const fetchCatImage = async(endpoint) => {
         try {
+            console.log("Fetching image from endpoint", endpoint)
             toggleError(false);
             toggleLoading(true);
 
             const response = await axios.get(endpointUrls[endpoint], {responseType: "arraybuffer"} );
-            // const imageUrl = response.config.url;
-            console.log(response.data)
-            const imageBlob = new Blob([response.data], { type: response.headers["content-type"] });
-            const imageUrl = URL.createObjectURL(imageBlob);
 
+            const contentType = response.headers["content-type"];
+            const arrayBuffer = response.data;
 
-            // const imageContainer = document.createElement("div");
-            // const imgElement = document.createElement("img");
-            // imgElement.src = imageUrl;
-            // const saveButton = document.createElement("button");
-            // saveButton.classList.add("save-as-favorite-button");
-            // saveButton.textContent = "Opslaan in Favorieten";
-            // saveButton.addEventListener("click", () => {
-            //     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            //     if (!favorites.includes(imageUrl)) {
-            //         favorites.push(imageUrl);
-            //         localStorage.setItem("favorites", JSON.stringify(favorites));
-            //     }
-            // });
+            const blob = new Blob([arrayBuffer], { type: contentType });
+            const imageUrl = URL.createObjectURL(blob);
+
+            console.log("Full Response:", response);
+            console.log("Image fetched", response.data)
+            console.log("Content-Type", response.headers["content-type"]);
+
             navigate("/cat", {
                 state: {
                     imageUrl: imageUrl
                 }
             });
-            // imageContainer.appendChild(imgElement);
-            // imageContainer.appendChild(saveButton);
-
-            console.log(response.data);
+            console.log("Image opened at /cat", response.data);
 
         } catch(e) {
-            console.error("Fout bij het ophalen van afbeelding", e);
+            console.error("Error fetching image", e);
             toggleError(true )
             setErrorMessage("Ophalen van afbeelding mislukt.");
         }
@@ -78,28 +66,28 @@ function Images() {
     };
 
     const handleFetchRandomCatSays = () => {
+
+        if (!userInput) {
+            setInputError("Dit veld is verplicht");
+            return;
+        }
+        setInputError("")
+
+        console.log("User input before fetch:", userInput);
+
         const catSaysUrl = endpointUrls.randomCatSays.replace(":text", userInput);
         fetchCatImage(catSaysUrl);
+        console.log(catSaysUrl)
+
+        console.log("User input after fetch:", userInput);
     }
 
     const handleFetchRandomCatFilter = () => {
-        const catFilterUrl = endpointUrls.randomCatSays.replace(":filter", selectedFilter);
+        const catFilterUrl = endpointUrls.randomCatFilter.replace(":filter", selectedFilter);
+        console.log("Filter:", selectedFilter);
         fetchCatImage(catFilterUrl);
+        console.log(catFilterUrl)
     }
-
-    // const [favorites, updateFavorites] = useState(
-    //     JSON.parse(localStorage.getItem("favorites")) || []  )
-    //  const saveImageAsFavorite = (imageUrl) => {
-    //
-    //      if (favorites.length < 24 && !favorites.includes(imageUrl)) {
-    //         favorites.push(imageUrl);
-    //         localStorage.setItem("favorites", JSON.stringify(favorites));
-    //      } else {
-    //          console.log("Maximum aantal afbeeldingen overschreden");
-    //          toggleError(true);
-    //          setErrorMessage("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.")
-    //      }
-    //  }
 
     return (
         <div className="inner-container">
@@ -141,7 +129,7 @@ function Images() {
                             </select>
                             <Button
                                 type="button"
-                                disabled={loading}
+                                disabled={loading || !selectedFilter}
                                 clickHandler={() => handleFetchRandomCatFilter()}>Kat met filter
                             </Button>
                          </div>
@@ -151,20 +139,14 @@ function Images() {
                                 inputName="image-text"
                                 inputLabel="Jouw tekst"
                                 inputValue={userInput}
-                                onInput={setUserInput}
                                 placeholder="Vul je eigen tekst in"
-                                validationRules={{
-                                    required: "Dit veld is verplicht",
-                                    maxLength: {
-                                    value: 50,
-                                    message: "De tekst mag maximaal 50 karakters lang zijn",
-                                    }}}
-                                register={register}
-                                errors={errors}
-                                />
+                                onChange={(e) => setUserInput(e.target.value)}
+                                errors={{ "image-text" : inputError }}
+                            />
+                            {inputError && <p className="error-message">{inputError}</p>}
                             <Button
                                 type="button"
-                                disabled={loading}
+                                disabled={loading || !userInput || inputError}
                                 clickHandler={() => handleFetchRandomCatSays()}>Kat met jouw tekst
                             </Button>
                         </div>

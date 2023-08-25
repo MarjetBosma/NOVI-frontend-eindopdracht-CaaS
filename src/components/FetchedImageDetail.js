@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import {useLocation} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Button from "./Button";
 import "./FetchedImageDetail.css"
 function FetchedImageDetail() {
     const location = useLocation();
 
-    const [ catImage, setCatImage ] = useState()
-    let cat = location.state
-    console.log(cat)
+    const [ catImage, setCatImage ] = useState("")
+    const imageUrl = location?.state?.imageUrl || "";
+    // const imageUrl = location?.state?.imageUrl || "";
+    // console.log("cat object", cat)
 
+    // useEffect(() => {
+    //     console.log("cat object", cat);
+    //     setCatImage(cat.imageUrl)
+    //
+    // }, [cat]);
 
     useEffect(() => {
-        setCatImage(cat.imageUrl)
+        setCatImage(imageUrl);
+    }, [imageUrl]);
 
-    }, [cat]);
+    console.log("catImage URL:", catImage);
 
     const [error, toggleError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -35,6 +42,9 @@ function FetchedImageDetail() {
             setErrorMessage("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.")
         }
     }
+
+    console.log("catImage URL:", catImage);
+    console.log("Image URL from state:", imageUrl);
 
     return (
         <div className="fetched-image-button-container">

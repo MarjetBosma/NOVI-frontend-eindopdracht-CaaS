@@ -31,6 +31,12 @@
     object-position: top;
 }
 
+.profile-pic {
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
 .info-container {
     display: flex;
     flex-direction: column;
@@ -54,6 +60,11 @@
     border: 2px solid #0E0F3B;
     width: 400px;
     height: 600px;
+}
+
+.close {
+    position: relative;
+    padding-left: 350px;
 }
 
 .modal-content {

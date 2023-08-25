@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useForm } from "react-hook-form"
 import "./Profile.css"
 import logo from "../../assets/caas-logo-no-text.jpg";
 import profilePicPlaceholder from "../../assets/profile-pic-placeholder.png"
@@ -12,7 +11,7 @@ import { AuthContext } from "../../context/AuthContext";
 function Profile() {
 
     const { user } = useContext(AuthContext);
-    const { register, setValue, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
+    // const { register, setValue, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
@@ -20,9 +19,11 @@ function Profile() {
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
     const [newProfilePicture, setNewProfilePicture] = useState(null);
+    const [errors, setErrors] = useState({})
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const [isFormValid, setIsFormValid] = useState(false);
 
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
@@ -93,14 +94,57 @@ function Profile() {
         }
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    // const handleSubmitAll = async (data) => {
-    //     await Promise.all([handleUpdateUserData(data), handleUpdateProfilePicture()]);
-    //     console.log(data);
-    // };
+        const newErrors = {};
+
+        if (!newUsername || newUsername.length < 6) {
+            newErrors.username = "Gebruikersnaam moet minimaal 6 karakters bevatten";
+        }
+        if (!newEmail || !newEmail.includes("@")) {
+            newErrors.email = "Dit veld is verplicht";
+        }
+        if (!newPassword || newPassword.length < 6) {
+            newErrors.password = "Dit veld is verplicht";
+        }
+        if (newPassword !== newPasswordRepeat) {
+            newErrors.repeatedpassword = "Wachtwoorden komen niet overeen"
+        }
+        if (!newPasswordRepeat || newPasswordRepeat !== newPassword) {
+            newErrors.passwordRepeat = "Wachtwoorden komen niet overeen";
+        }
+
+        if (Object.keys(newErrors).length === 0) {
+            handleUpdateProfilePicture();
+            handleUpdateUserData();
+            console.log("New username:", newUsername);
+            console.log("New email:", newEmail);
+            console.log("New password:", newPassword);
+        } else {
+            setErrors(newErrors);
+        }
+
+        setIsFormValid(validateForm());
+
+        handleUpdateProfilePicture();
+        handleUpdateUserData();
+
+        console.log("New username:", newUsername);
+        console.log("New email:", newEmail);
+        console.log("New password:", newPassword);
+    };
+
+    const validateForm = () => {
+
+        const areFieldsFilled = newUsername && newEmail && newPassword && newPasswordRepeat;
+        const areErrorsPresent = Object.keys(errors).some((key) => errors[key]);
+
+        return areFieldsFilled && !areErrorsPresent;
+    };
 
 
-    useEffect(() => {
+useEffect(() => {
         console.log(user, newEmail, newPassword, newProfilePicture, newUsername, profilePicture);
 
         return function cleanup() {
@@ -130,6 +174,7 @@ function Profile() {
               </div>
                 <div className="button-container-profile">
                     <Button
+                        type="button"
                         clickHandler={() => setShowModal(true)}
                         disabled={showModal}
                     >Wijzig gegevens
@@ -148,76 +193,42 @@ function Profile() {
                         </div>
                         <form
                             className="update-userdata-form"
-                            onSubmit={handleSubmit((data) => {
-                                handleUpdateUserData(data);
-                                if (profilePicture) {
-                                    handleUpdateProfilePicture();
-                                }
-                            })}
+                            onSubmit={handleSubmit}
                         >
                             <InputField
                                 inputType="text"
                                 inputName="username"
                                 inputLabel="Gebruikersnaam"
-                                inputValue={newUsername}
                                 placeholder={"Nieuwe gebruikersnaam"}
-                                validationRules={{
-                                    required: "Dit veld is verplicht",
-                                    minLength: {
-                                        value: 6,
-                                        message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
-                                    }}}
-
-                                register={register}
+                                inputValue={newUsername}
+                                onChange={(e) => setNewUsername(e.target.value)}
                                 errors={errors}
                             />
                             <InputField
                                 inputType="email"
                                 inputName="email"
                                 inputLabel="E-mailadres"
-                                inputValue={newEmail}
                                 placeholder = {"Nieuw e-mailadres"}
-                                validationRules={{
-                                    required: "Dit veld is verplicht",
-                                    validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
-                                }}
-                                register={register}
+                                inputValue={newEmail}
+                                onChange={(e) => setNewEmail(e.target.value)}
                                 errors={errors}
                             />
                             <InputField
                                 inputType="password"
                                 inputName="password"
                                 inputLabel="Wachtwoord"
-                                inputValue={newPassword}
                                 placeholder={"Nieuw wachtwoord"}
-                                validationRules={{
-                                    required: "Dit veld is verplicht",
-                                    minLength: {
-                                        value: 6,
-                                        message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
-                                    },
-                                    validate: (value) =>
-                                        value === newPasswordRepeat || "Wachtwoorden komen niet overeen",
-                                }}
-                                register={register}
+                                inputValue={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
                                 errors={errors}
                             />
                             <InputField
                                 inputType="password"
                                 inputName="repeatedPassword"
                                 inputLabel="Herhaal wachtwoord"
-                                inputValue={newPasswordRepeat}
                                 placeholder={"Herhaal het nieuwe wachtwoord"}
-                                validationRules={{
-                                    required: "Dit veld is verplicht",
-                                    minLength: {
-                                        value: 6,
-                                        message: "Het wachtwoord moet minimaal 6 karakters bevatten",
-                                    },
-                                    validate: (value) =>
-                                        value === newPassword || "Wachtwoorden komen niet overeen",
-                                }}
-                                register={register}
+                                inputValue={newPasswordRepeat}
+                                onChange={(e) => setNewPasswordRepeat(e.target.value)}
                                 errors={errors}
                             />
                             <label className="input-label-profile-pic">Profielfoto
@@ -230,16 +241,15 @@ function Profile() {
                                         value || "Selecteer een afbeelding voor je profielfoto",
                                 }}
                                 onChange={(e) => {
-                                    setValue("newProfilePicture", e.target.files[0]);
                                     handleProfilePictureUpload(e);
                                 }}
-                                register={register}
                                 errors={errors}
                             />
                             <Button
                                 type="submit"
                                 className="save-profile-changes-button"
-                                disabled={!isDirty || !isValid}>
+                                disabled={!isFormValid}
+                                >
                                 Opslaan
                             </Button>
                         </form>
