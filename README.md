@@ -4,12 +4,19 @@
 
 Als je van katten houdt, kan het aaien van zo'n pluizge viervoeter ontspannend en stressverlagend werken. Instant stress-relief op pootjes! Maar ja, op het werk, op school, in de trein etc. heb je meestal geen kat bij de hand. Gelukkig is uit onderzoek gebleken dat het kijken naar kattenfilmpjes of -plaatjes ook werkt. Deze applicatie biedt de gebruiker een wereld aan leuke, gezellige en schattige afbeeldingen van katten. Precies voor die momenten waarop je wel even wat harige afleiding en ontspanning kunt gebruiken, maar er geen echte kat in de buurt is!
 
+Deze applicatie is gemaakt als integrale eindopdracht voor de leerlijn Frontend van de NOVI Hogeschool te Utrecht.
+
 *** screenshot belangrijkste pagina ***
 ![screenshot](src/assets/screenshot.png)
 
 Om gebruik te kunnen maken van alle functies in de app, dient een gebruiker zich te registreren en vervolgens in te loggen.
 
-*** beschrijving belangrijkste functionaliteit ***
+## Belangrijkste functionaliteiten
+
+- De gebruiker kan zich registreren en inloggen.
+- De gebruiker kan een random kattenplaatje of GIF opvragen, indien gewenst met een bepaalde tag of filter, of een afbeelding met een tekstje naar keuze.
+- De gebruiker kan zijn favoriete afbeeldingen opslaan en bewaren in zijn account.
+- De gebruiker kan een profielfoto uploaden en indien gewenst zijn gegevens wijzigen.
 
 ## Benodigdheden
 
@@ -52,5 +59,8 @@ De kern van deze webapplicatie wordt gevormd door een REST API genaamd CATAAS (C
 
 De afbeelding van het CaaS logo is afkomstig van Freepik (zie [hier](https://www.freepik.com/free-vector/flat-design-creative-nerd-logo-template_20827096.htm#page=9&query=cat%20logo&position=23&from_view=search&track=ais)), waarbij ik zelf een andere tekst heb bedacht en opgemaakt.
 
+## Contact
 
-    
+Vragen of opmerkingen? Laat een comment achter in de repository op GitHub (zie [hier](https://github.com/MarjetBosma/NOVI-frontend-eindopdracht-CaaS)) of stuur mij een e-mail op marjet_bosma@hotmail.com.
+
+© Marjet Bosma, Eindopdracht Frontend, NOVI Hogeschool

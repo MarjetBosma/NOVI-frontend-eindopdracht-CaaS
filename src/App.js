@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
-import HamburgerMenu from "./components/HamburgerMenu";
 import Home from "./pages/home/Home";
 import SignUp from "./pages/signup/SignUp";
 import SignIn from "./pages/signin/SignIn";
 import Images from "./pages/images/Images";
 import Profile from "./pages/profile/Profile";
 import Favorites from "./pages/favorites/Favorites";
+import FavoriteImageDetail from "./components/FavoriteImageDetail";
+import FetchedImageDetail from "./components/FetchedImageDetail";
 import NotFound from "./pages/notFound/NotFound";
 import { AuthContext } from "./context/AuthContext";
 import logo from "./assets/caas-logo-no-text.jpg"
@@ -30,9 +31,6 @@ function App() {
         <span className="navbar-container">
           <NavigationBar />
         </span>
-        <span className="hamburger-menu-container">
-          <HamburgerMenu />
-        </span>
       </header>
       <div>
         <Routes>
@@ -42,6 +40,8 @@ function App() {
           <Route path="/images" element={isAuth ? <Images /> : <Navigate to="/signin" />}/>
           <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to="/signin" />}/>
           <Route path="/favorites" element={isAuth ? <Favorites /> : <Navigate to="/signin" />}/>
+          <Route path="/favorites/:index" element={<FavoriteImageDetail/>}/>
+          <Route path="/cat" element={<FetchedImageDetail/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>

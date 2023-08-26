@@ -13,37 +13,43 @@ function AuthContextProvider ({ children }) {
     });
     const navigate = useNavigate();
 
-    useEffect( () => {
+    useEffect(() => {
         const token = localStorage.getItem("token");
+
         if (token && checkTokenValidity(token)) {
-            void login(token)
-            const decodedToken = jwt_decode(token);
-            void fetchUserData (decodedToken.sub, token);
+            const decoded = jwt_decode(token);
+            fetchUserData(token, "/");
         } else {
-            void logout()
+            toggleIsAuth({
+                isAuth: false,
+                user: null,
+                status: 'done',
+            });
         }
     }, []);
 
-function login(accessToken) {
+    function login(accessToken) {
 
-    localStorage.setItem("token", accessToken);
-    const decodedToken = jwt_decode(accessToken)
+        localStorage.setItem("token", accessToken);
+        const decodedToken = jwt_decode(accessToken)
 
-    void fetchUserData(decodedToken.sub, accessToken, "/images");
-    navigate("/images");
-    console.log("Gebruiker is ingelogd");
-}
+        fetchUserData(accessToken, "/images");
+        navigate("/images");
+        console.log("Gebruiker is ingelogd");
+    }
 
-function logout() {
-    toggleIsAuth({
-        ...isAuth,
-        isAuth: false,
-        user: null,
-        status: "done",
-    })
-    navigate("/");
-    console.log("Gebruiker is uitgelogd");
-}
+    function logout() {
+        localStorage.removeItem("favorites");
+
+        toggleIsAuth({
+            ...isAuth,
+            isAuth: false,
+            user: null,
+            status: "done",
+        })
+        navigate("/");
+        console.log("Gebruiker is uitgelogd");
+    }
 
     async function fetchUserData(token, redirectUrl) {
         try {
@@ -53,6 +59,7 @@ function logout() {
                     Authorization: `Bearer ${token}`,
                 },
             } );
+            console.log(response.data);
 
             toggleIsAuth( {
                 ...isAuth,
@@ -79,15 +86,30 @@ function logout() {
         }
     }
 
-const contextData = {
-    isAuth: isAuth,
-    login: login,
-    logout: logout,
-};
+    useEffect( () => {
+        console.log(isAuth);
+    }, [isAuth])
 
-return (
+
+    const contextData = {
+        isAuth: isAuth.isAuth,
+        user: isAuth.user,
+        login: login,
+        logout: logout,
+    };
+
+    return (
         <AuthContext.Provider value={contextData}>
-            { isAuth.status === "done" ? children : <h2 className="loading-message">Loading...</h2>}
+            { isAuth.status === "done"
+                ?
+                    children
+                :
+                    <div>loading-container
+                        <h2 className="loading-message">Laden...</h2>
+                        <div className="loading-animation"></div>
+
+                    </div>
+            }
         </AuthContext.Provider>
     );
 }

@@ -1,18 +1,20 @@
 /* ------------------------------- Desktop versie -------------------------------- */
 
+.profile-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    padding-right: 50px;
+}
+
 .profile-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 40px;
-}
-
-.picture-button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    gap: 20px;
+    width: 550px;
 }
 
 .picture-container {
@@ -29,43 +31,98 @@
     object-position: top;
 }
 
-.info-button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    gap: 20px;
+.profile-pic {
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
 }
 
 .info-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
+    gap: 20px;
     border: 2px solid #0E0F3B;
     width: 250px;
     height: 310px;
     padding-block: 10px;
 }
 
+.profile-to-favorites-link {
+    padding-top: 20px;
+}
+
+.modal {
+    position: absolute;
+    background-color: #FFFFFF;
+    padding-inline: 20px;
+    padding-top: 40px;
+    border: 2px solid #0E0F3B;
+    width: 400px;
+    height: 600px;
+}
+
+.close {
+    position: relative;
+    padding-left: 350px;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 475px;
+}
+
+.update-userdata-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+}
+
+.input-label-profile-pic {
+    font-weight: 700;
+}
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
 
+    .profile-button-container {
+        padding-left: 40px;
+    }
+
     .profile-container {
+        display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        width: 300px;
+        margin-top: -40px;
     }
 
     .info-container {
         width: 200px;
         height: auto;
-        gap: 5px;
+        gap: 10px;
+        padding-block: 20px;
     }
 
     .picture-container {
         width: 150px;
     }
 
-
-
+    .modal {
+        position: relative;
+        background-color: #FFFFFF;
+        padding-inline: 20px;
+        padding-top: 0;
+        border: none;
+        width: 400px;
+        height: 600px;
+    }
 }

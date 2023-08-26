@@ -18,6 +18,17 @@
     width: 75px;
     height: 75px;
     background: grey;
+    list-style-type: none;
+    border: none;
+}
+
+.thumbnail.selected {
+    border: 2px solid #F7931E;
+}
+
+.cat-image {
+    height: 100%;
+    width: 100%;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
@@ -37,4 +48,5 @@
         height: 45px;
         background: grey;
     }
+
 }

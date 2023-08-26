@@ -1,0 +1,43 @@
+/* ------------------------------- Desktop versie -------------------------------- */
+
+.fetched-image-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fetched-image-container {
+    display: flex;
+    flex-direction: row;
+    padding: 40px;
+}
+
+.fetched-image {
+    max-height: 400px;
+    width: auto;
+}
+
+.add-to-favorites-button {
+    margin-block: 20px;
+}
+
+/* ------------------------------- Media Queries -------------------------------- */
+
+@media screen and (max-width: 576px) {
+
+    .fetched-image-container {
+        padding: 20px;
+    }
+
+    .fetched-image {
+        max-width: 300px;
+        height: auto;
+    }
+
+    .add-to-favorites-button {
+        margin-bottom: 0;
+        margin-top: 20px;
+    }
+
+}

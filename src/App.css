@@ -127,6 +127,37 @@ footer {
     padding: 20px;
 }
 
+.loading-message {
+    padding: 100px;
+}
+
+.loading-animation {
+    margin: auto;
+    border: 20px solid #F7931E;
+    border-radius: 50%;
+    border-top: 20px solid #FF7A59;
+    width: 200px;
+    height: 200px;
+    animation: spinner 4s linear infinite;
+}
+
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error-message {
+    font-size: 14px;
+    color: #F7931E;
+    min-height: 30px;
+}
+
+
+.input-error-message {
+    font-size: 14px;
+    color: #F7931E;
+}
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
@@ -173,4 +204,16 @@ footer {
         font-size: 10px;
     }
 
+    .loading-animation {
+        width: 150px;
+        height: 150px;
+    }
+
+    .error-message {
+        font-size: 12px;
+    }
+
+    .input-error-message {
+        font-size: 12px;
+    }
 }

@@ -15,6 +15,14 @@
     height: 300px;
 }
 
+.title-logo-container {
+    padding-inline: 100px;
+}
+
+.error-message--signin {
+    padding-top: 150px;
+}
+
 
 /* ------------------------------- Media Queries -------------------------------- */
 
@@ -23,5 +31,10 @@
     .signin-container {
         gap: 10px;
     }
+
+    .error-message--signin {
+        padding-top: 100px;
+    }
+
 
 }
