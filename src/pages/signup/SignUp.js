@@ -28,6 +28,7 @@ function SignUp() {
             toggleError(false);
             toggleLoading(true);
             console.log(data);
+            console.log("status voor submitten")
 
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
@@ -43,13 +44,13 @@ function SignUp() {
                 setErrorMessageSignup("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
             }
             toggleLoading(false);
+            console.log("status na submitten")
         }
+
 
     return (
         <div className="inner-container">
           <section className="signup-container">
-
-            {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}
 
             <form className="signup-form"
                   onSubmit={handleSubmit(onSubmit)}>
@@ -103,6 +104,8 @@ function SignUp() {
                   Registreer
               </Button>
             </form>
+
+            {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}
 
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
             {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}

@@ -22,6 +22,10 @@ function Images() {
         }
     }, []);
 
+    const controller = new AbortController();
+
+    const navigate = useNavigate()
+
     const [error, toggleError] = useState(false);
     const [errorMessageImages, setErrorMessageImages] = useState("");
     const [inputErrorCatSays, setInputErrorCatSays] = useState("");
@@ -29,9 +33,6 @@ function Images() {
     const [userInputCatSays, setUserInputCatSays] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
 
-    const controller = new AbortController();
-
-    const navigate = useNavigate()
     const fetchCatImage = async(endpoint) => {
         try {
             console.log("Fetching image from endpoint", endpoint)
@@ -65,6 +66,13 @@ function Images() {
         toggleLoading(false);
     };
 
+    const handleFetchRandomCatFilter = () => {
+        const catFilterUrl = endpointUrls.randomCatFilter.replace(":filter", selectedFilter);
+        console.log("Filter:", selectedFilter);
+        fetchCatImage(catFilterUrl);
+        console.log(catFilterUrl)
+    }
+
     const handleFetchRandomCatSays = () => {
 
         if (!userInputCatSays) {
@@ -80,13 +88,6 @@ function Images() {
         console.log(catSaysUrl)
 
         console.log("User input after fetch:", userInputCatSays);
-    }
-
-    const handleFetchRandomCatFilter = () => {
-        const catFilterUrl = endpointUrls.randomCatFilter.replace(":filter", selectedFilter);
-        console.log("Filter:", selectedFilter);
-        fetchCatImage(catFilterUrl);
-        console.log(catFilterUrl)
     }
 
     return (
