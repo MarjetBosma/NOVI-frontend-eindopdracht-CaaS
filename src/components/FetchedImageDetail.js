@@ -54,7 +54,7 @@ function FetchedImageDetail() {
             <Button
                 className="add-to-favorites-button"
                 clickHandler={() => saveImageAsFavorite(catImage)}
-                disabled={favorites.length >= 24 || favorites.includes(catImage)}
+                disabled={favorites.includes(catImage)}
             >
                 Toevoegen aan favorieten
             </Button>

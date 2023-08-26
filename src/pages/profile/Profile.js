@@ -15,6 +15,7 @@ function Profile() {
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
     const [newEmail, setNewEmail] = useState("");
+    // const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
     const [newProfilePicture, setNewProfilePicture] = useState(null);
@@ -63,8 +64,8 @@ function Profile() {
         const reader = new FileReader();
         reader.onload = (event) => {
             const base64String = event.target.result;
-            setProfilePicture(selectedFile); // Store the selected file in state
-            setNewProfilePicture(base64String); // Store the base64-encoded image data in state
+            setProfilePicture(selectedFile);
+            setNewProfilePicture(base64String);
         };
         reader.readAsDataURL(selectedFile);
     };
@@ -98,20 +99,33 @@ function Profile() {
 
         const newErrors = {};
 
-        if (!newUsername || newUsername.length < 6) {
-            newErrors.username = "Gebruikersnaam moet minimaal 6 karakters bevatten";
+        if (!newUsername) {
+             newErrors.username = "Dit veld is verplicht"
+            } else if (newUsername.length < 6) {
+                newErrors.username = "Gebruikersnaam moet minimaal 6 karakters bevatten";
         }
-        if (!newEmail || !newEmail.includes("@")) {
-            newErrors.email = "Dit veld is verplicht";
+        if (!newEmail) {
+                 newErrors.email = "Dit veld is verplicht"
+            } else if (!newEmail.includes("@")) {
+                 newErrors.email = "E-mailadres moet een @ bevatten"
         }
-        if (!newPassword || newPassword.length < 6) {
-            newErrors.password = "Dit veld is verplicht";
+        // if (!currentPassword) {
+        //         newErrors.currentPassword = "Dit veld is verplicht";
+        //     } else if (currentPassword !== user.password) {
+        //         newErrors.currentPassword = "Huidig wachtwoord is onjuist";
+        // }
+        if (!newPassword) {
+                newErrors.newPassword = "Dit veld is verplicht";
+            } else if (newPassword.length < 6) {
+                newErrors.password = "Wachtwoord moet minimaal 6 karakters bevatten";
+        }
+        if (!newPasswordRepeat) {
+            newErrors.repeatedpassword = "Dit veld is verplicht"
+        } else if (newPasswordRepeat.length < 6) {
+            newErrors.repeatedpassword = "Wachtwoord moet minimaal 6 karakters bevatten";
         }
         if (newPassword !== newPasswordRepeat) {
             newErrors.repeatedpassword = "Wachtwoorden komen niet overeen"
-        }
-        if (!newPasswordRepeat || newPasswordRepeat !== newPassword) {
-            newErrors.passwordRepeat = "Wachtwoorden komen niet overeen";
         }
 
         if (Object.keys(newErrors).length === 0) {
@@ -197,7 +211,7 @@ useEffect(() => {
                         >
                             <InputField
                                 inputType="text"
-                                inputName="username"
+                                inputName="newUsername"
                                 inputLabel="Gebruikersnaam"
                                 placeholder={"Nieuwe gebruikersnaam"}
                                 inputValue={newUsername}
@@ -206,17 +220,26 @@ useEffect(() => {
                             />
                             <InputField
                                 inputType="email"
-                                inputName="email"
+                                inputName="newEmail"
                                 inputLabel="E-mailadres"
                                 placeholder = {"Nieuw e-mailadres"}
                                 inputValue={newEmail}
                                 onChange={(e) => setNewEmail(e.target.value)}
                                 errors={errors}
                             />
+                            {/*<InputField*/}
+                            {/*    inputType="password"*/}
+                            {/*    inputName="currentPassword"*/}
+                            {/*    inputLabel="Huidig wachtwoord"*/}
+                            {/*    placeholder={"Voer uw huidige wachtwoord in"}*/}
+                            {/*    inputValue={currentPassword}*/}
+                            {/*    onChange={(e) => setCurrentPassword(e.target.value)}*/}
+                            {/*    errors={errors}*/}
+                            {/*/>*/}
                             <InputField
                                 inputType="password"
-                                inputName="password"
-                                inputLabel="Wachtwoord"
+                                inputName="newPassword"
+                                inputLabel="Nieuw wachtwoord"
                                 placeholder={"Nieuw wachtwoord"}
                                 inputValue={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
@@ -225,7 +248,7 @@ useEffect(() => {
                             <InputField
                                 inputType="password"
                                 inputName="repeatedPassword"
-                                inputLabel="Herhaal wachtwoord"
+                                inputLabel="Herhaal nieuw wachtwoord"
                                 placeholder={"Herhaal het nieuwe wachtwoord"}
                                 inputValue={newPasswordRepeat}
                                 onChange={(e) => setNewPasswordRepeat(e.target.value)}

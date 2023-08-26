@@ -96,13 +96,13 @@ function SignUp() {
                   register={register}
                   errors={errors}
               />
-
-              <Button
-                  type="submit"
-                  className="button">
-                  {/*// disabled={loading || !isDirty || !isValid}>*/}
-                  Registreer
-              </Button>
+                <Button
+                    type="submit"
+                    className="button"
+                    disabled={loading || !isDirty || !isValid}
+                >
+                    Registreer
+                </Button>
             </form>
 
             {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}

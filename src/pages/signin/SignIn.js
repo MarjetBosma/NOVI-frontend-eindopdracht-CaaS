@@ -89,7 +89,7 @@ function SignIn() {
                 <Button
                     type="submit"
                     className="button"
-                    // disabled={loading || !isDirty || !isValid}
+                    disabled={loading || !isDirty || !isValid}
                 >
                     Log in
                 </Button>
