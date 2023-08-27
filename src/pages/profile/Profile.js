@@ -15,7 +15,6 @@ function Profile() {
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
     const [newEmail, setNewEmail] = useState("");
-    // const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
     const [newProfilePicture, setNewProfilePicture] = useState(null);
@@ -109,11 +108,6 @@ function Profile() {
             } else if (!newEmail.includes("@")) {
                  newErrors.email = "E-mailadres moet een @ bevatten"
         }
-        // if (!currentPassword) {
-        //         newErrors.currentPassword = "Dit veld is verplicht";
-        //     } else if (currentPassword !== user.password) {
-        //         newErrors.currentPassword = "Huidig wachtwoord is onjuist";
-        // }
         if (!newPassword) {
                 newErrors.newPassword = "Dit veld is verplicht";
             } else if (newPassword.length < 6) {
@@ -227,15 +221,6 @@ useEffect(() => {
                                 onChange={(e) => setNewEmail(e.target.value)}
                                 errors={errors}
                             />
-                            {/*<InputField*/}
-                            {/*    inputType="password"*/}
-                            {/*    inputName="currentPassword"*/}
-                            {/*    inputLabel="Huidig wachtwoord"*/}
-                            {/*    placeholder={"Voer uw huidige wachtwoord in"}*/}
-                            {/*    inputValue={currentPassword}*/}
-                            {/*    onChange={(e) => setCurrentPassword(e.target.value)}*/}
-                            {/*    errors={errors}*/}
-                            {/*/>*/}
                             <InputField
                                 inputType="password"
                                 inputName="newPassword"

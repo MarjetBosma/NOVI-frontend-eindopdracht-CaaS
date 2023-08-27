@@ -108,7 +108,6 @@ function SignUp() {
             {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}
 
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
-            {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}
 
           </section>
 
