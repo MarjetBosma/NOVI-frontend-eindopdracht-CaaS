@@ -16,7 +16,9 @@
 }
 
 .error-message--signup {
-    padding-top: 200px;
+    margin-bottom: 500px;
+    margin-top: 0;
+    padding-left: 10px;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
@@ -25,15 +27,13 @@
 
     .signup-container {
         gap: 20px;
+        width: 100vw;
     }
 
     .signup-form {
         height: 325px;
     }
 
-    .error-message--signup {
-
-    }
 }
 
 

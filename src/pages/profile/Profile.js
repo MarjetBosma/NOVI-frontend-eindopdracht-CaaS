@@ -18,7 +18,7 @@ function Profile() {
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
     const [newProfilePicture, setNewProfilePicture] = useState(null);
-    const [errors, setErrors] = useState({})
+    const [errors, toggleErrors] = useState({})
     const [errorMessageProfile, setErrorMessageProfile] = useState("");
     const [successMessageProfile, setSuccessMessageProfile] = useState("");
     const [showModal, setShowModal] = useState(false);
@@ -26,8 +26,9 @@ function Profile() {
 
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
-
         const updatedUserData = {};
+
+        console.log(updatedUserData)
         if (data.username) {
             updatedUserData.username = data.username;
         }
@@ -93,7 +94,7 @@ function Profile() {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newErrors = {};
@@ -104,38 +105,35 @@ function Profile() {
                 newErrors.username = "Gebruikersnaam moet minimaal 6 karakters bevatten";
         }
         if (!newEmail) {
-                 newErrors.email = "Dit veld is verplicht"
+             newErrors.email = "Dit veld is verplicht"
             } else if (!newEmail.includes("@")) {
-                 newErrors.email = "E-mailadres moet een @ bevatten"
+                newErrors.email = "E-mailadres moet een @ bevatten"
         }
         if (!newPassword) {
-                newErrors.newPassword = "Dit veld is verplicht";
+            newErrors.newPassword = "Dit veld is verplicht";
             } else if (newPassword.length < 6) {
                 newErrors.password = "Wachtwoord moet minimaal 6 karakters bevatten";
         }
         if (!newPasswordRepeat) {
             newErrors.repeatedpassword = "Dit veld is verplicht"
         } else if (newPasswordRepeat.length < 6) {
-            newErrors.repeatedpassword = "Wachtwoord moet minimaal 6 karakters bevatten";
+             newErrors.repeatedpassword = "Wachtwoord moet minimaal 6 karakters bevatten";
         }
         if (newPassword !== newPasswordRepeat) {
             newErrors.repeatedpassword = "Wachtwoorden komen niet overeen"
         }
 
         if (Object.keys(newErrors).length === 0) {
-            handleUpdateProfilePicture();
-            handleUpdateUserData();
+            await handleUpdateProfilePicture();
+            await handleUpdateUserData();
             console.log("New username:", newUsername);
             console.log("New email:", newEmail);
             console.log("New password:", newPassword);
         } else {
-            setErrors(newErrors);
+            toggleErrors(newErrors);
         }
 
         setIsFormValid(validateForm());
-
-        handleUpdateProfilePicture();
-        handleUpdateUserData();
 
         console.log("New username:", newUsername);
         console.log("New email:", newEmail);
@@ -196,8 +194,8 @@ useEffect(() => {
                         </span>
                     <div className="modal-content">
                         <div className="error-message-container">
-                            {errorMessageProfile && <div className="error-message">{errorMessageProfile}</div>}
-                            {successMessageProfile && <div className="error-message error-message--signup">{successMessageProfile}</div>}
+                            {errorMessageProfile && <div className="error-message error-message--profile">{errorMessageProfile}</div>}
+                            {successMessageProfile && <div className="success-message">{successMessageProfile}</div>}
                         </div>
                         <form
                             className="update-userdata-form"
@@ -263,7 +261,6 @@ useEffect(() => {
                         </form>
                     </div>
                 </div>
-
             )}
 
             <section className="title-logo-container">

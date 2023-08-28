@@ -8,7 +8,7 @@ import Button from "../../components/Button";
 import InputField from "../../components/InputField";
 
 function SignUp() {
-    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
+    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm( { mode: "onChange" });
 
     const [errorMessageSignup, setErrorMessageSignup] = useState("");
 
@@ -28,7 +28,6 @@ function SignUp() {
             toggleError(false);
             toggleLoading(true);
             console.log(data);
-            console.log("status voor submitten")
 
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
@@ -44,9 +43,7 @@ function SignUp() {
                 setErrorMessageSignup("Registratie mislukt. Controleer je invoer en probeer het opnieuw.");
             }
             toggleLoading(false);
-            console.log("status na submitten")
         }
-
 
     return (
         <div className="inner-container">
@@ -54,14 +51,13 @@ function SignUp() {
 
             <form className="signup-form"
                   onSubmit={handleSubmit(onSubmit)}>
-
               <InputField
                   inputType="text"
                   inputName="username"
                   inputLabel="Gebruikersnaam"
                   validationRules={{
-                    required: "Dit veld is verplicht",
-                    minLength: {
+                      required: "Dit veld is verplicht",
+                      minLength: {
                       value: 6,
                       message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
                     }
@@ -69,7 +65,6 @@ function SignUp() {
                   register={register}
                   errors={errors}
               />
-
               <InputField
                   inputType="email"
                   inputName="email"
@@ -77,11 +72,10 @@ function SignUp() {
                   validationRules={{
                     required: "Dit veld is verplicht",
                     validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
-              }}
-              register={register}
-              errors={errors}
+                }}
+                register={register}
+                errors={errors}
               />
-
               <InputField
                   inputType="password"
                   inputName="password"
@@ -92,28 +86,27 @@ function SignUp() {
                       value: 6,
                       message: "Het wachtwoord moet minimaal 6 karakters bevatten",
                   }
-              }}
+                }}
                   register={register}
                   errors={errors}
               />
-                <Button
+              <Button
                     type="submit"
-                    className="button"
                     disabled={loading || !isDirty || !isValid}
                 >
                     Registreer
-                </Button>
+              </Button>
             </form>
 
-            {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}
-
             <p>Al bekend bij CaaS? Log dan <Link to="/signin">hier</Link> in.</p>
+
+            {errorMessageSignup && <div className="error-message error-message--signup">{errorMessageSignup}</div>}
 
           </section>
 
           <section className="title-logo-container">
             <h2>Maak een account</h2>
-            <p>Je hebt een account nodig om gebruik te kunnen maken van CaaS. Schrijf je nu in! </p>
+            <p>Je hebt een account nodig, schrijf je nu in! </p>
             <div className="logo-container">
               <img className="logo-large" src={logo} alt="logo"/>
             </div>

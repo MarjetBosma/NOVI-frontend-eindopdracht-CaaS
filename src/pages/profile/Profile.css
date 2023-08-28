@@ -64,7 +64,13 @@
 
 .close {
     position: relative;
-    padding-left: 350px;
+    background-color: #F7931E;
+    padding-inline: 5px;
+    margin-left: 345px;
+}
+
+.close:hover {
+    cursor: pointer;
 }
 
 .modal-content {
@@ -93,6 +99,7 @@
 
     .profile-button-container {
         padding-left: 40px;
+        width: 100vw;
     }
 
     .profile-container {

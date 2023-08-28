@@ -104,10 +104,9 @@ function AuthContextProvider ({ children }) {
                 ?
                     children
                 :
-                    <div>loading-container
+                    <div className="loading-container">
                         <h2 className="loading-message">Laden...</h2>
-                        <div className="loading-animation"></div>
-
+                    <div className="loading-animation"></div>
                     </div>
             }
         </AuthContext.Provider>

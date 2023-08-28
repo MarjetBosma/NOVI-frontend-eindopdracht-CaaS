@@ -1,7 +1,9 @@
 import React from "react";
 import "./InputField.css";
 
-function InputField({ inputLabel, inputType, inputName, inputValue, onChange, errors }) {
+function InputField({ inputLabel, inputType, inputName, inputValue, onChange, register, validationRules, errors }) {
+    console.log("Errors InputField", errors)
+
     return (
         <div className="input-container">
             <label htmlFor={`${inputName}-field`}>{inputLabel}</label>
@@ -10,9 +12,10 @@ function InputField({ inputLabel, inputType, inputName, inputValue, onChange, er
                 value={inputValue}
                 id={`${inputName}-input`}
                 onChange={onChange}
+                {...register(inputName, validationRules)}
                 className={`input-field ${errors[inputName] ? "input-error" : ""}`}
             />
-            {errors[inputName] && <p className="input-error-message">{errors[inputName].message}</p>}
+            {errors[inputName] && <p className="error-message">{errors[inputName].message}</p>}
         </div>
     );
 }

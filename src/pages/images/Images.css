@@ -46,10 +46,6 @@
     padding-top: 60px;
 }
 
-/*.error-message {*/
-/*    padding-top:200px;*/
-/*}*/
-
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
@@ -79,14 +75,17 @@
     }
 
 
-    .title-logo-container-images {
+    .title-logo-container {
         display: flex;
         flex-direction: column;
+        justify-items: center;
+        align-items: center;
         gap: 20px;
-        padding-right: 30px;
+        padding-inline: 20px;
         height: 150px;
         padding-bottom: 20px;
-        padding-top: 50px;
+        padding-top: 30px;
+        width: 100vw;
     }
 
     .images-to-favorites-link {

@@ -43,7 +43,7 @@ function Favorites() {
                             key={index}
                             className={`thumbnail ${selectedImages.includes(index) ? "selected" : ""}`}>
                                 <img className="cat-image"
-                                     src={imageUrl} alt={`Favorite ${index}`}
+                                     src={imageUrl} alt={`Fav. ${index + 1}`}
                                      onDoubleClick={() => handleImageClick(index)}
                                      onClick={() => handleImageSelection(index)}
                                 />

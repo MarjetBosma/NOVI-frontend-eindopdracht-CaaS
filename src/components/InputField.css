@@ -36,7 +36,7 @@ label {
     z-index: 0;
 }
 
-.input-field.input-error {
+.input-error {
     border-color: #F7931E;
     border-style: solid;
 }
@@ -47,14 +47,13 @@ label {
     padding-block: 5px;
     min-height: 30px;
     position: absolute;
-    margin-top: 280px;
+    margin-top: 60px;
 }
 
-.input-error-message {
-    font-size: 14px;
-    color: #F7931E;
-}
-
+/*.errors {*/
+/*    font-size: 14px;*/
+/*    color: #F7931E;*/
+/*}*/
 
 /* ------------------------------- Media Queries -------------------------------- */
 

@@ -47,7 +47,7 @@ function Images() {
             const blob = new Blob([arrayBuffer], { type: contentType });
             const imageUrl = URL.createObjectURL(blob);
 
-            console.log("Full Response:", response);
+            console.log("Full response:", response);
             console.log("Image fetched", response.data)
             console.log("Content-Type", response.headers["content-type"]);
 
@@ -66,14 +66,14 @@ function Images() {
         toggleLoading(false);
     };
 
-    const handleFetchRandomCatFilter = () => {
+    const handleFetchRandomCatFilter = async () => {
         const catFilterUrl = endpointUrls.randomCatFilter.replace(":filter", selectedFilter);
         console.log("Filter:", selectedFilter);
-        fetchCatImage(catFilterUrl);
+        await fetchCatImage(catFilterUrl);
         console.log(catFilterUrl)
     }
 
-    const handleFetchRandomCatSays = () => {
+    const handleFetchRandomCatSays = async () => {
 
         if (!userInputCatSays) {
             setInputErrorCatSays("Dit veld is verplicht");
@@ -84,7 +84,7 @@ function Images() {
         console.log("User input before fetch:", userInputCatSays);
 
         const catSaysUrl = endpointUrls.randomCatSays.replace(":text", userInputCatSays);
-        fetchCatImage(catSaysUrl);
+        await fetchCatImage(catSaysUrl);
         console.log(catSaysUrl)
 
         console.log("User input after fetch:", userInputCatSays);
@@ -156,13 +156,12 @@ function Images() {
                 <p className="images-to-favorites-link">Eerder opgeslagen afbeeldingen bekijken? Ga naar je <Link to="/favorites">favorieten</Link>!</p>
             </section>
             <section className="title-logo-container">
-                <h2>Vraag hier een kat op</h2>
+                <h2>Vraag een kat op</h2>
                 <p>Een wereld aan kattenplaatjes is slechts een muisklik van je verwijderd... Welke katten maken jou
                     blij vandaag? </p>
                 <div className="logo-container">
                     <img className="logo-large" src={logo} alt="logo"/>
                 </div>
-
             </section>
         </div>
     )

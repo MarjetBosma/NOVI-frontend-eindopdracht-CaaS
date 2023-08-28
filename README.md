@@ -2,14 +2,13 @@
 
 ## Inleiding
 
-Als je van katten houdt, kan het aaien van zo'n pluizge viervoeter ontspannend en stressverlagend werken. Instant stress-relief op pootjes! Maar ja, op het werk, op school, in de trein etc. heb je meestal geen kat bij de hand. Gelukkig is uit onderzoek gebleken dat het kijken naar kattenfilmpjes of -plaatjes ook werkt. Deze applicatie biedt de gebruiker een wereld aan leuke, gezellige en schattige afbeeldingen van katten. Precies voor die momenten waarop je wel even wat harige afleiding en ontspanning kunt gebruiken, maar er geen echte kat in de buurt is!
+Als je van katten houdt, kan het aaien van zo'n pluizige viervoeter ontspannend en stressverlagend werken. Instant stress-relief op pootjes! Maar ja, op het werk, op school, in de trein etc. heb je meestal geen kat bij de hand. Gelukkig is uit onderzoek gebleken dat het kijken naar kattenfilmpjes of -plaatjes ook werkt. CaaS biedt de gebruiker een wereld aan leuke, gezellige en schattige afbeeldingen van katten. Precies voor die momenten waarop je wel even wat harige afleiding en ontspanning kunt gebruiken, maar er geen echte kat in de buurt is!
 
-Deze applicatie is gemaakt als integrale eindopdracht voor de leerlijn Frontend van de NOVI Hogeschool te Utrecht.
+Deze webapplicatie is gemaakt als integrale eindopdracht voor de leerlijn Frontend van de NOVI Hogeschool te Utrecht.
 
-*** screenshot belangrijkste pagina ***
 ![screenshot](src/assets/screenshot.png)
 
-Om gebruik te kunnen maken van alle functies in de app, dient een gebruiker zich te registreren en vervolgens in te loggen.
+Om gebruik te kunnen maken van alle functionaliteiten van de app, dient een gebruiker zich te registreren en vervolgens in te loggen.
 
 ## Belangrijkste functionaliteiten
 
@@ -54,6 +53,11 @@ De kern van deze webapplicatie wordt gevormd door een REST API genaamd CATAAS (C
 
 
 5. Geniet van je dosis kattenliefde! :-)
+
+## Beperkingen
+
+Het betreft hier een demo-versie. Gebruikersgegevens worden slechts een uur bewaard op de NOVI Backend. Favoriete afbeeldingen worden opgeslagen in de local storage van de browser i.p.v. een server, en zijn deze niet gekoppeld aan een account. De local storage wordt geleegd bij uitloggen.
+Bij nadere implementatie is een echte backend en server nodig om gebruikersgegevens en de bijbehorende favoriete afbeeldingen langdurig samen te kunnen opslaan.  
 
 ## Verantwoording afbeelding logo
 
