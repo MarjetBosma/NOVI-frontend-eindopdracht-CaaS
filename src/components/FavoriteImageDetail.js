@@ -45,7 +45,7 @@ function FavoriteImageDetail() {
             </div>
             <Button
                 className="remove-from-favorites-button"
-                onClick={handleRemoveClick}
+                clickHandler={handleRemoveClick}
             >
                 Verwijderen uit favorieten
             </Button>

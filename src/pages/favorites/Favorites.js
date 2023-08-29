@@ -30,7 +30,11 @@ function Favorites() {
 
     function handleDeleteSelection() {
         const updatedFavorites = favorites.filter((item, index) => !selectedImages.includes(index));
+        console.log("Updated favorites:", updatedFavorites);
+
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+        console.log("Favorites in local storage after update:", JSON.parse(localStorage.getItem("favorites")));
+
         setSelectedImages([]);
     }
 
@@ -53,7 +57,7 @@ function Favorites() {
                 </ul>
                 <Button
                     type="submit"
-                    onClick={handleDeleteSelection}
+                    clickHandler={handleDeleteSelection}
                     disabled={selectedImages.length === 0}>
                     Verwijder selectie
                 </Button>

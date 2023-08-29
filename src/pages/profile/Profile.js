@@ -94,61 +94,6 @@ function Profile() {
         }
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //
-    //     const newErrors = {};
-    //
-    //     if (!newUsername) {
-    //          newErrors.username = "Dit veld is verplicht"
-    //         } else if (newUsername.length < 6) {
-    //             newErrors.username = "Gebruikersnaam moet minimaal 6 karakters bevatten";
-    //     }
-    //     if (!newEmail) {
-    //          newErrors.email = "Dit veld is verplicht"
-    //         } else if (!newEmail.includes("@")) {
-    //             newErrors.email = "E-mailadres moet een @ bevatten"
-    //     }
-    //     if (!newPassword) {
-    //         newErrors.newPassword = "Dit veld is verplicht";
-    //         } else if (newPassword.length < 6) {
-    //             newErrors.password = "Wachtwoord moet minimaal 6 karakters bevatten";
-    //     }
-    //     if (!newPasswordRepeat) {
-    //         newErrors.repeatedpassword = "Dit veld is verplicht"
-    //     } else if (newPasswordRepeat.length < 6) {
-    //          newErrors.repeatedpassword = "Wachtwoord moet minimaal 6 karakters bevatten";
-    //     }
-    //     if (newPassword !== newPasswordRepeat) {
-    //         newErrors.repeatedpassword = "Wachtwoorden komen niet overeen"
-    //     }
-    //
-    //     if (Object.keys(newErrors).length === 0) {
-    //         await handleUpdateProfilePicture();
-    //         await handleUpdateUserData();
-    //         console.log("New username:", newUsername);
-    //         console.log("New email:", newEmail);
-    //         console.log("New password:", newPassword);
-    //     } else {
-    //         toggleErrors(newErrors);
-    //     }
-    //
-    //     setIsFormValid(validateForm());
-    //
-    //     console.log("New username:", newUsername);
-    //     console.log("New email:", newEmail);
-    //     console.log("New password:", newPassword);
-    // };
-
-    // const validateForm = () => {
-    //
-    //     const areFieldsFilled = newUsername && newEmail && newPassword && newPasswordRepeat;
-    //     const areErrorsPresent = Object.keys(errors).some((key) => errors[key]);
-    //
-    //     return areFieldsFilled && !areErrorsPresent;
-    // };
-
-
 useEffect(() => {
         console.log(user, newEmail, newPassword, newProfilePicture, newUsername, profilePicture);
 
@@ -282,9 +227,7 @@ useEffect(() => {
                                     validate: (value) =>
                                         value || "Selecteer een afbeelding voor je profielfoto",
                                 }}
-                                onChange={(e) => {
-                                    handleProfilePictureUpload(e);
-                                }}
+                                onChange={handleProfilePictureUpload}
                                 errors={errors}
                             />
                             <Button
