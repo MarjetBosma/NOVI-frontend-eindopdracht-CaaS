@@ -7,6 +7,7 @@ import InputField from "../../components/InputField";
 import { Link } from "react-router-dom";
 import axios from "axios"
 import { AuthContext } from "../../context/AuthContext";
+import {useForm} from "react-hook-form";
 
 function Profile() {
 
@@ -23,6 +24,8 @@ function Profile() {
     const [successMessageProfile, setSuccessMessageProfile] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [isFormValid, setIsFormValid] = useState(false);
+
+    const { register } = useForm({ mode: "onChange" });
 
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
@@ -208,6 +211,7 @@ useEffect(() => {
                                 placeholder={"Nieuwe gebruikersnaam"}
                                 inputValue={newUsername}
                                 onChange={(e) => setNewUsername(e.target.value)}
+                                register={register}
                                 errors={errors}
                             />
                             <InputField
@@ -217,6 +221,7 @@ useEffect(() => {
                                 placeholder = {"Nieuw e-mailadres"}
                                 inputValue={newEmail}
                                 onChange={(e) => setNewEmail(e.target.value)}
+                                register={register}
                                 errors={errors}
                             />
                             <InputField
@@ -226,6 +231,7 @@ useEffect(() => {
                                 placeholder={"Nieuw wachtwoord"}
                                 inputValue={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
+                                register={register}
                                 errors={errors}
                             />
                             <InputField
@@ -235,6 +241,7 @@ useEffect(() => {
                                 placeholder={"Herhaal het nieuwe wachtwoord"}
                                 inputValue={newPasswordRepeat}
                                 onChange={(e) => setNewPasswordRepeat(e.target.value)}
+                                register={register}
                                 errors={errors}
                             />
                             <label className="input-label-profile-pic">Profielfoto

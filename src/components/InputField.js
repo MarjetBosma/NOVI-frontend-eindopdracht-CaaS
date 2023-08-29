@@ -2,7 +2,6 @@ import React from "react";
 import "./InputField.css";
 
 function InputField({ inputLabel, inputType, inputName, inputValue, onChange, register, validationRules, errors }) {
-    console.log("Errors InputField", errors)
 
     return (
         <div className="input-container">

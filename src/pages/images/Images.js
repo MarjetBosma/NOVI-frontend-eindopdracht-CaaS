@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
+import {useForm} from "react-hook-form";
 
 const endpointUrls = {
     randomCatImage: "https://cataas.com/cat",
@@ -28,12 +29,12 @@ function Images() {
 
     const [error, toggleError] = useState(false);
     const [errorMessageImages, setErrorMessageImages] = useState("");
-    const [inputErrorCatSays, setInputErrorCatSays] = useState("");
     const [loading, toggleLoading] = useState(false);
     const [userInputCatSays, setUserInputCatSays] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
 
-    const fetchCatImage = async(endpoint) => {
+    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
+    const fetchCatImageFromEndpoint = async(endpoint) => {
         try {
             console.log("Fetching image from endpoint", endpoint)
             toggleError(false);
@@ -66,28 +67,59 @@ function Images() {
         toggleLoading(false);
     };
 
-    const handleFetchRandomCatFilter = async () => {
+    const fetchCatImageFromUrl = async(url) => {
+        try {
+            console.log("Fetching image from endpoint", url)
+            toggleError(false);
+            toggleLoading(true);
+
+            const response = await axios.get(url, {responseType: "arraybuffer"} );
+
+            const contentType = response.headers["content-type"];
+            const arrayBuffer = response.data;
+
+            const blob = new Blob([arrayBuffer], { type: contentType });
+            const imageUrl = URL.createObjectURL(blob);
+
+            console.log("Full response:", response);
+            console.log("Image fetched", response.data)
+            console.log("Content-Type", response.headers["content-type"]);
+
+            navigate("/cat", {
+                state: {
+                    imageUrl: imageUrl
+                }
+            });
+            console.log("Image opened at /cat", response.data);
+
+        } catch(e) {
+            console.error("Error fetching image", e);
+            toggleError(true )
+            setErrorMessageImages("Ophalen van afbeelding mislukt.");
+        }
+        toggleLoading(false);
+    };
+
+    function handleFetchRandomCatFilter() {
         const catFilterUrl = endpointUrls.randomCatFilter.replace(":filter", selectedFilter);
         console.log("Filter:", selectedFilter);
-        await fetchCatImage(catFilterUrl);
+        fetchCatImageFromUrl(catFilterUrl);
         console.log(catFilterUrl)
     }
 
-    const handleFetchRandomCatSays = async () => {
+  function handleFetchRandomCatSays(data) {
 
-        if (!userInputCatSays) {
-            setInputErrorCatSays("Dit veld is verplicht");
-            return;
-        }
-        setInputErrorCatSays("")
+        const {"image-text": imagetext} = data
+        setUserInputCatSays(imagetext)
+        console.log(imagetext)
 
-        console.log("User input before fetch:", userInputCatSays);
+        console.log("User input before fetch:", imagetext);
 
-        const catSaysUrl = endpointUrls.randomCatSays.replace(":text", userInputCatSays);
-        await fetchCatImage(catSaysUrl);
+        const catSaysUrl = endpointUrls.randomCatSays.replace(":text", imagetext);
+        fetchCatImageFromUrl(catSaysUrl)
         console.log(catSaysUrl)
 
-        console.log("User input after fetch:", userInputCatSays);
+        console.log("User input after fetch:", imagetext);
     }
 
     return (
@@ -101,17 +133,17 @@ function Images() {
                         <Button
                             type="button"
                             disabled={loading}
-                            clickHandler={() => fetchCatImage("randomCatImage")}>Random kat
+                            clickHandler={() => fetchCatImageFromEndpoint("randomCatImage")}>Random kat
                         </Button>
                         <Button
                             type="button"
                             disabled={loading}
-                            clickHandler={() => fetchCatImage("randomKitten")}>Random kitten
+                            clickHandler={() => fetchCatImageFromEndpoint("randomKitten")}>Random kitten
                         </Button>
                         <Button
                             type="button"
                             disabled={loading}
-                            clickHandler={() => fetchCatImage("randomGifCat")}>GIF afbeelding kat
+                            clickHandler={() => fetchCatImageFromEndpoint("randomGifCat")}>GIF afbeelding kat
                         </Button>
                     </div>
                     <div className="inner-button-container-right">
@@ -134,23 +166,34 @@ function Images() {
                                 clickHandler={() => handleFetchRandomCatFilter()}>Kat met filter
                             </Button>
                          </div>
-                        <div className="text-field-button-container">
+                        <form className="text-field-button-container"
+                            onSubmit={handleSubmit(handleFetchRandomCatSays)}>
                             <InputField
                                 inputType="text"
                                 inputName="image-text"
                                 inputLabel="Jouw tekst"
-                                inputValue={userInputCatSays}
                                 placeholder="Vul je eigen tekst in"
-                                onChange={(e) => setUserInputCatSays(e.target.value)}
-                                errors={{ "image-text" : inputErrorCatSays }}
+                                errors={{ "image-text" : {errors} }}
+                                register={register}
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    minLength: {
+                                        value: 3,
+                                        message: "Dit veld moet minimaal 3 karakters bevatten",
+                                    },
+                                    maxLength: {
+                                        value: 50,
+                                        message: "Dit veld mag maximaal 50 karakters bevatten",
+                                    }
+                            }}
                             />
-                            {inputErrorCatSays && <p className="error-message">{inputErrorCatSays}</p>}
+                            {errors["image-text"] && <p className="error-message">{errors["image-text"].message}</p>}
                             <Button
-                                type="button"
-                                disabled={loading || !userInputCatSays || inputErrorCatSays}
-                                clickHandler={() => handleFetchRandomCatSays()}>Kat met jouw tekst
+                                type="submit"
+                                disabled={ loading || !isDirty || !isValid }>
+                                Kat met jouw tekst
                             </Button>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <p className="images-to-favorites-link">Eerder opgeslagen afbeeldingen bekijken? Ga naar je <Link to="/favorites">favorieten</Link>!</p>
