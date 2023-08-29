@@ -6,7 +6,6 @@ function FetchedImageDetail() {
     const location = useLocation();
 
     const [ catImage, setCatImage ] = useState({})
-    //const imageUrl = location?.state?.imageUrl || "";
     const imageUrl = location.state && location.state.imageUrl ? location.state.imageUrl : "";
     console.log("cat object", catImage)
 

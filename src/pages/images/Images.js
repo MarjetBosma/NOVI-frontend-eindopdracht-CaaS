@@ -173,7 +173,7 @@ function Images() {
                                 inputName="image-text"
                                 inputLabel="Jouw tekst"
                                 placeholder="Vul je eigen tekst in"
-                                errors={{ "image-text" : {errors} }}
+                                errors={{ "image-text" : { errors } }}
                                 register={register}
                                 validationRules={{
                                     required: "Dit veld is verplicht",
@@ -190,7 +190,7 @@ function Images() {
                             {errors["image-text"] && <p className="error-message">{errors["image-text"].message}</p>}
                             <Button
                                 type="submit"
-                                disabled={ loading || !isDirty || !isValid }>
+                                disabled={ !isDirty || !isValid }>
                                 Kat met jouw tekst
                             </Button>
                         </form>

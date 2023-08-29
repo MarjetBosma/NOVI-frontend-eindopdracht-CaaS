@@ -7,11 +7,12 @@ import InputField from "../../components/InputField";
 import { Link } from "react-router-dom";
 import axios from "axios"
 import { AuthContext } from "../../context/AuthContext";
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 function Profile() {
 
     const { user } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
 
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
@@ -19,19 +20,15 @@ function Profile() {
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
     const [newProfilePicture, setNewProfilePicture] = useState(null);
-    const [errors, toggleErrors] = useState({})
     const [errorMessageProfile, setErrorMessageProfile] = useState("");
     const [successMessageProfile, setSuccessMessageProfile] = useState("");
     const [showModal, setShowModal] = useState(false);
-    const [isFormValid, setIsFormValid] = useState(false);
-
-    const { register } = useForm({ mode: "onChange" });
 
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
         const updatedUserData = {};
-
         console.log(updatedUserData)
+
         if (data.username) {
             updatedUserData.username = data.username;
         }
@@ -97,59 +94,59 @@ function Profile() {
         }
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //
+    //     const newErrors = {};
+    //
+    //     if (!newUsername) {
+    //          newErrors.username = "Dit veld is verplicht"
+    //         } else if (newUsername.length < 6) {
+    //             newErrors.username = "Gebruikersnaam moet minimaal 6 karakters bevatten";
+    //     }
+    //     if (!newEmail) {
+    //          newErrors.email = "Dit veld is verplicht"
+    //         } else if (!newEmail.includes("@")) {
+    //             newErrors.email = "E-mailadres moet een @ bevatten"
+    //     }
+    //     if (!newPassword) {
+    //         newErrors.newPassword = "Dit veld is verplicht";
+    //         } else if (newPassword.length < 6) {
+    //             newErrors.password = "Wachtwoord moet minimaal 6 karakters bevatten";
+    //     }
+    //     if (!newPasswordRepeat) {
+    //         newErrors.repeatedpassword = "Dit veld is verplicht"
+    //     } else if (newPasswordRepeat.length < 6) {
+    //          newErrors.repeatedpassword = "Wachtwoord moet minimaal 6 karakters bevatten";
+    //     }
+    //     if (newPassword !== newPasswordRepeat) {
+    //         newErrors.repeatedpassword = "Wachtwoorden komen niet overeen"
+    //     }
+    //
+    //     if (Object.keys(newErrors).length === 0) {
+    //         await handleUpdateProfilePicture();
+    //         await handleUpdateUserData();
+    //         console.log("New username:", newUsername);
+    //         console.log("New email:", newEmail);
+    //         console.log("New password:", newPassword);
+    //     } else {
+    //         toggleErrors(newErrors);
+    //     }
+    //
+    //     setIsFormValid(validateForm());
+    //
+    //     console.log("New username:", newUsername);
+    //     console.log("New email:", newEmail);
+    //     console.log("New password:", newPassword);
+    // };
 
-        const newErrors = {};
-
-        if (!newUsername) {
-             newErrors.username = "Dit veld is verplicht"
-            } else if (newUsername.length < 6) {
-                newErrors.username = "Gebruikersnaam moet minimaal 6 karakters bevatten";
-        }
-        if (!newEmail) {
-             newErrors.email = "Dit veld is verplicht"
-            } else if (!newEmail.includes("@")) {
-                newErrors.email = "E-mailadres moet een @ bevatten"
-        }
-        if (!newPassword) {
-            newErrors.newPassword = "Dit veld is verplicht";
-            } else if (newPassword.length < 6) {
-                newErrors.password = "Wachtwoord moet minimaal 6 karakters bevatten";
-        }
-        if (!newPasswordRepeat) {
-            newErrors.repeatedpassword = "Dit veld is verplicht"
-        } else if (newPasswordRepeat.length < 6) {
-             newErrors.repeatedpassword = "Wachtwoord moet minimaal 6 karakters bevatten";
-        }
-        if (newPassword !== newPasswordRepeat) {
-            newErrors.repeatedpassword = "Wachtwoorden komen niet overeen"
-        }
-
-        if (Object.keys(newErrors).length === 0) {
-            await handleUpdateProfilePicture();
-            await handleUpdateUserData();
-            console.log("New username:", newUsername);
-            console.log("New email:", newEmail);
-            console.log("New password:", newPassword);
-        } else {
-            toggleErrors(newErrors);
-        }
-
-        setIsFormValid(validateForm());
-
-        console.log("New username:", newUsername);
-        console.log("New email:", newEmail);
-        console.log("New password:", newPassword);
-    };
-
-    const validateForm = () => {
-
-        const areFieldsFilled = newUsername && newEmail && newPassword && newPasswordRepeat;
-        const areErrorsPresent = Object.keys(errors).some((key) => errors[key]);
-
-        return areFieldsFilled && !areErrorsPresent;
-    };
+    // const validateForm = () => {
+    //
+    //     const areFieldsFilled = newUsername && newEmail && newPassword && newPasswordRepeat;
+    //     const areErrorsPresent = Object.keys(errors).some((key) => errors[key]);
+    //
+    //     return areFieldsFilled && !areErrorsPresent;
+    // };
 
 
 useEffect(() => {
@@ -192,7 +189,8 @@ useEffect(() => {
 
             {showModal && (
                 <div className="modal">
-                   <span className="close" onClick={() => setShowModal(false)}>
+                   <span className="close"
+                         onClick={() => setShowModal(false)}>
                             &times;
                         </span>
                     <div className="modal-content">
@@ -202,15 +200,25 @@ useEffect(() => {
                         </div>
                         <form
                             className="update-userdata-form"
-                            onSubmit={handleSubmit}
+                            onSubmit={handleSubmit((data) => {
+                                handleUpdateUserData(data);
+                                if (profilePicture) {
+                                    handleUpdateProfilePicture();
+                                }
+                            })}
                         >
                             <InputField
                                 inputType="text"
                                 inputName="newUsername"
                                 inputLabel="Gebruikersnaam"
                                 placeholder={"Nieuwe gebruikersnaam"}
-                                inputValue={newUsername}
-                                onChange={(e) => setNewUsername(e.target.value)}
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    minLength: {
+                                        value: 6,
+                                        message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
+                                    }
+                                }}
                                 register={register}
                                 errors={errors}
                             />
@@ -219,8 +227,15 @@ useEffect(() => {
                                 inputName="newEmail"
                                 inputLabel="E-mailadres"
                                 placeholder = {"Nieuw e-mailadres"}
-                                inputValue={newEmail}
-                                onChange={(e) => setNewEmail(e.target.value)}
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    minLength: {
+                                        value: 6,
+                                        message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
+                                    },
+                                    validate: (value) =>
+                                        value === newPasswordRepeat || "Wachtwoorden komen niet overeen",
+                                }}
                                 register={register}
                                 errors={errors}
                             />
@@ -229,8 +244,15 @@ useEffect(() => {
                                 inputName="newPassword"
                                 inputLabel="Nieuw wachtwoord"
                                 placeholder={"Nieuw wachtwoord"}
-                                inputValue={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    minLength: {
+                                    value: 6,
+                                    message: "Het wachtwoord moet minimaal 6 karakters bevatten",
+                                },
+                                    validate: (value) =>
+                                    value === newPasswordRepeat || "Wachtwoorden komen niet overeen",
+                                }}
                                 register={register}
                                 errors={errors}
                             />
@@ -239,8 +261,15 @@ useEffect(() => {
                                 inputName="repeatedPassword"
                                 inputLabel="Herhaal nieuw wachtwoord"
                                 placeholder={"Herhaal het nieuwe wachtwoord"}
-                                inputValue={newPasswordRepeat}
-                                onChange={(e) => setNewPasswordRepeat(e.target.value)}
+                                validationRules={{
+                                    required: "Dit veld is verplicht",
+                                    minLength: {
+                                    value: 6,
+                                    message: "Het wachtwoord moet minimaal 6 karakters bevatten",
+                                },
+                                    validate: (value) =>
+                                    value === newPassword || "Wachtwoorden komen niet overeen",
+                                }}
                                 register={register}
                                 errors={errors}
                             />
@@ -261,11 +290,12 @@ useEffect(() => {
                             <Button
                                 type="submit"
                                 className="save-profile-changes-button"
-                                // disabled={!isFormValid}
-                                >
+                                disabled={ !isDirty || !isValid }
+                            >
                                 Opslaan
                             </Button>
                         </form>
+                        {errorMessageProfile && <div className="error-message error-message--signin">{errorMessageProfile}</div>}
                     </div>
                 </div>
             )}

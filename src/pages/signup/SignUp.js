@@ -92,7 +92,7 @@ function SignUp() {
               />
               <Button
                     type="submit"
-                    disabled={loading || !isDirty || !isValid}
+                    disabled={ !isDirty || !isValid }
                 >
                     Registreer
               </Button>
