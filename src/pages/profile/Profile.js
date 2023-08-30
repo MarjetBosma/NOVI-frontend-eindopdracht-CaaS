@@ -9,20 +9,47 @@ import axios from "axios"
 import { AuthContext } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 
-function Profile() {
 
-    const { user } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
+function Profile() {
 
     const [profilePicture, setProfilePicture] = useState(null);
     const [newUsername, setNewUsername] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
+    const [repeatedPassword, setRepeatedPassword] = useState("");
     const [newProfilePicture, setNewProfilePicture] = useState(null);
     const [errorMessageProfile, setErrorMessageProfile] = useState("");
     const [successMessageProfile, setSuccessMessageProfile] = useState("");
     const [showModal, setShowModal] = useState(false);
+
+    const resolver = async (data) => {
+        return {
+            values: data,
+            errors: {
+                repeatedPassword:
+                    data.password !== data.repeatedPassword
+                        ? "Wachtwoorden komen niet overeen"
+                        : undefined,
+            },
+        };
+    };
+
+    const { register, handleSubmit, setValue, formState: { errors, isDirty, isValid } } = useForm({
+        resolver: resolver,
+        mode: "onChange",
+    });
+
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setValue("newPassword", value);
+        setValue("repeatedPassword", "");
+    };
+
+    const handleRepeatedPasswordChange = (e) => {
+        setValue("repeatedPassword", e.target.value);
+    };
+
+    const { user } = useContext(AuthContext);
 
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
@@ -95,12 +122,12 @@ function Profile() {
     };
 
 useEffect(() => {
-        console.log(user, newEmail, newPassword, newProfilePicture, newUsername, profilePicture);
+        console.log(user, newEmail, newPassword, repeatedPassword, newProfilePicture, newUsername, profilePicture);
 
         return function cleanup() {
         }
 
-    }, [user, newEmail, newPassword, newProfilePicture, newUsername, profilePicture]);
+    }, [user, newEmail, newPassword, repeatedPassword, newProfilePicture, newUsername, profilePicture]);
 
 
     return (
@@ -174,12 +201,7 @@ useEffect(() => {
                                 placeholder = {"Nieuw e-mailadres"}
                                 validationRules={{
                                     required: "Dit veld is verplicht",
-                                    minLength: {
-                                        value: 6,
-                                        message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
-                                    },
-                                    validate: (value) =>
-                                        value === newPasswordRepeat || "Wachtwoorden komen niet overeen",
+                                    validate: (value) => value.includes('@') || "E-mailadres moet een @ bevatten",
                                 }}
                                 register={register}
                                 errors={errors}
@@ -195,11 +217,12 @@ useEffect(() => {
                                     value: 6,
                                     message: "Het wachtwoord moet minimaal 6 karakters bevatten",
                                 },
-                                    validate: (value) =>
-                                    value === newPasswordRepeat || "Wachtwoorden komen niet overeen",
+                                    // validate: (value) =>
+                                    // value === repeatedPassword || "Wachtwoorden komen niet overeen",
                                 }}
                                 register={register}
                                 errors={errors}
+                                onChange={handlePasswordChange}
                             />
                             <InputField
                                 inputType="password"
@@ -212,11 +235,12 @@ useEffect(() => {
                                     value: 6,
                                     message: "Het wachtwoord moet minimaal 6 karakters bevatten",
                                 },
-                                    validate: (value) =>
-                                    value === newPassword || "Wachtwoorden komen niet overeen",
+                                    // validate: (value) =>
+                                    // value === newPassword || "Wachtwoorden komen niet overeen",
                                 }}
                                 register={register}
                                 errors={errors}
+                                onChange={handleRepeatedPasswordChange}
                             />
                             <label className="input-label-profile-pic">Profielfoto
                             </label>
@@ -228,6 +252,7 @@ useEffect(() => {
                                         value || "Selecteer een afbeelding voor je profielfoto",
                                 }}
                                 onChange={handleProfilePictureUpload}
+                                register={register}
                                 errors={errors}
                             />
                             <Button
@@ -238,7 +263,7 @@ useEffect(() => {
                                 Opslaan
                             </Button>
                         </form>
-                        {errorMessageProfile && <div className="error-message error-message--signin">{errorMessageProfile}</div>}
+                        {errorMessageProfile && <div className="error-message error-message--profile">{errorMessageProfile}</div>}
                     </div>
                 </div>
             )}

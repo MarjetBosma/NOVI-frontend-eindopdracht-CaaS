@@ -69,7 +69,7 @@ function Images() {
 
     const fetchCatImageFromUrl = async(url) => {
         try {
-            console.log("Fetching image from endpoint", url)
+            console.log("Fetching image from URL", url)
             toggleError(false);
             toggleLoading(true);
 
@@ -166,7 +166,8 @@ function Images() {
                                 clickHandler={() => handleFetchRandomCatFilter()}>Kat met filter
                             </Button>
                          </div>
-                        <form className="text-field-button-container"
+                        <form
+                            className="text-field-button-container"
                             onSubmit={handleSubmit(handleFetchRandomCatSays)}>
                             <InputField
                                 inputType="text"
@@ -190,7 +191,8 @@ function Images() {
                             {errors["image-text"] && <p className="error-message">{errors["image-text"].message}</p>}
                             <Button
                                 type="submit"
-                                disabled={ !isDirty || !isValid }>
+                                disabled={ !isDirty || !isValid }
+                            >
                                 Kat met jouw tekst
                             </Button>
                         </form>
