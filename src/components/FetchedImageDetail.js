@@ -9,7 +9,6 @@ function FetchedImageDetail() {
     const imageUrl = location.state && location.state.imageUrl ? location.state.imageUrl : "";
     console.log("cat object", catImage)
 
-
     useEffect(() => {
         setCatImage(imageUrl);
     }, [imageUrl]);

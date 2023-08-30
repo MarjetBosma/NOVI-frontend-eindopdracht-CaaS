@@ -35,7 +35,6 @@ function FavoriteImageDetail() {
         navigate("/favorites");
     };
 
-
     return (
         <div className="favorite-image-button-container" >
             <div className="favorite-image-container">

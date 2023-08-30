@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const endpointUrls = {
     randomCatImage: "https://cataas.com/cat",

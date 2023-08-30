@@ -9,7 +9,6 @@ import axios from "axios"
 import { AuthContext } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 
-
 function Profile() {
 
     const [profilePicture, setProfilePicture] = useState(null);
@@ -17,44 +16,31 @@ function Profile() {
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [repeatedPassword, setRepeatedPassword] = useState("");
+    const [passwordsMatchError, setPasswordsMatchError] = useState(false);
     const [newProfilePicture, setNewProfilePicture] = useState(null);
     const [errorMessageProfile, setErrorMessageProfile] = useState("");
     const [successMessageProfile, setSuccessMessageProfile] = useState("");
     const [showModal, setShowModal] = useState(false);
 
-    const resolver = async (data) => {
-        return {
-            values: data,
-            errors: {
-                repeatedPassword:
-                    data.password !== data.repeatedPassword
-                        ? "Wachtwoorden komen niet overeen"
-                        : undefined,
-            },
-        };
-    };
-
-    const { register, handleSubmit, setValue, formState: { errors, isDirty, isValid } } = useForm({
-        resolver: resolver,
-        mode: "onChange",
-    });
+    const { register, handleSubmit, setValue, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
 
     const handlePasswordChange = (e) => {
         const value = e.target.value;
-        setValue("newPassword", value);
-        setValue("repeatedPassword", "");
+        setValue("newPassword", value);  // update newPassword (setValue is destructured uit useForm)
+        setValue("repeatedPassword", ""); // leegt repeatedPassword invoerveld
     };
 
     const handleRepeatedPasswordChange = (e) => {
         setValue("repeatedPassword", e.target.value);
     };
 
-    const { user } = useContext(AuthContext);
+    // setUser toegevoegd (zie ook AuthContext)
+    const { user, setUser } = useContext(AuthContext);
 
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
         const updatedUserData = {};
-        console.log(updatedUserData)
+        console.log("Updated user data", updatedUserData)
 
         if (data.username) {
             updatedUserData.username = data.username;
@@ -62,10 +48,19 @@ function Profile() {
         if (data.email) {
             updatedUserData.email = data.email;
         }
+        // Onderstaande uitgebreid met zetten van state voor al dan niet overeenkomende wachtwoorden.
         if (data.password && data.repeatedPassword) {
+            if (data.password !== data.repeatedPassword) {
+                setPasswordsMatchError(true);
+                return;
+            } else {
+                setPasswordsMatchError(false);
+            }
             updatedUserData.password = data.password;
             updatedUserData.repeatedPassword = data.repeatedPassword;
         }
+        // Ik twijfel of dit werkt. Onderaan bij de invoervelden heb ik ook een error message voor de gebruiker gezet, maar die verschijnt niet.
+        // De button is ook klikbaar, dus hij ziet nog niet dat er iets niet valid is.
 
         try {
             const response = await axios.put(
@@ -80,6 +75,18 @@ function Profile() {
             );
             console.log(response.data, "Gebruikersgegevens gewijzigd");
             setSuccessMessageProfile("Gebruikersgegevens gewijzigd");
+
+
+            // deze toegevoegd
+            setUser({
+                username: data.newUsername || user.username,
+                email: data.newEmail || user.email,
+                id: user.id,
+            });
+
+            setShowModal(false);
+            setPasswordsMatchError(false);
+
         } catch (e) {
             console.error("Wijzigen gebruikersgegevens mislukt", e);
             setErrorMessageProfile("Wijzigen gebruikersgegevens mislukt");
@@ -123,9 +130,6 @@ function Profile() {
 
 useEffect(() => {
         console.log(user, newEmail, newPassword, repeatedPassword, newProfilePicture, newUsername, profilePicture);
-
-        return function cleanup() {
-        }
 
     }, [user, newEmail, newPassword, repeatedPassword, newProfilePicture, newUsername, profilePicture]);
 
@@ -217,6 +221,7 @@ useEffect(() => {
                                     value: 6,
                                     message: "Het wachtwoord moet minimaal 6 karakters bevatten",
                                 },
+                                    // staat uit omdat ik ook de melding krijg dat de wachtwoorden niet overeenkomen als dat wel het geval is
                                     // validate: (value) =>
                                     // value === repeatedPassword || "Wachtwoorden komen niet overeen",
                                 }}
@@ -235,6 +240,7 @@ useEffect(() => {
                                     value: 6,
                                     message: "Het wachtwoord moet minimaal 6 karakters bevatten",
                                 },
+                                    // staat uit omdat ik ook de melding krijg dat de wachtwoorden niet overeenkomen als dat wel het geval is
                                     // validate: (value) =>
                                     // value === newPassword || "Wachtwoorden komen niet overeen",
                                 }}
@@ -264,6 +270,10 @@ useEffect(() => {
                             </Button>
                         </form>
                         {errorMessageProfile && <div className="error-message error-message--profile">{errorMessageProfile}</div>}
+                        {passwordsMatchError && (
+                            <div className="error-message error-message--passwords-match">Wachtwoorden komen niet overeen</div>
+                            // Ik zie bovenstaande melding nog niet verschijnen bij twee verschillende wachtwoorden
+                        )}
                     </div>
                 </div>
             )}

@@ -4,7 +4,6 @@ import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 
-
 function Favorites() {
 
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
