@@ -12,35 +12,36 @@ import { useForm } from "react-hook-form";
 function Profile() {
 
     const [profilePicture, setProfilePicture] = useState(null);
-    const [newUsername, setNewUsername] = useState("");
+    // huidige profielfoto, indien niet null dan weergegeven als <img> object
+    const [newProfilePicture, setNewProfilePicture] = useState(null);
+    // nieuwe profielfoto, base64 representatie van de nieuw geselecteerde profielfoto
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [repeatedPassword, setRepeatedPassword] = useState("");
     const [passwordsMatchError, setPasswordsMatchError] = useState(false);
-    const [newProfilePicture, setNewProfilePicture] = useState(null);
     const [errorMessageProfile, setErrorMessageProfile] = useState("");
     const [successMessageProfile, setSuccessMessageProfile] = useState("");
-    const [showModal, setShowModal] = useState(false);
+    const [showModalUserData, setShowModalUserData] = useState(false);
+    const [showModalProfilePic, setShowModalProfilePic] = useState(false);
 
     const { register, handleSubmit, setValue, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
 
     const handlePasswordChange = (e) => {
         const value = e.target.value;
-        setValue("newPassword", value);  // update newPassword (setValue is destructured uit useForm)
-        setValue("repeatedPassword", ""); // leegt repeatedPassword invoerveld
+        setValue("newPassword", value);
+        setValue("repeatedPassword", "");
     };
 
     const handleRepeatedPasswordChange = (e) => {
         setValue("repeatedPassword", e.target.value);
     };
-
-    // setUser toegevoegd (zie ook AuthContext)
     const { user, setUser } = useContext(AuthContext);
 
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
-        const updatedUserData = {};
+        const updatedUserData = data;
         console.log("Updated user data", updatedUserData)
+        console.log(data);
 
         if (data.username) {
             updatedUserData.username = data.username;
@@ -48,24 +49,25 @@ function Profile() {
         if (data.email) {
             updatedUserData.email = data.email;
         }
-        // Onderstaande uitgebreid met zetten van state voor al dan niet overeenkomende wachtwoorden.
+
         if (data.password && data.repeatedPassword) {
             if (data.password !== data.repeatedPassword) {
                 setPasswordsMatchError(true);
-                return;
             } else {
                 setPasswordsMatchError(false);
             }
             updatedUserData.password = data.password;
             updatedUserData.repeatedPassword = data.repeatedPassword;
         }
-        // Ik twijfel of dit werkt. Onderaan bij de invoervelden heb ik ook een error message voor de gebruiker gezet, maar die verschijnt niet.
-        // De button is ook klikbaar, dus hij ziet nog niet dat er iets niet valid is.
 
         try {
             const response = await axios.put(
-                "https://frontend-educational-backend.herokuapp.com/api/user/",
-                updatedUserData,
+                "https://frontend-educational-backend.herokuapp.com/api/user/", {
+                    email: updatedUserData.newEmail,
+                    password: updatedUserData.newPassword,
+                    repeatedPassword: updatedUserData.repeatedPassword,
+                },
+
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -76,15 +78,13 @@ function Profile() {
             console.log(response.data, "Gebruikersgegevens gewijzigd");
             setSuccessMessageProfile("Gebruikersgegevens gewijzigd");
 
-
-            // deze toegevoegd
             setUser({
-                username: data.newUsername || user.username,
+                username: user.username,
                 email: data.newEmail || user.email,
                 id: user.id,
             });
 
-            setShowModal(false);
+            setShowModalUserData(false);
             setPasswordsMatchError(false);
 
         } catch (e) {
@@ -94,24 +94,29 @@ function Profile() {
     };
 
     const handleProfilePictureUpload = (e) => {
-        const selectedFile = e.target.files[0];
-        const reader = new FileReader();
+        console.log("onChange in InputField triggered") // wordt nu niet gelogd
+        const selectedFile = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
+        const reader = new FileReader(); // maakt het leesbaar voor de browser
+        console.log(selectedFile)
+
         reader.onload = (event) => {
-            const base64String = event.target.result;
-            setProfilePicture(selectedFile);
-            setNewProfilePicture(base64String);
+            const base64String = event.target.result; // zorgt voor base64 representatie van de afbeelding
+            setNewProfilePicture(base64String); // updaten van de state met de base64 string
         };
-        reader.readAsDataURL(selectedFile);
+
+        reader.readAsDataURL(selectedFile); // leest de image file als een data URL in Base64 formaat
+        console.log("handleProfilePictureUpload was triggered"); // deze wordt nu niet gelogd
     };
 
     const handleUpdateProfilePicture = async () => {
+        console.log("handleUpdateProfilePicture function triggered") // Deze log krijg ik te zien, ook al lijkt de handleProfilePictureUpload niets aan te leveren
         const token = localStorage.getItem("token");
 
         try {
             const response = await axios.post(
                 "https://frontend-educational-backend.herokuapp.com/api/user/image",
                 {
-                    image: newProfilePicture,
+                    image: newProfilePicture, // Base64 data naar backend
                 },
                 {
                     headers: {
@@ -120,84 +125,82 @@ function Profile() {
                     },
                 }
             );
-            console.log(response.data, "Profielfoto gewijzigd");
-            setSuccessMessageProfile("Profielfoto gewijzigd");
+            console.log(response.data, "Profielfoto gewijzigd"); // deze wordt gek genoeg wel gelogd, en ik krijg een object (base64Image: null) en een jpg file van de afbeelding.
+            setSuccessMessageProfile("Profielfoto gewijzigd"); // er lijkt dus iets mis te gaan met die base64
         } catch (e) {
-            console.error("Wijzigen profielfoto mislukt", e);
+            console.error("Wijzigen profielfoto mislukt", e); // ik krijg GEEN error, maar ik zie toch echt geen foto...
             setErrorMessageProfile("Wijzigen profielfoto mislukt");
         }
     };
 
 useEffect(() => {
-        console.log(user, newEmail, newPassword, repeatedPassword, newProfilePicture, newUsername, profilePicture);
+        console.log(user, newEmail, newPassword, repeatedPassword, newProfilePicture, profilePicture);
 
-    }, [user, newEmail, newPassword, repeatedPassword, newProfilePicture, newUsername, profilePicture]);
+    }, [user, newEmail, newPassword, repeatedPassword, newProfilePicture, profilePicture]);
 
 
     return (
         <div className="inner-container">
-            <section className="profile-button-container">
-              <div className="profile-container">
-                <article className="picture-container">
-                        <img
-                            className="profile-pic-placeholder"
-                            src={profilePicture ? URL.createObjectURL(profilePicture) : profilePicPlaceholder}
-                            alt="profile picture"
-                        />
-                </article>
-                <article className="info-container">
+            <section className="profile-container">
+                <article className="info-button-container">
+                    <div className="info-container">
                         <p><strong>Gebruikersnaam: </strong></p>
                         <p>{user.username}</p>
                         <p><strong>E-mailadres: </strong></p>
                         <p>{user.email}</p>
                         <p className="profile-to-favorites-link"><strong>Bekijk je <Link to="/favorites">favorieten</Link>.</strong></p>
-                </article>
-              </div>
-                <div className="button-container-profile">
+                    </div>
                     <Button
                         type="button"
-                        clickHandler={() => setShowModal(true)}
-                        disabled={showModal}
-                    >Wijzig gegevens
+                        className="changeUserdataButton"
+                        clickHandler={() => setShowModalUserData(true)}
+                        disabled={showModalUserData}
+                        >
+                        Wijzig gegevens
                     </Button>
-                </div>
+                </article>
+                <article className="picture-button-container">
+                    <div className="picture-container">
+                        <img
+                            className="profile-pic-placeholder"
+                            src={profilePicture ? URL.createObjectURL(profilePicture) : profilePicPlaceholder} // huidige profielfoto wordt hier weergegeven, indien die er niet is de placholder
+                            alt="profile picture"
+                        />
+                    </div>
+                    <Button
+                        type="button"
+                        className="uploadProfilePicButton"
+                        clickHandler={() => setShowModalProfilePic(true)} // opent de modal
+                        disabled={showModalProfilePic} // werkt niet als de modal al open is
+                        >
+                        Upload / wijzig foto
+                    </Button>
+                </article>
             </section>
 
-            {showModal && (
-                <div className="modal">
-                   <span className="close"
-                         onClick={() => setShowModal(false)}>
+            {showModalUserData && (
+                <div className="modal-userdata">
+                   <span className="close-modal-userdata"
+                         onClick={() => setShowModalUserData(false)}>
                             &times;
                         </span>
-                    <div className="modal-content">
+                    <div className="modal-userdata-content">
                         <div className="error-message-container">
                             {errorMessageProfile && <div className="error-message error-message--profile">{errorMessageProfile}</div>}
                             {successMessageProfile && <div className="success-message">{successMessageProfile}</div>}
                         </div>
                         <form
                             className="update-userdata-form"
-                            onSubmit={handleSubmit((data) => {
-                                handleUpdateUserData(data);
-                                if (profilePicture) {
-                                    handleUpdateProfilePicture();
+                            onSubmit={handleSubmit(async (data) => {
+                                await handleUpdateUserData(data);
+                                if (!errorMessageProfile && passwordsMatchError) {
+                                setShowModalUserData(false)
+                                } else {
                                 }
-                            })}
+
+                          })
+                        }
                         >
-                            <InputField
-                                inputType="text"
-                                inputName="newUsername"
-                                inputLabel="Gebruikersnaam"
-                                placeholder={"Nieuwe gebruikersnaam"}
-                                validationRules={{
-                                    required: "Dit veld is verplicht",
-                                    minLength: {
-                                        value: 6,
-                                        message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
-                                    }
-                                }}
-                                register={register}
-                                errors={errors}
-                            />
                             <InputField
                                 inputType="email"
                                 inputName="newEmail"
@@ -248,19 +251,6 @@ useEffect(() => {
                                 errors={errors}
                                 onChange={handleRepeatedPasswordChange}
                             />
-                            <label className="input-label-profile-pic">Profielfoto
-                            </label>
-                            <InputField
-                                inputType="file"
-                                inputName="newProfilePicture"
-                                validationRules={{
-                                    validate: (value) =>
-                                        value || "Selecteer een afbeelding voor je profielfoto",
-                                }}
-                                onChange={handleProfilePictureUpload}
-                                register={register}
-                                errors={errors}
-                            />
                             <Button
                                 type="submit"
                                 className="save-profile-changes-button"
@@ -277,6 +267,53 @@ useEffect(() => {
                     </div>
                 </div>
             )}
+
+            { showModalProfilePic && (
+                <div className="modal-profile-pic">
+                   <span className="close-modal-pic"
+                         onClick={() => setShowModalProfilePic(false)}>
+                            &times;
+                    </span>
+                    <label className="input-label-profile-pic">Kies een afbeelding
+                    </label>
+                    <form className="upload-profile-picture-form"
+                          onSubmit={handleSubmit(async (data) => {
+                          await handleUpdateProfilePicture(data); // wacht met submitten tot deze functie is uitgevoerd
+                          setShowModalProfilePic(false) // sluit de modal na submitten
+                          //setNewProfilePicture(data.newProfilePicture[0])
+                          console.log(newProfilePicture);
+                          if (data.newProfilePicture[0] !== null) {
+                              handleUpdateProfilePicture(data.newProfilePicture[0]); // als de state van newProfilePicture niet null is, kan genoemde functie getriggerd worden
+                              console.log(data.newProfilePicture[0]); // Tot nu toe blijft de state van newProfilePicture null, omdat handleUploadProfilePicture, die moet zorgen voor de aanlevering van de afbeeldingsdata, niet getriggerd wordt.
+                          }
+                        })
+                      }
+                    >
+                        <InputField
+                           className="input-field-profile-pic"
+                           inputType="file"
+                           inputName="newProfilePicture"
+                           validationRules={{
+                                validate: (value) =>
+                                value || "Selecteer een afbeelding voor je profielfoto",
+                            }}
+                           onChange={(e) => {
+                               console.log("InputField onChange triggered"); // hier lijkt het mis te gaan, ik zie deze log niet als ik een foto probeer te uploaden,, dus de onChange werkt niet
+                               handleProfilePictureUpload(e); // zou de handleProfilePicture functie moeten triggeren
+                           }}
+                            register={register}
+                            errors={errors}
+                        />
+                        <Button
+                            type="submit"
+                            className="save-picture-button"
+                            disabled={ !isDirty || !isValid }
+                        >
+                            Opslaan
+                        </Button>
+                </form>
+                </div>
+                )}
 
             <section className="title-logo-container">
                 <h2>Jouw profiel</h2>

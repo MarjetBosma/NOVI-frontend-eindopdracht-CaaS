@@ -1,14 +1,5 @@
 /* ------------------------------- Desktop versie -------------------------------- */
 
-.profile-button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-    padding-right: 50px;
-}
-
 .profile-container {
     display: flex;
     flex-direction: row;
@@ -17,12 +8,21 @@
     width: 550px;
 }
 
+.picture-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 350px;
+}
+
 .picture-container {
     display: flex;
     flex-direction: row;
     width: 250px;
+    height: 310px;
     border: 1px solid #0E0F3B;
-    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .profile-pic-placeholder {
@@ -37,6 +37,14 @@
     object-position: top;
 }
 
+.info-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+}
+
 .info-container {
     display: flex;
     flex-direction: column;
@@ -46,39 +54,39 @@
     width: 250px;
     height: 310px;
     padding-block: 10px;
+    margin-bottom: 20px;
 }
 
 .profile-to-favorites-link {
     padding-top: 20px;
 }
 
-.modal {
+.modal-userdata {
     position: absolute;
     background-color: #FFFFFF;
     padding-inline: 20px;
     padding-top: 40px;
     border: 2px solid #0E0F3B;
-    width: 400px;
-    height: 600px;
+    width: 425px;
+    height: 475px;
+    margin-right: 800px;
 }
 
-.close {
-    position: relative;
+.close-modal-userdata {
     background-color: #F7931E;
     padding-inline: 5px;
     margin-left: 345px;
 }
 
-.close:hover {
+.close-modal-userdata:hover {
     cursor: pointer;
 }
 
-.modal-content {
+.modal-userdata-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-height: 475px;
 }
 
 .update-userdata-form {
@@ -89,17 +97,55 @@
     align-items: center;
 }
 
+.modal-profile-pic {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    background-color: #FFFFFF;
+    border: 2px solid #0E0F3B;
+    width: 400px;
+    height: 250px;
+    margin-left: 150px;
+    z-index: 1;
+}
+
 .input-label-profile-pic {
+    margin-block: 20px;
     font-weight: 700;
+}
+
+.save-picture-button {
+    margin-bottom: 25px;
+}
+
+.close-modal-pic {
+    background-color: #F7931E;
+    padding-inline: 5px;
+    margin-left: 345px;
+    margin-top: 15px;
+}
+
+.close-modal-pic:hover {
+    cursor: pointer;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
 
-    .profile-button-container {
-        padding-left: 40px;
+    .profile-container {
         width: 100vw;
+    }
+
+    .picture-button-container {
+        margin-top: 20px;
+    }
+
+    .picture-container {
+        width: 200px;
+        height: auto;
     }
 
     .profile-container {
@@ -108,29 +154,40 @@
         justify-content: space-between;
         align-items: center;
         gap: 20px;
-        width: 300px;
-        margin-top: -40px;
     }
 
     .info-container {
         width: 200px;
         height: auto;
         gap: 10px;
-        padding-block: 20px;
+        padding: 20px;
     }
 
-    .picture-container {
-        width: 150px;
-    }
-
-    .modal {
-        position: relative;
-        background-color: #FFFFFF;
-        padding-inline: 20px;
+    .modal-userdata {
         padding-top: 0;
-        border: none;
         width: 400px;
-        height: 600px;
+        height: 400px;
+        margin-right: 0;
+        z-index: 1;
+    }
+
+    .modal-userdata-content {
+        margin-top: 20px;
+    }
+
+    .close-modal-userdata {
+        margin-top: 10px;
+    }
+
+    .modal-profile-pic {
+        width: 400px;
+        height: 250px;
+        margin-left: 0;
+        z-index: 1;
+    }
+
+    .error-message-profile {
+
     }
 
 }

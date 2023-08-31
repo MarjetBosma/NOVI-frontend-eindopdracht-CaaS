@@ -152,7 +152,7 @@ function AuthContextProvider ({ children }) {
         }
     }
 
-    // logen van huidige authenticatie status
+    // loggen van huidige authenticatie status
     useEffect( () => {
         console.log(isAuth);
     }, [isAuth])
