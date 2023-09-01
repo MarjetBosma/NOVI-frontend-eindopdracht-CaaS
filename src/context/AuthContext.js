@@ -14,7 +14,6 @@ function AuthContextProvider ({ children }) {
     });
     const navigate = useNavigate();
 
-    // updaten van userdata in de state:
     const setUser = (newUserData) => {
         toggleIsAuth((prevAuth) => ({
             ...prevAuth,
@@ -23,7 +22,6 @@ function AuthContextProvider ({ children }) {
         }));
     };
 
-    // checken van authenticatie status bij mounting:
     useEffect(() => {
         const token = localStorage.getItem("token");
 
@@ -37,28 +35,6 @@ function AuthContextProvider ({ children }) {
                 status: "done",
             });
         }
-    }, []);
-
-
-    // Deze toegevoegd, om user data op te slaan in de local storage bij wijzigingen hierin:
-    useEffect(() => {
-        if (isAuth.isAuth && isAuth.user) {
-            localStorage.setItem("userData", JSON.stringify(isAuth.user));
-        }
-    }, [isAuth.user]);
-
-
-    // Deze toegevoegd, om user data op te halen uit de local storage bij mounting:
-    useEffect(() => {
-        const savedUserData = localStorage.getItem("userData");
-        if (savedUserData) {
-            const parsedUserData = JSON.parse(savedUserData);
-            setUser(parsedUserData); // Use the setUser function to update state
-        }
-        toggleIsAuth((prevAuth) => ({
-            ...prevAuth,
-            status: "done",
-        }));
     }, []);
 
     function login(accessToken) {
@@ -84,20 +60,6 @@ function AuthContextProvider ({ children }) {
         console.log("Gebruiker is uitgelogd");
     }
 
-    // Oude versie:
-    // function logout() {
-    //     localStorage.removeItem("favorites");
-    //
-    //     toggleIsAuth({
-    //         ...isAuth,
-    //         isAuth: false,
-    //         user: null,
-    //         status: "done",
-    //     })
-    //     navigate("/");
-    //     console.log("Gebruiker is uitgelogd");
-    // }
-
     async function fetchUserData(token, redirectUrl) {
         try {
             const response = await axios.get( `https://frontend-educational-backend.herokuapp.com/api/user/`, {
@@ -119,19 +81,6 @@ function AuthContextProvider ({ children }) {
                 status: "done",
             }));
 
-            // Oude versie:
-            // toggleIsAuth( {
-            //     ...isAuth,
-            //     isAuth: true,
-            //     user: {
-            //         username: response.data.username,
-            //         email: response.data.email,
-            //         id: response.data.id,
-            //     },
-            //     status: "done",
-            // } );
-
-            // Nieuw toegevoegd:
             setUser({
                 username: response.data.username,
                 email: response.data.email,
@@ -152,13 +101,11 @@ function AuthContextProvider ({ children }) {
         }
     }
 
-    // loggen van huidige authenticatie status
     useEffect( () => {
         console.log(isAuth);
     }, [isAuth])
 
 
-    // setUser toegevoegd t.o.v. oude versie
     const contextData = {
         isAuth: isAuth.isAuth,
         user: isAuth.user,

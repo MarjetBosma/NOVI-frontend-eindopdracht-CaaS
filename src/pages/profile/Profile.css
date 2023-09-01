@@ -68,7 +68,7 @@
     padding-top: 40px;
     border: 2px solid #0E0F3B;
     width: 425px;
-    height: 475px;
+    height: 500px;
     margin-right: 800px;
 }
 
@@ -131,6 +131,11 @@
     cursor: pointer;
 }
 
+.error-message--profile {
+    margin-top: 430px;
+    text-align: center;
+}
+
 /* ------------------------------- Media Queries -------------------------------- */
 
 @media screen and (max-width: 576px) {
@@ -166,7 +171,7 @@
     .modal-userdata {
         padding-top: 0;
         width: 400px;
-        height: 400px;
+        height: 450px;
         margin-right: 0;
         z-index: 1;
     }

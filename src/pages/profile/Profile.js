@@ -18,24 +18,18 @@ function Profile() {
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [repeatedPassword, setRepeatedPassword] = useState("");
-    const [passwordsMatchError, setPasswordsMatchError] = useState(false);
+    const [errorMessageProfilePic, setErrorMessageProfilePic] = useState("");
     const [errorMessageProfile, setErrorMessageProfile] = useState("");
-    const [successMessageProfile, setSuccessMessageProfile] = useState("");
     const [showModalUserData, setShowModalUserData] = useState(false);
     const [showModalProfilePic, setShowModalProfilePic] = useState(false);
 
-    const { register, handleSubmit, setValue, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
+    const { register, handleSubmit, reset, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
 
-    const handlePasswordChange = (e) => {
-        const value = e.target.value;
-        setValue("newPassword", value);
-        setValue("repeatedPassword", "");
-    };
-
-    const handleRepeatedPasswordChange = (e) => {
-        setValue("repeatedPassword", e.target.value);
-    };
     const { user, setUser } = useContext(AuthContext);
+
+    const resetForm = () => {
+        reset();
+    };
 
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
@@ -51,11 +45,6 @@ function Profile() {
         }
 
         if (data.password && data.repeatedPassword) {
-            if (data.password !== data.repeatedPassword) {
-                setPasswordsMatchError(true);
-            } else {
-                setPasswordsMatchError(false);
-            }
             updatedUserData.password = data.password;
             updatedUserData.repeatedPassword = data.repeatedPassword;
         }
@@ -76,7 +65,6 @@ function Profile() {
                 }
             );
             console.log(response.data, "Gebruikersgegevens gewijzigd");
-            setSuccessMessageProfile("Gebruikersgegevens gewijzigd");
 
             setUser({
                 username: user.username,
@@ -84,12 +72,9 @@ function Profile() {
                 id: user.id,
             });
 
-            setShowModalUserData(false);
-            setPasswordsMatchError(false);
-
         } catch (e) {
             console.error("Wijzigen gebruikersgegevens mislukt", e);
-            setErrorMessageProfile("Wijzigen gebruikersgegevens mislukt");
+            setErrorMessageProfile("Wijzigen gegevens mislukt. Controleer je invoer, zijn de wachtwoorden gelijk? Probeer het daarna opnieuw.");
         }
     };
 
@@ -126,10 +111,10 @@ function Profile() {
                 }
             );
             console.log(response.data, "Profielfoto gewijzigd"); // deze wordt gek genoeg wel gelogd, en ik krijg een object (base64Image: null) en een jpg file van de afbeelding.
-            setSuccessMessageProfile("Profielfoto gewijzigd"); // er lijkt dus iets mis te gaan met die base64
+            // er lijkt dus iets mis te gaan met die base64
         } catch (e) {
             console.error("Wijzigen profielfoto mislukt", e); // ik krijg GEEN error, maar ik zie toch echt geen foto...
-            setErrorMessageProfile("Wijzigen profielfoto mislukt");
+            setErrorMessageProfilePic("Wijzigen profielfoto mislukt");
         }
     };
 
@@ -181,23 +166,24 @@ useEffect(() => {
             {showModalUserData && (
                 <div className="modal-userdata">
                    <span className="close-modal-userdata"
-                         onClick={() => setShowModalUserData(false)}>
+                         onClick={() => {
+                             setShowModalUserData(false);
+                             resetForm();
+                             setErrorMessageProfile("")
+                         }}
+                   >
                             &times;
                         </span>
                     <div className="modal-userdata-content">
-                        <div className="error-message-container">
-                            {errorMessageProfile && <div className="error-message error-message--profile">{errorMessageProfile}</div>}
-                            {successMessageProfile && <div className="success-message">{successMessageProfile}</div>}
-                        </div>
                         <form
                             className="update-userdata-form"
                             onSubmit={handleSubmit(async (data) => {
                                 await handleUpdateUserData(data);
-                                if (!errorMessageProfile && passwordsMatchError) {
-                                setShowModalUserData(false)
+                                if (errorMessageProfile) {
+                                    setShowModalUserData(false)
                                 } else {
+                                    setShowModalUserData(true)
                                 }
-
                           })
                         }
                         >
@@ -223,14 +209,10 @@ useEffect(() => {
                                     minLength: {
                                     value: 6,
                                     message: "Het wachtwoord moet minimaal 6 karakters bevatten",
-                                },
-                                    // staat uit omdat ik ook de melding krijg dat de wachtwoorden niet overeenkomen als dat wel het geval is
-                                    // validate: (value) =>
-                                    // value === repeatedPassword || "Wachtwoorden komen niet overeen",
+                                    },
                                 }}
                                 register={register}
                                 errors={errors}
-                                onChange={handlePasswordChange}
                             />
                             <InputField
                                 inputType="password"
@@ -242,14 +224,10 @@ useEffect(() => {
                                     minLength: {
                                     value: 6,
                                     message: "Het wachtwoord moet minimaal 6 karakters bevatten",
-                                },
-                                    // staat uit omdat ik ook de melding krijg dat de wachtwoorden niet overeenkomen als dat wel het geval is
-                                    // validate: (value) =>
-                                    // value === newPassword || "Wachtwoorden komen niet overeen",
+                                    },
                                 }}
                                 register={register}
                                 errors={errors}
-                                onChange={handleRepeatedPasswordChange}
                             />
                             <Button
                                 type="submit"
@@ -260,10 +238,6 @@ useEffect(() => {
                             </Button>
                         </form>
                         {errorMessageProfile && <div className="error-message error-message--profile">{errorMessageProfile}</div>}
-                        {passwordsMatchError && (
-                            <div className="error-message error-message--passwords-match">Wachtwoorden komen niet overeen</div>
-                            // Ik zie bovenstaande melding nog niet verschijnen bij twee verschillende wachtwoorden
-                        )}
                     </div>
                 </div>
             )}
@@ -311,6 +285,7 @@ useEffect(() => {
                         >
                             Opslaan
                         </Button>
+                        {errorMessageProfilePic && <div className="error-message error-message--profile-pic">{errorMessageProfilePic}</div>}
                 </form>
                 </div>
                 )}
