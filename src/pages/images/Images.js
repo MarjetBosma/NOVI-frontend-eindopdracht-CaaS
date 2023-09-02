@@ -8,7 +8,7 @@ import InputField from "../../components/InputField";
 import { useForm } from "react-hook-form";
 
 const endpointUrls = {
-    randomCatImage: "https://cataas.com/cats",
+    randomCatImage: "https://cataas.com/cat",
     randomKitten: "https://cataas.com/cat/kitten",
     randomGifCat: "https://cataas.com/cat/gif",
     randomCatFilter: "https://cataas.com/cat/cat?filter=:filter",

@@ -44,7 +44,7 @@ function SignIn() {
 
                 console.error("Inloggen mislukt", e)
                 toggleError(true);
-                setErrorMessageSignin("Inloggen mislukt. Controleer je invoer, is deze gebruiker wel geregistreerd? Probeer het daarna opnieuw.");
+                setErrorMessageSignin("Inloggen mislukt. Mogelijke oorzaken: 1) Gebruiker is niet bekend 2) Typefout in je invoer 3) Server reageert niet, probeer het later opnieuw.");
             }
             toggleLoading(false);
         }

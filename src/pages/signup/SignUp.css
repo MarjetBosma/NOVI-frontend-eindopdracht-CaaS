@@ -16,7 +16,7 @@
 }
 
 .error-message--signup {
-    margin-bottom: 500px;
+    margin-bottom: 520px;
     margin-top: 0;
     padding-left: 10px;
     width: 400px;
@@ -37,7 +37,8 @@
     }
 
     .error-message--signup {
-        margin-top: 20px;
+        margin-top: 30px;
+        margin-bottom: 470px;
         width: 300px;
     }
 }

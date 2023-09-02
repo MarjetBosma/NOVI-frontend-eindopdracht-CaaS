@@ -74,7 +74,7 @@ function Profile() {
 
         } catch (e) {
             console.error("Wijzigen gebruikersgegevens mislukt", e);
-            setErrorMessageProfile("Wijzigen gegevens mislukt. Controleer je invoer, zijn de wachtwoorden gelijk? Probeer het daarna opnieuw.");
+            setErrorMessageProfile("Wijzigen gegevens mislukt. Mogelijke oorzaken: 1) wachtwoorden ongelijk of e-mailadres niet geldig. Controleer je invoer. 2) Server reageert niet, probeer het later opnieuw.");
         }
     };
 
@@ -114,7 +114,7 @@ function Profile() {
             // er lijkt dus iets mis te gaan met die base64
         } catch (e) {
             console.error("Wijzigen profielfoto mislukt", e); // ik krijg GEEN error, maar ik zie toch echt geen foto...
-            setErrorMessageProfilePic("Wijzigen profielfoto mislukt");
+            setErrorMessageProfilePic("Wijzigen profielfoto mislukt, probeer nogmaals.");
         }
     };
 

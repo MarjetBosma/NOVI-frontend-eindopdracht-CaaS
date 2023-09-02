@@ -162,7 +162,7 @@
     }
 
     .info-container {
-        width: 200px;
+        width: 250px;
         height: auto;
         gap: 10px;
         padding: 20px;
@@ -191,7 +191,11 @@
         z-index: 1;
     }
 
-    .error-message-profile {
+    .error-message--profile {
+        margin-bottom: 15px;
+    }
+
+    .error-message--profile-pic {
 
     }
 

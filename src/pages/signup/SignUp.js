@@ -40,7 +40,7 @@ function SignUp() {
             } catch(e) {
                 console.error("Registratie mislukt", e)
                 toggleError(true);
-                setErrorMessageSignup("Registratie mislukt. Controleer je invoer, is deze gebruiker niet al bekend? Probeer het daarna opnieuw.");
+                setErrorMessageSignup("Registratie mislukt. Mogelijke oorzaken: 1) Gebruiker is al bekend 2) Typefout in je invoer 3) Server reageert niet, probeer het later opnieuw.");
             }
             toggleLoading(false);
         }
