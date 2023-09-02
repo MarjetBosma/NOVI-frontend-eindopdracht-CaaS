@@ -21,8 +21,9 @@
 
 .error-message--signin {
     margin-top: 400px;
+    width: 400px;
+    text-align: center;
 }
-
 
 /* ------------------------------- Media Queries -------------------------------- */
 
@@ -31,6 +32,11 @@
     .signin-container {
         gap: 10px;
         width: 100vw;
+    }
+
+    .error-message--signin {
+        margin-bottom: 20px;
+        width: 300px;
     }
 
 }

@@ -19,6 +19,8 @@
     margin-bottom: 500px;
     margin-top: 0;
     padding-left: 10px;
+    width: 400px;
+    text-align: center;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */
@@ -34,6 +36,10 @@
         height: 325px;
     }
 
+    .error-message--signup {
+        margin-top: 20px;
+        width: 300px;
+    }
 }
 
 
