@@ -8,7 +8,7 @@ import InputField from "../../components/InputField";
 import { useForm } from "react-hook-form";
 
 const endpointUrls = {
-    randomCatImage: "https://cataas.com/cat",
+    randomCatImage: "https://cataas.com/cats",
     randomKitten: "https://cataas.com/cat/kitten",
     randomGifCat: "https://cataas.com/cat/gif",
     randomCatFilter: "https://cataas.com/cat/cat?filter=:filter",
@@ -62,7 +62,7 @@ function Images() {
         } catch(e) {
             console.error("Error fetching image", e);
             toggleError(true )
-            setErrorMessageImages("Ophalen van afbeelding mislukt.");
+            setErrorMessageImages("Ophalen van afbeelding mislukt, server reageert niet. Probeer het later opnieuw.");
         }
         toggleLoading(false);
     };
@@ -95,7 +95,7 @@ function Images() {
         } catch(e) {
             console.error("Error fetching image", e);
             toggleError(true )
-            setErrorMessageImages("Ophalen van afbeelding mislukt.");
+            setErrorMessageImages("Ophalen van afbeelding mislukt, server reageert niet. Probeer het later opnieuw.");
         }
         toggleLoading(false);
     };
@@ -125,8 +125,6 @@ function Images() {
     return (
         <div className="inner-container">
             <section className="image-request-container">
-
-                {errorMessageImages && <div className="error-message">{errorMessageImages}</div>}
 
                 <div className="button-container">
                     <div className="inner-button-container-left">
@@ -188,7 +186,9 @@ function Images() {
                                     }
                             }}
                             />
-                            {errors["image-text"] && <p className="error-message">{errors["image-text"].message}</p>}
+                            {errors["image-text"] &&  (
+                                <p className="error-message error-message--image-text">{errors["image-text"].message}</p>
+                            )}
                             <Button
                                 type="submit"
                                 disabled={ !isDirty || !isValid }
@@ -198,6 +198,7 @@ function Images() {
                         </form>
                     </div>
                 </div>
+                {errorMessageImages && <div className="error-message error-message--images">{errorMessageImages}</div>}
                 <p className="images-to-favorites-link">Eerder opgeslagen afbeeldingen bekijken? Ga naar je <Link to="/favorites">favorieten</Link>!</p>
             </section>
             <section className="title-logo-container">
