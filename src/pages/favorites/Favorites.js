@@ -46,12 +46,16 @@ function Favorites() {
                             key={index}
                             className={`thumbnail ${selectedImages.includes(index) ? "selected" : ""}`}>
                                 <img className="cat-image"
-                                     src={imageUrl} alt={`Fav. ${index + 1}`}
+                                     src={imageUrl}
+                                     alt={`Fav. ${index + 1}`}
                                      onDoubleClick={() => handleImageClick(index)}
                                      onClick={() => handleImageSelection(index)}
+                                     onError={(e) => {
+                                         e.target.src = logo;
+                                         e.target.className = "cat-image-fallback-thumbnail";
+                                     }}
                                 />
                         </li>
-
                     ))}
                 </ul>
                 <Button

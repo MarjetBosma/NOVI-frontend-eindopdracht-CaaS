@@ -65,7 +65,7 @@
     position: absolute;
     background-color: #FFFFFF;
     padding-inline: 20px;
-    padding-top: 40px;
+    margin-top: 40px;
     border: 2px solid #0E0F3B;
     width: 425px;
     height: 500px;
@@ -75,7 +75,7 @@
 .close-modal-userdata {
     background-color: #F7931E;
     padding-inline: 5px;
-    margin-left: 345px;
+    margin-left: 384px;
 }
 
 .close-modal-userdata:hover {
@@ -95,6 +95,7 @@
     justify-content: space-between;
     gap: 16px;
     align-items: center;
+    margin-top: 40px;
 }
 
 .modal-profile-pic {
@@ -106,9 +107,17 @@
     background-color: #FFFFFF;
     border: 2px solid #0E0F3B;
     width: 400px;
-    height: 250px;
+    height: 300px;
     margin-left: 150px;
     z-index: 1;
+}
+
+.upload-profile-picture-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .input-label-profile-pic {
@@ -123,8 +132,8 @@
 .close-modal-pic {
     background-color: #F7931E;
     padding-inline: 5px;
-    margin-left: 345px;
-    margin-top: 15px;
+    margin-left: 379px;
+    margin-bottom: 50px;
 }
 
 .close-modal-pic:hover {
@@ -132,7 +141,7 @@
 }
 
 .error-message--profile {
-    margin-top: 430px;
+    margin-top: 460px;
     text-align: center;
 }
 
@@ -170,29 +179,39 @@
 
     .modal-userdata {
         padding-top: 0;
-        width: 400px;
-        height: 450px;
+        margin-bottom: 255px;
+        width: 350px;
+        height: 490px;
         margin-right: 0;
         z-index: 1;
     }
 
     .modal-userdata-content {
-        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .close-modal-userdata {
-        margin-top: 10px;
+        margin-left: 308px;
     }
 
     .modal-profile-pic {
-        width: 400px;
+        width: 350px;
         height: 250px;
         margin-left: 0;
         z-index: 1;
     }
 
+    .upload-profile-picture-form {
+
+    }
+
+    .close-modal-pic {
+        margin-left: 328px;
+        margin-bottom: 14px;
+    }
+
     .error-message--profile {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     .error-message--profile-pic {

@@ -31,6 +31,14 @@ function Profile() {
         reset();
     };
 
+    useEffect(() => {
+        return function cleanup() {
+            controller.abort();
+        }
+    }, []);
+
+    const controller = new AbortController();
+
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
         const updatedUserData = data;
@@ -242,7 +250,7 @@ useEffect(() => {
                 </div>
             )}
 
-            { showModalProfilePic && (
+            {showModalProfilePic && (
                 <div className="modal-profile-pic">
                    <span className="close-modal-pic"
                          onClick={() => setShowModalProfilePic(false)}>

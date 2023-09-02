@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import "./FavoriteImageDetail.css"
+import logo from "../assets/caas-logo-no-text.jpg";
 
 function FavoriteImageDetail() {
+
     const { index } = useParams();
+
+    const [error, setError] = useState(false)
 
     const [favorites, updateFavorites] = useState(
         JSON.parse(localStorage.getItem("favorites")) || []
@@ -38,9 +42,20 @@ function FavoriteImageDetail() {
     return (
         <div className="favorite-image-button-container" >
             <div className="favorite-image-container">
-                {favorites && <img
-                    className="favorite-image"
-                    src={favorites[index]} alt={`Favorite ${index}`} />}
+                {favorites ? (
+                    <img
+                        className="favorite-image"
+                        src={favorites[index]}
+                        alt={`Favorite ${index}`}
+                        onError={(e) => {
+                            e.target.src = logo;
+                            e.target.className = "cat-image-fallback-favorite";
+                            setError(true);
+                        }}
+                    />
+                ) : (
+                    <div className="error-message error-message--favorite-detail">Laden van afbeelding mislukt. Mogelijke oorzaak: server reageert niet. Probeer het later nogmaals.</div>
+                )}
             </div>
             <Button
                 className="remove-from-favorites-button"
