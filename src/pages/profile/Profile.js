@@ -13,8 +13,12 @@ function Profile() {
 
     const [profilePicture, setProfilePicture] = useState(null);
     // huidige profielfoto, indien niet null dan weergegeven als <img> object
+    // profilePicture wordt gebruikt op regel 162, 179, 181 en 208
+    // setProfilePicture op regel 161
     const [newProfilePicture, setNewProfilePicture] = useState(null);
-    // nieuwe profielfoto, base64 representatie van de nieuw geselecteerde profielfoto
+    // nieuwe profielfoto, base64 representatie van de nieuw geselecteerde profielfoto;
+    // newProfilePicture wordt gebruikt op regel 118, 145, 149, 162, 180, 182 en 313
+    // setNewProfilePicture op regel 119
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [repeatedPassword, setRepeatedPassword] = useState("");
@@ -38,6 +42,8 @@ function Profile() {
     }, []);
 
     const controller = new AbortController();
+
+    // Gebruikersgegevens
 
     const handleUpdateUserData = async (data) => {
         const token = localStorage.getItem("token");
@@ -86,41 +92,85 @@ function Profile() {
         }
     };
 
-    const handleProfilePictureUpload = (e) => {
-        console.log("onChange in InputField triggered") // wordt nu niet gelogd
-        const selectedFile = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
-        const reader = new FileReader(); // maakt het leesbaar voor de browser
-        console.log(selectedFile)
+    // Profielfoto
 
-        reader.onload = (event) => {
-            const base64String = event.target.result; // zorgt voor base64 representatie van de afbeelding
-            setNewProfilePicture(base64String); // updaten van de state met de base64 string
-        };
-
-        reader.readAsDataURL(selectedFile); // leest de image file als een data URL in Base64 formaat
-        console.log("handleProfilePictureUpload was triggered"); // deze wordt nu niet gelogd
+    // Gescheiden functies voor omzetten naar base64 en uploaden foto en state aanpassen
+    const convertToBase64 = (file) => { // argument is een file, in dit geval een foto
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file); // methode die de fileReader instrueert om de inhoud van de file te lezen en om te zetten naar een data URL in base 64 encoding
+            fileReader.onload = () => { // eventhandler die wordt aangeroepen als de file succesvol gelezen is
+                resolve(fileReader.result); // wordt angeroepen met het result, de data url / base64 string
+                console.log(fileReader.result) // als dit is gedaan wordt de Promise gereturned
+            };
+            fileReader.onerror = (error) => { // error handling als het lezen en omzetten niet lukt
+                reject(error);
+                console.log(error)
+            };
+        });
     };
 
+    const handleProfilePictureUpload = async (e) => {
+        console.log("handleProfilePictureUpload function triggered"); // wordt nu niet gelogd
+        const file = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
+        console.log("Selected File:", file);
+        try {
+            const base64 = await convertToBase64(file); // wacht het resultaat af van functie convertToBase64
+            setNewProfilePicture(base64); // hiermee wordt de nieuwe profielfoto ingesteld
+            console.log(newProfilePicture)
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    // Eerdere versie van handleProfilePictureUpload, inclusief de omzetting naar base64 string:
+
+    // const handleProfilePictureUpload = (e) => {
+    //     console.log("onChange in InputField triggered") // wordt nu niet gelogd
+    //     const selectedFile = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
+    //     const reader = new FileReader(); // maakt het leesbaar voor de browser
+    //     console.log(selectedFile)
+    //
+    //     reader.onload = (event) => {
+    //         const base64String = event.target.result; // zorgt voor base64 representatie van de afbeelding
+    //         setNewProfilePicture(base64String); // updaten van de state met de base64 string
+    //     };
+    //
+    //     reader.readAsDataURL(selectedFile); // leest de image file als een data URL in Base64 formaat
+    //     console.log("handleProfilePictureUpload was triggered"); // deze wordt nu niet gelogd
+    // };
+
     const handleUpdateProfilePicture = async () => {
-        console.log("handleUpdateProfilePicture function triggered") // Deze log krijg ik te zien, ook al lijkt de handleProfilePictureUpload niets aan te leveren
         const token = localStorage.getItem("token");
 
         try {
-            const response = await axios.post(
-                "https://frontend-educational-backend.herokuapp.com/api/user/image",
-                {
-                    image: newProfilePicture, // Base64 data naar backend
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
+            if(newProfilePicture) { // dus alleen als newProfilePicture niet null of undefined is
+                const response = await axios.post(
+                    "https://frontend-educational-backend.herokuapp.com/api/user/image",
+                    {
+                        base64Image: newProfilePicture, // Base64 data naar backend
                     },
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                if (response.status === 200) {
+                    console.log("Upload successful");
+                    console.log(response.data, "Profielfoto gewijzigd");
+                    // de upload moet succesvol zijn geweest, voordat de nieuwe foto wordt ingesteld
+                    setProfilePicture(newProfilePicture);
+                    console.log("profilePicture updated:", profilePicture);
+                } else {
+                    console.error("Upload failed:", response.statusText);
                 }
-            );
-            console.log(response.data, "Profielfoto gewijzigd"); // deze wordt gek genoeg wel gelogd, en ik krijg een object (base64Image: null) en een jpg file van de afbeelding.
-            // er lijkt dus iets mis te gaan met die base64
-        } catch (e) {
+            } else {
+                console.log("newProfilePicture is null or undefined");
+            }
+            //Ik heb allerlei mogelijkheden voor foutmeldingen en andere logs in de code opgenomen, maar op dit moment wordt er helemaal NIETS gelogd als ik probeer een foto te uploaden...
+            } catch (e) {
             console.error("Wijzigen profielfoto mislukt", e); // ik krijg GEEN error, maar ik zie toch echt geen foto...
             setErrorMessageProfilePic("Wijzigen profielfoto mislukt, probeer nogmaals.");
         }
@@ -156,7 +206,10 @@ useEffect(() => {
                     <div className="picture-container">
                         <img
                             className="profile-pic-placeholder"
-                            src={profilePicture ? URL.createObjectURL(profilePicture) : profilePicPlaceholder} // huidige profielfoto wordt hier weergegeven, indien die er niet is de placholder
+                            // src={logo} // Dit was om te testen, deze afbeelding wordt correct weergegeven
+                            // src={profilePicPlaceholder} // test: geef parsing error, wat vreemd is. Import statement klopt, en in de originele code werkt het wel (achter :)
+                            // src={URL.createObjectURL(profilePicture)} // test: geeft een parsing error, ook vreemd. In de originele code werkt het wel (achter ?)
+                            src={profilePicture ? URL.createObjectURL(profilePicture) : profilePicPlaceholder} // huidige profielfoto wordt hier weergegeven, indien die er niet is de placeholder
                             alt="profile picture"
                         />
                     </div>
@@ -260,14 +313,17 @@ useEffect(() => {
                     </label>
                     <form className="upload-profile-picture-form"
                           onSubmit={handleSubmit(async (data) => {
-                          await handleUpdateProfilePicture(data); // wacht met submitten tot deze functie is uitgevoerd
+                              if (newProfilePicture) // controleert of er een nieuwe profielfoto is
+                              await handleUpdateProfilePicture(data); // wacht tot deze functie is uitgevoerd
                           setShowModalProfilePic(false) // sluit de modal na submitten
+
+                          // Eerdere versie:
                           //setNewProfilePicture(data.newProfilePicture[0])
-                          console.log(newProfilePicture);
-                          if (data.newProfilePicture[0] !== null) {
-                              handleUpdateProfilePicture(data.newProfilePicture[0]); // als de state van newProfilePicture niet null is, kan genoemde functie getriggerd worden
-                              console.log(data.newProfilePicture[0]); // Tot nu toe blijft de state van newProfilePicture null, omdat handleUploadProfilePicture, die moet zorgen voor de aanlevering van de afbeeldingsdata, niet getriggerd wordt.
-                          }
+                          // console.log(newProfilePicture);
+                          // if (data.newProfilePicture[0] !== null) {
+                          //     handleUpdateProfilePicture(data.newProfilePicture[0]); // als de state van newProfilePicture niet null is, kan genoemde functie getriggerd worden
+                          //     console.log(data.newProfilePicture[0]); // Tot nu toe blijft de state van newProfilePicture null, omdat handleUploadProfilePicture, die moet zorgen voor de aanlevering van de afbeeldingsdata, niet getriggerd wordt.
+                          // }
                         })
                       }
                     >

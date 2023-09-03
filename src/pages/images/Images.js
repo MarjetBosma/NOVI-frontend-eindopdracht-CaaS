@@ -34,13 +34,14 @@ function Images() {
     const [selectedFilter, setSelectedFilter] = useState("");
 
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
-    const fetchCatImageFromEndpoint = async(endpoint) => {
+
+    const fetchCatImage = async (source) => {
         try {
-            console.log("Fetching image from endpoint", endpoint)
+            console.log("Fetching image from source", source);
             toggleError(false);
             toggleLoading(true);
 
-            const response = await axios.get(endpointUrls[endpoint], {responseType: "arraybuffer"} );
+            const response = await axios.get(source, { responseType: "arraybuffer" });
 
             const contentType = response.headers["content-type"];
             const arrayBuffer = response.data;
@@ -49,55 +50,31 @@ function Images() {
             const imageUrl = URL.createObjectURL(blob);
 
             console.log("Full response:", response);
-            console.log("Image fetched", response.data)
+            console.log("Image fetched", response.data);
             console.log("Content-Type", response.headers["content-type"]);
 
             navigate("/cat", {
                 state: {
-                    imageUrl: imageUrl
-                }
+                    imageUrl: imageUrl,
+                },
             });
             console.log("Image opened at /cat", response.data);
-
-        } catch(e) {
+        } catch (e) {
             console.error("Error fetching image", e);
-            toggleError(true )
-            setErrorMessageImages("Ophalen van afbeelding mislukt, server reageert niet. Probeer het later opnieuw.");
+            toggleError(true);
+            setErrorMessageImages(
+                "Ophalen van afbeelding mislukt, server reageert niet. Probeer het later opnieuw."
+            );
         }
         toggleLoading(false);
     };
 
-    const fetchCatImageFromUrl = async(url) => {
-        try {
-            console.log("Fetching image from URL", url)
-            toggleError(false);
-            toggleLoading(true);
+    const fetchCatImageFromEndpoint = async (endpoint) => {
+        await fetchCatImage(endpointUrls[endpoint]);
+    };
 
-            const response = await axios.get(url, {responseType: "arraybuffer"} );
-
-            const contentType = response.headers["content-type"];
-            const arrayBuffer = response.data;
-
-            const blob = new Blob([arrayBuffer], { type: contentType });
-            const imageUrl = URL.createObjectURL(blob);
-
-            console.log("Full response:", response);
-            console.log("Image fetched", response.data)
-            console.log("Content-Type", response.headers["content-type"]);
-
-            navigate("/cat", {
-                state: {
-                    imageUrl: imageUrl
-                }
-            });
-            console.log("Image opened at /cat", response.data);
-
-        } catch(e) {
-            console.error("Error fetching image", e);
-            toggleError(true )
-            setErrorMessageImages("Ophalen van afbeelding mislukt, server reageert niet. Probeer het later opnieuw.");
-        }
-        toggleLoading(false);
+    const fetchCatImageFromUrl = async (url) => {
+        await fetchCatImage(url);
     };
 
     function handleFetchRandomCatFilter() {
