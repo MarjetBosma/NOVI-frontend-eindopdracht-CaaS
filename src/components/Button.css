@@ -9,6 +9,7 @@ Button {
     height: 60px;
     padding: 8px 16px;
     border-radius: 8px;
+    border-color: transparent;
     background-color: #F7931E;
     font-family: inherit;
     font-weight: 700;

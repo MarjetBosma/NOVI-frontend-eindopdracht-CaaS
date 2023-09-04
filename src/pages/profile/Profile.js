@@ -11,10 +11,10 @@ import { useForm } from "react-hook-form";
 
 function Profile() {
 
-    const [profilePicture, setProfilePicture] = useState(""); // was null in de gecompliceerdere code, "" was een suggestie bij het gebruik van de versimpelde functies om bepaalde errors te vermijden
-    // huidige profielfoto, indien niet null dan weergegeven als <img> object
-    const [newProfilePicture, setNewProfilePicture] = useState(null); // in versimpelde versie gebruik ik deze nier
-    // nieuwe profielfoto, base64 representatie van de nieuw geselecteerde profielfoto;
+    const [profilePicture, setProfilePicture] = useState(""); // was null in de gecompliceerdere code, "" was een suggestie bij het gebruik van de versimpelde functies om bepaalde errors (type mismatch) te vermijden
+    // in originele code staat deze voor de huidige profielfoto, indien niet null dan weergegeven als <img> object
+    const [newProfilePicture, setNewProfilePicture] = useState(null); // in de versimpelde versie gebruik ik deze niet
+    // in de originele code staat deze voor de nieuwe profielfoto, base64 representatie van de nieuw geselecteerde profielfoto;
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [repeatedPassword, setRepeatedPassword] = useState("");
@@ -90,54 +90,19 @@ function Profile() {
 
     // Profielfoto
 
-    // Gescheiden functies voor omzetten naar base64 en uploaden foto en state aanpassen
-    // const convertToBase64 = (file) => { // argument is een file, in dit geval een foto
-    //     return new Promise((resolve, reject) => {
-    //         const fileReader = new FileReader();
-    //         fileReader.readAsDataURL(file); // methode die de fileReader instrueert om de inhoud van de file te lezen en om te zetten naar een data URL in base 64 encoding
-    //         fileReader.onload = () => { // eventhandler die wordt aangeroepen als de file succesvol gelezen is
-    //             resolve(fileReader.result); // wordt angeroepen met het result, de data url / base64 string
-    //             console.log(fileReader.result) // als dit is gedaan wordt de Promise gereturned
-    //         };
-    //         fileReader.onerror = (error) => { // error handling als het lezen en omzetten niet lukt
-    //             reject(error);
-    //             console.log(error)
-    //         };
-    //     });
-    // };
-
-    // const handleProfilePictureUpload = async (e) => {
-    //     console.log("handleProfilePictureUpload function triggered"); // wordt nu niet gelogd
-    //     const file = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
-    //     console.log("Selected File:", file);
-    //     try {
-    //         const base64 = await convertToBase64(file); // wacht het resultaat af van functie convertToBase64
-    //         setNewProfilePicture(base64); // hiermee wordt de nieuwe profielfoto ingesteld
-    //         console.log(newProfilePicture)
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-
-
     const handleProfilePictureUpload = (e) => {
         console.log("handleProfilePictureUpload function triggered");
-        const file = e.target.files[0];
-
-        // Create a URL for the selected image and set it as the source of an <img> element
-        const imageUrl = URL.createObjectURL(file);
-
-        // Update the state with the selected image URL as a string
-        setProfilePicture(imageUrl);
+        const file = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
+        const imageUrl = URL.createObjectURL(file); // maakt een url voor de geselecteerde afbeelding, dit is the src voor het <img> element
+        setProfilePicture(imageUrl); // Update de state met de imageUrl string
     };
 
     const handleUpdateProfilePicture = (imageURL) => {
-        // Simulate updating the profile picture on the server
         console.log("Updating profile picture on the server with URL:", imageURL);
-        // You can add further logic here for server-side updates if needed
+        // hier gebeurt nu verder even niks, maar omdat de functie verderop aangeroepen wordt, declareer ik hem hier wel. In de originele versie zorgt dez functie voor het verzenden van de foto als base64 string naar de backend.
     };
 
-    // Complexe van handleProfilePictureUpload, met verzending naar de server, inclusief de omzetting naar base64 string:
+    // Oorspronkelijke versie van handleProfilePictureUpload, inclusief de omzetting naar base64 string:
 
     // const handleProfilePictureUpload = (e) => {
     //     console.log("onChange in InputField triggered") // wordt nu niet gelogd
@@ -153,6 +118,26 @@ function Profile() {
     //     reader.readAsDataURL(selectedFile); // leest de image file als een data URL in Base64 formaat
     //     console.log("handleProfilePictureUpload was triggered"); // deze wordt nu niet gelogd
     // };
+
+
+    //     // Latere versie met gescheiden functies voor omzetten naar base64 en uploaden foto en state aanpassen (maakte geen verschil)
+    //     // const convertToBase64 = (file) => { // argument is een file, in dit geval een foto
+    //     //     return new Promise((resolve, reject) => {
+    //     //         const fileReader = new FileReader();
+    //     //         fileReader.readAsDataURL(file); // methode die de fileReader instrueert om de inhoud van de file te lezen en om te zetten naar een data URL in base 64 encoding
+    //     //         fileReader.onload = () => { // eventhandler die wordt aangeroepen als de file succesvol gelezen is
+    //     //             resolve(fileReader.result); // wordt angeroepen met het result, de data url / base64 string
+    //     //             console.log(fileReader.result) // als dit is gedaan wordt de Promise gereturned
+    //     //         };
+    //     //         fileReader.onerror = (error) => { // error handling als het lezen en omzetten niet lukt
+    //     //             reject(error);
+    //     //             console.log(error)
+    //     //         };
+    //     //     });
+    //     // };
+
+
+    // Oorspronkelijke versie handleUpdateProfilePicture, met verzenden naar de backend
 
     // const handleUpdateProfilePicture = async () => {
     //     const token = localStorage.getItem("token");
@@ -220,7 +205,7 @@ useEffect(() => {
                     <div className="picture-container">
                         <img
                             className="profile-pic-placeholder"
-                            src={profilePicture ? (profilePicture) : profilePicPlaceholder}
+                            src={profilePicture ? profilePicture : profilePicPlaceholder}
                             alt="profile picture"
                         />
                     </div>

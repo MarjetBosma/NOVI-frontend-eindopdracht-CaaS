@@ -63,7 +63,7 @@ function Images() {
             console.error("Error fetching image", e);
             toggleError(true);
             setErrorMessageImages(
-                "Ophalen van afbeelding mislukt, server reageert niet. Probeer het later opnieuw."
+                "Ophalen van afbeelding mislukt. Server reageert mogelijk niet, probeer het later opnieuw."
             );
         }
         toggleLoading(false);
