@@ -5,16 +5,9 @@ import "./FetchedImageDetail.css"
 function FetchedImageDetail() {
     const location = useLocation();
 
-    const [ catImage, setCatImage ] = useState("")
-    const imageUrl = location?.state?.imageUrl || "";
-    // const imageUrl = location?.state?.imageUrl || "";
-    // console.log("cat object", cat)
-
-    // useEffect(() => {
-    //     console.log("cat object", cat);
-    //     setCatImage(cat.imageUrl)
-    //
-    // }, [cat]);
+    const [ catImage, setCatImage ] = useState({})
+    const imageUrl = location.state && location.state.imageUrl ? location.state.imageUrl : "";
+    console.log("cat object", catImage)
 
     useEffect(() => {
         setCatImage(imageUrl);
@@ -54,7 +47,7 @@ function FetchedImageDetail() {
             <Button
                 className="add-to-favorites-button"
                 clickHandler={() => saveImageAsFavorite(catImage)}
-                disabled={favorites.length >= 24 || favorites.includes(catImage)}
+                disabled={favorites.includes(catImage)}
             >
                 Toevoegen aan favorieten
             </Button>

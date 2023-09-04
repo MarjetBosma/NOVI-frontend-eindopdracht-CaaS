@@ -42,10 +42,12 @@ a {
     text-decoration: underline;
     color: #0A4C90;
     font-weight: 700;
+    cursor: pointer;
 }
 
 a:hover {
     color: #0DD4EF;
+    cursor: pointer;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */

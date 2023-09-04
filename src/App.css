@@ -129,6 +129,7 @@ footer {
 
 .loading-message {
     padding: 100px;
+    font-size: 48px;
 }
 
 .loading-animation {
@@ -151,7 +152,6 @@ footer {
     color: #F7931E;
     min-height: 30px;
 }
-
 
 .input-error-message {
     font-size: 14px;
@@ -190,6 +190,7 @@ footer {
         align-items: center;
         gap: 20px;
         height: 100px;
+        padding-inline: 20px;
     }
 
     .logo-container {
@@ -204,6 +205,10 @@ footer {
         font-size: 10px;
     }
 
+    .loading-message {
+        font-size: 36px;
+    }
+
     .loading-animation {
         width: 150px;
         height: 150px;
@@ -216,4 +221,5 @@ footer {
     .input-error-message {
         font-size: 12px;
     }
+
 }

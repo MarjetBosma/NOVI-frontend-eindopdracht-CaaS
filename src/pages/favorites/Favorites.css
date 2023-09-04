@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100vw;
 }
 
 .favorites-container {
@@ -17,9 +18,9 @@
 .thumbnail {
     width: 75px;
     height: 75px;
-    background: grey;
     list-style-type: none;
     border: none;
+    background-color: lightgrey;
 }
 
 .thumbnail.selected {
@@ -29,6 +30,12 @@
 .cat-image {
     height: 100%;
     width: 100%;
+}
+
+.cat-image-fallback-thumbnail {
+    height: 100%;
+    width: 100%;
+    opacity: 30%;
 }
 
 /* ------------------------------- Media Queries -------------------------------- */

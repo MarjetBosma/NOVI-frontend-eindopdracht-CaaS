@@ -6,12 +6,21 @@ import checkTokenValidity from "../helper/checkTokenValidity";
 export const AuthContext = createContext({})
 
 function AuthContextProvider ({ children }) {
+
     const [isAuth, toggleIsAuth] = useState({
         isAuth: false,
         user: null,
         status: "pending",
     });
     const navigate = useNavigate();
+
+    const setUser = (newUserData) => {
+        toggleIsAuth((prevAuth) => ({
+            ...prevAuth,
+            user: newUserData,
+            status: "done",
+        }));
+    };
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -23,7 +32,7 @@ function AuthContextProvider ({ children }) {
             toggleIsAuth({
                 isAuth: false,
                 user: null,
-                status: 'done',
+                status: "done",
             });
         }
     }, []);
@@ -41,12 +50,12 @@ function AuthContextProvider ({ children }) {
     function logout() {
         localStorage.removeItem("favorites");
 
-        toggleIsAuth({
-            ...isAuth,
+        toggleIsAuth((prevAuth) => ({
+            ...prevAuth,
             isAuth: false,
             user: null,
             status: "done",
-        })
+        }));
         navigate("/");
         console.log("Gebruiker is uitgelogd");
     }
@@ -61,8 +70,8 @@ function AuthContextProvider ({ children }) {
             } );
             console.log(response.data);
 
-            toggleIsAuth( {
-                ...isAuth,
+            toggleIsAuth((prevAuth) => ({
+                ...prevAuth,
                 isAuth: true,
                 user: {
                     username: response.data.username,
@@ -70,7 +79,13 @@ function AuthContextProvider ({ children }) {
                     id: response.data.id,
                 },
                 status: "done",
-            } );
+            }));
+
+            setUser({
+                username: response.data.username,
+                email: response.data.email,
+                id: response.data.id,
+            });
 
             if (redirectUrl) {
                 navigate(redirectUrl);
@@ -96,22 +111,20 @@ function AuthContextProvider ({ children }) {
         user: isAuth.user,
         login: login,
         logout: logout,
+        setUser: setUser,
     };
 
     return (
         <AuthContext.Provider value={contextData}>
-            { isAuth.status === "done"
-                ?
-                    children
-                :
-                    <div>loading-container
-                        <h2 className="loading-message">Laden...</h2>
-                        <div className="loading-animation"></div>
-
-                    </div>
-            }
+            {isAuth.status === "done" ? (
+                children
+            ) : (
+                <div className="loading-container">
+                    <h2 className="loading-message">Laden...</h2>
+                    <div className="loading-animation"></div>
+                </div>
+            )}
         </AuthContext.Provider>
     );
 }
-
 export default AuthContextProvider;

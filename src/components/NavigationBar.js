@@ -62,7 +62,6 @@ function NavigationBar() {
                 />
             </div>
 
-            {/* Mobile menu */}
             {isMobileMenuOpen && (
                 <nav className="nav-menu-hamburger" ref={mobileMenuRef}>
                     <NavLink className="default-link" to="/" onClick={closeMobileMenu}>

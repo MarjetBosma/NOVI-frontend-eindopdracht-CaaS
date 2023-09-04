@@ -30,7 +30,6 @@ function SignIn() {
             toggleError(false);
             toggleLoading(true);
             console.log(data);
-            console.log("status voor submitten")
 
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {
@@ -45,10 +44,9 @@ function SignIn() {
 
                 console.error("Inloggen mislukt", e)
                 toggleError(true);
-                setErrorMessageSignin("Inloggen mislukt. Controleer je invoer en probeer het opnieuw.");
+                setErrorMessageSignin("Inloggen mislukt. Mogelijke oorzaken: 1) Gebruiker is niet bekend 2) Typefout in je invoer 3) Server reageert niet, probeer het later opnieuw.");
             }
             toggleLoading(false);
-            console.log("status na submitten")
         }
 
     return (
@@ -64,10 +62,10 @@ function SignIn() {
                   validationRules={{
                       required: "Dit veld is verplicht",
                       minLength: {
-                          value: 6,
-                          message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
-
-                  }}}
+                        value: 6,
+                        message: "De gebruikersnaam moet minimaal 6 karakters bevatten",
+                    }
+                  }}
                   register={register}
                   errors={errors}
                 />
@@ -80,24 +78,22 @@ function SignIn() {
                         minLength: {
                             value: 6,
                             message: "Het wachtwoord moet minimaal 6 karakters bevatten",
-                        }
+                      }
                     }}
                     register={register}
                     errors={errors}
                 />
-
                 <Button
                     type="submit"
-                    className="button"
-                    // disabled={loading || !isDirty || !isValid}
+                    disabled={ !isDirty || !isValid }
                 >
                     Log in
                 </Button>
               </form>
 
-              {errorMessageSignin && <div className="error-message error-message--signin">{errorMessageSignin}</div>}
-
               <p>Nog geen account? Registreer je <Link to="/signup">hier</Link>.</p>
+
+              {errorMessageSignin && <div className="error-message error-message--signin">{errorMessageSignin}</div>}
 
             </section>
 

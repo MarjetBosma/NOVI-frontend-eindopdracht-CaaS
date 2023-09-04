@@ -4,7 +4,6 @@ import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 
-
 function Favorites() {
 
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -30,7 +29,11 @@ function Favorites() {
 
     function handleDeleteSelection() {
         const updatedFavorites = favorites.filter((item, index) => !selectedImages.includes(index));
+        console.log("Updated favorites:", updatedFavorites);
+
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+        console.log("Favorites in local storage after update:", JSON.parse(localStorage.getItem("favorites")));
+
         setSelectedImages([]);
     }
 
@@ -43,17 +46,21 @@ function Favorites() {
                             key={index}
                             className={`thumbnail ${selectedImages.includes(index) ? "selected" : ""}`}>
                                 <img className="cat-image"
-                                     src={imageUrl} alt={`Favorite ${index}`}
+                                     src={imageUrl}
+                                     alt={`Fav. ${index + 1}`}
                                      onDoubleClick={() => handleImageClick(index)}
                                      onClick={() => handleImageSelection(index)}
+                                     onError={(e) => {
+                                         e.target.src = logo;
+                                         e.target.className = "cat-image-fallback-thumbnail";
+                                     }}
                                 />
                         </li>
-
                     ))}
                 </ul>
                 <Button
                     type="submit"
-                    onClick={handleDeleteSelection}
+                    clickHandler={handleDeleteSelection}
                     disabled={selectedImages.length === 0}>
                     Verwijder selectie
                 </Button>
