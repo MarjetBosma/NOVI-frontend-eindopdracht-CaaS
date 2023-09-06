@@ -11,10 +11,8 @@ import { useForm } from "react-hook-form";
 
 function Profile() {
 
-    const [profilePicture, setProfilePicture] = useState(""); // was null in de gecompliceerdere code, "" was een suggestie bij het gebruik van de versimpelde functies om bepaalde errors (type mismatch) te vermijden
-    // in originele code staat deze voor de huidige profielfoto, indien niet null dan weergegeven als <img> object
-    const [newProfilePicture, setNewProfilePicture] = useState(null); // in de versimpelde versie gebruik ik deze niet
-    // in de originele code staat deze voor de nieuwe profielfoto, base64 representatie van de nieuw geselecteerde profielfoto;
+    const [profilePicture, setProfilePicture] = useState(null);
+    const [newProfilePicture, setNewProfilePicture] = useState(null);
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [repeatedPassword, setRepeatedPassword] = useState("");
@@ -88,56 +86,40 @@ function Profile() {
         }
     };
 
-    //Profielfoto
+    // Profielfoto
+
+    // Hieronder de beperkte functie die alleen zorgt voor het tonen van de geüploade profielfoto op de pagina
 
     const handleProfilePictureUpload = (e) => {
-        console.log("handleProfilePictureUpload function triggered");
         const imageUrl = URL.createObjectURL(e[0]); // maakt een url voor de geselecteerde afbeelding, dit is the src voor het <img> element
-        setProfilePicture(imageUrl); // Update de state met de imageUrl string
+        setProfilePicture(imageUrl);
     };
 
-    const handleUpdateProfilePicture = (imageURL) => {
-        console.log("Updating profile picture on the server with URL:", imageURL);
-    };
-
-    // Oorspronkelijke versie van handleProfilePictureUpload, inclusief de omzetting naar base64 string:
+    // Hieronder dee originele functie waarbij ik probeer de geüploade fot om te zetten in base64 formaat. Dit gaf tijdens alle verschillende pogingen een hele range aan foutmeldingen...
 
     // const handleProfilePictureUpload = (e) => {
+    //    const file = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
+    //          console.log(file);
+    //          const fileReader = new FileReader(); // maakt het leesbaar voor de browser
+    //          fileReader.readAsDataURL(file);
     //
-    //     const selectedFile = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
-    //     const reader = new FileReader(); // maakt het leesbaar voor de browser
-    //     console.log(selectedFile)
-    //
-    //     reader.onload = (event) => {
-    //         const base64String = event.target.result; // zorgt voor base64 representatie van de afbeelding
-    //         setNewProfilePicture(base64String); // updaten van de state met de base64 string
-    //     };
-    //
-    //     reader.readAsDataURL(selectedFile); // leest de image file als een data URL in Base64 formaat
-    //     console.log("handleProfilePictureUpload was triggered"); // deze wordt nu niet gelogd
+    //         fileReader.onload = async () => {
+    //             const base64Image = fileReader.result // zorgt voor base64 representatie van de afbeelding
+    //              setNewProfilePicture(base64Image); // updaten van de state met de base64 string
+    //              await handleUpdateProfilePicture(base64Image);
+    //         };
+    //         fileReader.readAsDataURL(file);
     // };
 
+    // Hieronder de beperkte versie van handleUpdateProfilePicture, omdat het niet lukt om om de juiste vorm van data te creëren om naar de backend te zenden. Ik roep de functie wel aa hierboven, dus vandaar deze simulatieversie.
 
-    //     // Latere versie met gescheiden functies voor omzetten naar base64 en uploaden foto en state aanpassen (maakte geen verschil)
-    //     // const convertToBase64 = (file) => { // argument is een file, in dit geval een foto
-    //     //     return new Promise((resolve, reject) => {
-    //     //         const fileReader = new FileReader();
-    //     //         fileReader.readAsDataURL(file); // methode die de fileReader instrueert om de inhoud van de file te lezen en om te zetten naar een data URL in base 64 encoding
-    //     //         fileReader.onload = () => { // eventhandler die wordt aangeroepen als de file succesvol gelezen is
-    //     //             resolve(fileReader.result); // wordt angeroepen met het result, de data url / base64 string
-    //     //             console.log(fileReader.result) // als dit is gedaan wordt de Promise gereturned
-    //     //         };
-    //     //         fileReader.onerror = (error) => { // error handling als het lezen en omzetten niet lukt
-    //     //             reject(error);
-    //     //             console.log(error)
-    //     //         };
-    //     //     });
-    //     // };
+    const handleUpdateProfilePicture = (imageURL) => {
+        console.log("Simulating updating profile picture on the server", imageURL);
+    };
 
+    // Hieronder de oorspronkelijke versie handleUpdateProfilePicture, met verzenden naar de backend. Deze functie an sich is oké, maar ik kan hem niet gebruiken, omdat ik niet de data in base64 formaat heb.
 
-    // Oorspronkelijke versie handleUpdateProfilePicture, met verzenden naar de backend
-
-    // const handleUpdateProfilePicture = async () => {
+    // const handleUpdateProfilePicture = async (newProfilePicture) => {
     //     const token = localStorage.getItem("token");
     //
     //     try {
@@ -166,9 +148,9 @@ function Profile() {
     //         } else {
     //             console.log("newProfilePicture is null or undefined");
     //         }
-    //         //Ik heb allerlei mogelijkheden voor foutmeldingen en andere logs in de code opgenomen, maar op dit moment wordt er helemaal NIETS gelogd als ik probeer een foto te uploaden...
+    //
     //         } catch (e) {
-    //         console.error("Wijzigen profielfoto mislukt", e); // ik krijg GEEN error, maar ik zie toch echt geen foto...
+    //         console.error("Wijzigen profielfoto mislukt", e);
     //         setErrorMessageProfilePic("Wijzigen profielfoto mislukt, probeer nogmaals.");
     //     }
     // };
@@ -235,9 +217,9 @@ useEffect(() => {
                             onSubmit={handleSubmit(async (data) => {
                                 await handleUpdateUserData(data);
                                 if (errorMessageProfile) {
-                                    setShowModalUserData(false)
-                                } else {
                                     setShowModalUserData(true)
+                                } else {
+                                    setShowModalUserData(false)
                                 }
                           })
                         }
@@ -307,11 +289,10 @@ useEffect(() => {
                     </label>
                     <form className="upload-profile-picture-form"
                           onSubmit={handleSubmit(async (e) => {
-
-                                  await handleUpdateProfilePicture(profilePicture);
-                                  handleProfilePictureUpload(e.profilePicture);
+                              await handleUpdateProfilePicture(newProfilePicture);
+                              handleProfilePictureUpload(e.profilePicture)
                                   setShowModalProfilePic(false)
-                                  console.log("Closing the modal...)")
+
                         })
                       }
                     >
@@ -324,57 +305,23 @@ useEffect(() => {
                                 validate: (value) =>
                                 value || "Selecteer een afbeelding voor je profielfoto",
                             }}
-                            register={register}
-                            errors={errors}
+                           // onChange={(e) => {
+                           //      console.log("InputField onChange triggered");
+                           //      handleProfilePictureUpload(e)
+                           // }}
+                           register={register}
+                           errors={errors}
                         />
-                        {/*{profilePicture && (*/}
-                        {/*    <img*/}
-                        {/*        className="uploaded-image"*/}
-                        {/*        src={profilePicture}*/}
-                        {/*        alt="selected image"*/}
-                        {/*    />*/}
-                        {/*)}*/}
-
-                        {/*Eerdere versie met complexere code*/}
-                        {/*<form className="upload-profile-picture-form"*/}
-                        {/*      onSubmit={handleSubmit(async (data) => {*/}
-                        {/*          await handleUpdateProfilePicture(data); // wacht met submitten tot deze functie is uitgevoerd*/}
-                        {/*          setShowModalProfilePic(false) // sluit de modal na submitten*/}
-                        {/*          //setNewProfilePicture(data.newProfilePicture[0])*/}
-                        {/*          console.log(newProfilePicture);*/}
-                        {/*          if (data.newProfilePicture[0] !== null) {*/}
-                        {/*              handleUpdateProfilePicture(data.newProfilePicture[0]); // als de state van newProfilePicture niet null is, kan genoemde functie getriggerd worden*/}
-                        {/*              console.log(data.newProfilePicture[0]); // Tot nu toe blijft de state van newProfilePicture null, omdat handleUploadProfilePicture, die moet zorgen voor de aanlevering van de afbeeldingsdata, niet getriggerd wordt.*/}
-                        {/*          }*/}
-                        {/*      })*/}
-                        {/*      }*/}
-                        {/*>*/}
-                        {/*    <InputField*/}
-                        {/*        className="input-field-profile-pic"*/}
-                        {/*        inputType="file"*/}
-                        {/*        inputName="newProfilePicture"*/}
-                        {/*        validationRules={{*/}
-                        {/*            validate: (value) =>*/}
-                        {/*                value || "Selecteer een afbeelding voor je profielfoto",*/}
-                        {/*        }}*/}
-                        {/*        onChange={(e) => {*/}
-                        {/*            console.log("InputField onChange triggered"); // hier lijkt het mis te gaan, ik zie deze log niet als ik een foto probeer te uploaden,, dus de onChange werkt niet*/}
-                        {/*            handleProfilePictureUpload(e); // zou de handleProfilePicture functie moeten triggeren*/}
-                        {/*        }}*/}
-                        {/*        register={register}*/}
-                        {/*        errors={errors}*/}
-                        {/*    /> */}
-
 
                         <Button
                             type="submit"
                             className="save-picture-button"
-                            disabled={ !isDirty || !isValid }  // De button is niet disabled, maar er gebeurt ook nits. Geen foto, modal blijft open.
+                            disabled={ !isDirty || !isValid }
                         >
                             Opslaan
                         </Button>
                         {errorMessageProfilePic && <div className="error-message error-message--profile-pic">{errorMessageProfilePic}</div>}
-                </form>
+                    </form>
                 </div>
                 )}
 
