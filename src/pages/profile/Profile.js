@@ -88,24 +88,22 @@ function Profile() {
         }
     };
 
-    // Profielfoto
+    //Profielfoto
 
     const handleProfilePictureUpload = (e) => {
         console.log("handleProfilePictureUpload function triggered");
-        const file = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
-        const imageUrl = URL.createObjectURL(file); // maakt een url voor de geselecteerde afbeelding, dit is the src voor het <img> element
+        const imageUrl = URL.createObjectURL(e[0]); // maakt een url voor de geselecteerde afbeelding, dit is the src voor het <img> element
         setProfilePicture(imageUrl); // Update de state met de imageUrl string
     };
 
     const handleUpdateProfilePicture = (imageURL) => {
         console.log("Updating profile picture on the server with URL:", imageURL);
-        // hier gebeurt nu verder even niks, maar omdat de functie verderop aangeroepen wordt, declareer ik hem hier wel. In de originele versie zorgt dez functie voor het verzenden van de foto als base64 string naar de backend.
     };
 
     // Oorspronkelijke versie van handleProfilePictureUpload, inclusief de omzetting naar base64 string:
 
     // const handleProfilePictureUpload = (e) => {
-    //     console.log("onChange in InputField triggered") // wordt nu niet gelogd
+    //
     //     const selectedFile = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
     //     const reader = new FileReader(); // maakt het leesbaar voor de browser
     //     console.log(selectedFile)
@@ -308,12 +306,12 @@ useEffect(() => {
                     <label className="input-label-profile-pic">Kies een afbeelding
                     </label>
                     <form className="upload-profile-picture-form"
-                          onSubmit={handleSubmit(async () => {
-                              if (profilePicture)  {
-                              await handleUpdateProfilePicture(profilePicture);
-                              setShowModalProfilePic(false)
-                              console.log("Closing the modal...)")
-                        }
+                          onSubmit={handleSubmit(async (e) => {
+
+                                  await handleUpdateProfilePicture(profilePicture);
+                                  handleProfilePictureUpload(e.profilePicture);
+                                  setShowModalProfilePic(false)
+                                  console.log("Closing the modal...)")
                         })
                       }
                     >
@@ -326,20 +324,16 @@ useEffect(() => {
                                 validate: (value) =>
                                 value || "Selecteer een afbeelding voor je profielfoto",
                             }}
-                           onChange={(e) => {
-                               console.log("InputField onChange triggered"); // hier lijkt het mis te gaan, ik zie deze log niet als ik een foto probeer te uploaden, dus de onChange werkt niet
-                               handleProfilePictureUpload(e); // zou de handleProfilePicture functie moeten triggeren
-                           }}
                             register={register}
                             errors={errors}
                         />
-                        {profilePicture && (
-                            <img
-                                className="uploaded-image"
-                                src={profilePicture}
-                                alt="selected image"
-                            />
-                        )}
+                        {/*{profilePicture && (*/}
+                        {/*    <img*/}
+                        {/*        className="uploaded-image"*/}
+                        {/*        src={profilePicture}*/}
+                        {/*        alt="selected image"*/}
+                        {/*    />*/}
+                        {/*)}*/}
 
                         {/*Eerdere versie met complexere code*/}
                         {/*<form className="upload-profile-picture-form"*/}
