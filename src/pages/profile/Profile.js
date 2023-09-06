@@ -95,7 +95,7 @@ function Profile() {
         setProfilePicture(imageUrl);
     };
 
-    // Hieronder dee originele functie waarbij ik probeer de geüploade fot om te zetten in base64 formaat. Dit gaf tijdens alle verschillende pogingen een hele range aan foutmeldingen...
+    // Hieronder de originele functie waarbij ik probeer de geüploade foto om te zetten in base64 formaat. Dit gaf tijdens alle verschillende pogingen een hele range aan foutmeldingen...
 
     // const handleProfilePictureUpload = (e) => {
     //    const file = e.target.files[0]; // haalt de geselecteerde afbeelding uit de input
