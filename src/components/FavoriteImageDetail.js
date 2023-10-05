@@ -58,6 +58,7 @@ function FavoriteImageDetail() {
                 )}
             </div>
             <Button
+                type="button"
                 className="remove-from-favorites-button"
                 clickHandler={handleRemoveClick}
             >

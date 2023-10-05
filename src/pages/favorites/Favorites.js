@@ -59,7 +59,7 @@ function Favorites() {
                     ))}
                 </ul>
                 <Button
-                    type="submit"
+                    type="button"
                     clickHandler={handleDeleteSelection}
                     disabled={selectedImages.length === 0}>
                     Verwijder selectie

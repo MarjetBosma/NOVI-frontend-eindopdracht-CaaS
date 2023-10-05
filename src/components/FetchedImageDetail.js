@@ -45,6 +45,7 @@ function FetchedImageDetail() {
                 <img className="fetched-image" src={catImage} alt="random cat" />
             </div>
             <Button
+                type="button"
                 className="add-to-favorites-button"
                 clickHandler={() => saveImageAsFavorite(catImage)}
                 disabled={favorites.includes(catImage)}
