@@ -1,5 +1,15 @@
 # CaaS - Cat as a Service
 
+## Inhoudsopgave
+
+1. Inleiding
+2. Belangrijkste functionaliteiten
+3. Benodigdheden
+4. Project opstarten
+5. Beperkingen
+6. Verantwoording afbeelding logo
+7. Contact
+
 ## 1. Inleiding
 
 Als je van katten houdt, kan het aaien van zo'n pluizige viervoeter ontspannend en stressverlagend werken. Instant stress-relief op pootjes! Maar ja, op het werk, op school, in de trein etc. heb je meestal geen kat bij de hand. Gelukkig is uit onderzoek gebleken dat het kijken naar kattenfilmpjes of -plaatjes ook werkt. CaaS biedt de gebruiker een wereld aan leuke, gezellige en schattige afbeeldingen van katten. Precies voor die momenten waarop je wel even wat harige afleiding en ontspanning kunt gebruiken, maar er geen echte kat in de buurt is!
@@ -10,7 +20,7 @@ Deze webapplicatie is gemaakt als integrale eindopdracht voor de leerlijn Fronte
 
 Om gebruik te kunnen maken van alle functionaliteiten van de app, dient een gebruiker zich te registreren en vervolgens in te loggen.
 
-## Belangrijkste functionaliteiten
+## 2. Belangrijkste functionaliteiten
 
 - De gebruiker kan zich registreren en inloggen.
 - De gebruiker kan een random kattenplaatje of GIF opvragen, indien gewenst met een bepaalde tag of filter, of een afbeelding met een tekstje naar keuze.
