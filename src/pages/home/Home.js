@@ -19,7 +19,7 @@ function Home() {
     return (
         <div className="inner-container">
           <section className="logo-container--logo-container-home">
-            <img className="logo-large--logo-large-home" src={logo} alt="logo"/>
+            <img className="logo-large--logo-large-home" src={logo} alt="Logo Cat as a Service"/>
           </section>
 
           <section className="content-container">

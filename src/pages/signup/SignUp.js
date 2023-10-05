@@ -108,7 +108,7 @@ function SignUp() {
             <h2>Maak een account</h2>
             <p>Je hebt een account nodig, schrijf je nu in! </p>
             <div className="logo-container">
-              <img className="logo-large" src={logo} alt="logo"/>
+              <img className="logo-large" src={logo} alt="Logo Cat as a Service"/>
             </div>
           </section>
         </div>

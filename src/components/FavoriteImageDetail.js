@@ -46,7 +46,7 @@ function FavoriteImageDetail() {
                     <img
                         className="favorite-image"
                         src={favorites[index]}
-                        alt={`Favorite ${index}`}
+                        alt={`Favorite cat ${index}`}
                         onError={(e) => {
                             e.target.src = logo;
                             e.target.className = "cat-image-fallback-favorite";

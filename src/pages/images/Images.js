@@ -183,7 +183,7 @@ function Images() {
                 <p>Een wereld aan kattenplaatjes is slechts een muisklik van je verwijderd... Welke katten maken jou
                     blij vandaag? </p>
                 <div className="logo-container">
-                    <img className="logo-large" src={logo} alt="logo"/>
+                    <img className="logo-large" src={logo} alt="Logo Cat as a Service"/>
                 </div>
             </section>
         </div>
