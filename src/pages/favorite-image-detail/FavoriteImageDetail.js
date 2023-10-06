@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Button from "./Button";
+import Button from "../../components/Button";
 import "./FavoriteImageDetail.css"
-import logo from "../assets/caas-logo-no-text.jpg";
+import logo from "../../assets/caas-logo-no-text.jpg";
 
 function FavoriteImageDetail() {
 
@@ -16,26 +16,19 @@ function FavoriteImageDetail() {
     const navigate = useNavigate()
 
     useEffect(() => {
-
-        console.log("favorites")
     }, [favorites])
 
 
     if (!favorites[index]) {
-        console.log("Image not found")
         return <p>Afbeelding niet gevonden</p>;
     }
 
     const imageUrl = favorites[index];
-    console.log("Image URL:", imageUrl);
 
     const handleRemoveClick = () => {
         localStorage.setItem("favorites", "")
-        console.log(favorites)
         updateFavorites(favorites.splice(index, 1))
-        console.log(favorites)
         localStorage.setItem("favorites", JSON.stringify(favorites))
-        console.log(index)
         navigate("/favorites");
     };
 
@@ -46,7 +39,7 @@ function FavoriteImageDetail() {
                     <img
                         className="favorite-image"
                         src={favorites[index]}
-                        alt={`Favorite ${index}`}
+                        alt={`Favorite cat ${index}`}
                         onError={(e) => {
                             e.target.src = logo;
                             e.target.className = "cat-image-fallback-favorite";
@@ -58,6 +51,7 @@ function FavoriteImageDetail() {
                 )}
             </div>
             <Button
+                type="button"
                 className="remove-from-favorites-button"
                 clickHandler={handleRemoveClick}
             >

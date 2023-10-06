@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import NavigationBar from "./components/NavigationBar";
+import NavigationBar from "./navigation-bar/NavigationBar";
 import Home from "./pages/home/Home";
 import SignUp from "./pages/signup/SignUp";
 import SignIn from "./pages/signin/SignIn";
 import Images from "./pages/images/Images";
 import Profile from "./pages/profile/Profile";
 import Favorites from "./pages/favorites/Favorites";
-import FavoriteImageDetail from "./components/FavoriteImageDetail";
-import FetchedImageDetail from "./components/FetchedImageDetail";
+import FavoriteImageDetail from "./pages/favorite-image-detail/FavoriteImageDetail";
+import FetchedImageDetail from "./pages/fetched-image-detail/FetchedImageDetail";
 import NotFound from "./pages/notFound/NotFound";
 import { AuthContext } from "./context/AuthContext";
 import logo from "./assets/caas-logo-no-text.jpg"
@@ -21,7 +21,7 @@ function App() {
       <header>
         <span className="logo-text-container-header">
             <span className="logo-container-header">
-              <img className="logo-small" src={logo} alt="logo"/>
+              <img className="logo-small" src={logo} alt="Logo Cat as a Service, cat with glasses and laptop"/>
             </span>
             <span className="text-container-header">
                 <h3 className="caas-small">CaaS</h3>

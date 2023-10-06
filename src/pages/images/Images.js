@@ -37,7 +37,6 @@ function Images() {
 
     const fetchCatImage = async (source) => {
         try {
-            console.log("Fetching image from source", source);
             toggleError(false);
             toggleLoading(true);
 
@@ -48,10 +47,6 @@ function Images() {
 
             const blob = new Blob([arrayBuffer], { type: contentType });
             const imageUrl = URL.createObjectURL(blob);
-
-            console.log("Full response:", response);
-            console.log("Image fetched", response.data);
-            console.log("Content-Type", response.headers["content-type"]);
 
             navigate("/cat", {
                 state: {
@@ -79,24 +74,16 @@ function Images() {
 
     function handleFetchRandomCatFilter() {
         const catFilterUrl = endpointUrls.randomCatFilter.replace(":filter", selectedFilter);
-        console.log("Filter:", selectedFilter);
         fetchCatImageFromUrl(catFilterUrl);
-        console.log(catFilterUrl)
     }
 
   function handleFetchRandomCatSays(data) {
 
         const {"image-text": imagetext} = data
         setUserInputCatSays(imagetext)
-        console.log(imagetext)
-
-        console.log("User input before fetch:", imagetext);
 
         const catSaysUrl = endpointUrls.randomCatSays.replace(":text", imagetext);
         fetchCatImageFromUrl(catSaysUrl)
-        console.log(catSaysUrl)
-
-        console.log("User input after fetch:", imagetext);
     }
 
     return (
@@ -183,7 +170,7 @@ function Images() {
                 <p>Een wereld aan kattenplaatjes is slechts een muisklik van je verwijderd... Welke katten maken jou
                     blij vandaag? </p>
                 <div className="logo-container">
-                    <img className="logo-large" src={logo} alt="logo"/>
+                    <img className="logo-large" src={logo} alt="Logo Cat as a Service, cat with glasses and laptop"/>
                 </div>
             </section>
         </div>

@@ -29,14 +29,11 @@ function SignIn() {
         async function onSubmit(data) {
             toggleError(false);
             toggleLoading(true);
-            console.log(data);
 
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {
                 });
                 setErrorMessageSignin("")
-                console.log(response.data.accessToken);
-                console.log("Gebruiker is ingelogd")
                 login(response.data.accessToken)
                 navigate("/images");
 
@@ -101,7 +98,7 @@ function SignIn() {
                 <h2>Log in op je account</h2>
                 <p>Log snel in voor je dagelijkse dosis kattenliefde!</p>
                 <div className="logo-container">
-                    <img className="logo-large" src={logo} alt="logo"/>
+                    <img className="logo-large" src={logo} alt="Logo Cat as a Service, cat with glasses and laptop"/>
                 </div>
             </section>
         </div>

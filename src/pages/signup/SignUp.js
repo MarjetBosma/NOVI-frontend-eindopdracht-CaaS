@@ -27,14 +27,11 @@ function SignUp() {
         async function onSubmit(data) {
             toggleError(false);
             toggleLoading(true);
-            console.log(data);
 
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
                 });
                 setErrorMessageSignup("")
-                console.log(response.data);
-                console.log("Gebruiker is geregistreerd")
                 navigate("/signin");
 
             } catch(e) {
@@ -108,7 +105,7 @@ function SignUp() {
             <h2>Maak een account</h2>
             <p>Je hebt een account nodig, schrijf je nu in! </p>
             <div className="logo-container">
-              <img className="logo-large" src={logo} alt="logo"/>
+              <img className="logo-large" src={logo} alt="Logo Cat as a Service, cat with glasses and laptop"/>
             </div>
           </section>
         </div>

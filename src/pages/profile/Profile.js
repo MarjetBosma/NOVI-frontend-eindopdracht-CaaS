@@ -91,7 +91,7 @@ function Profile() {
     // Hieronder de beperkte functie die alleen zorgt voor het tonen van de geüploade profielfoto op de pagina
 
     const handleProfilePictureUpload = (e) => {
-        const imageUrl = URL.createObjectURL(e[0]); // maakt een url voor de geselecteerde afbeelding, dit is the src voor het <img> element
+        const imageUrl = URL.createObjectURL(e[0]); // maakt een url voor de geselecteerde afbeelding, dit is de src voor het <img> element
         setProfilePicture(imageUrl);
     };
 
@@ -114,7 +114,7 @@ function Profile() {
     // Hieronder de beperkte versie van handleUpdateProfilePicture, omdat het niet lukt om om de juiste vorm van data te creëren om naar de backend te zenden. Ik roep de functie wel aa hierboven, dus vandaar deze simulatieversie.
 
     const handleUpdateProfilePicture = (imageURL) => {
-        console.log("Simulating updating profile picture on the server", imageURL);
+        console.log("Simulating updating profile picture on the server", imageURL); // Deze console.log heb ik laten staan, aangezien deze aangeeft dat het een simulatie is.
     };
 
     // Hieronder de oorspronkelijke versie handleUpdateProfilePicture, met verzenden naar de backend. Deze functie an sich is oké, maar ik kan hem niet gebruiken, omdat ik niet de data in base64 formaat heb.
@@ -156,8 +156,6 @@ function Profile() {
     // };
 
 useEffect(() => {
-        console.log(user, newEmail, newPassword, repeatedPassword, newProfilePicture, profilePicture);
-
     }, [user, newEmail, newPassword, repeatedPassword, newProfilePicture, profilePicture]);
 
 
