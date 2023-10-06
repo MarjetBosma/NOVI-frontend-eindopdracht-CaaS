@@ -7,13 +7,10 @@ function FetchedImageDetail() {
 
     const [ catImage, setCatImage ] = useState({})
     const imageUrl = location.state && location.state.imageUrl ? location.state.imageUrl : "";
-    console.log("cat object", catImage)
 
     useEffect(() => {
         setCatImage(imageUrl);
     }, [imageUrl]);
-
-    console.log("catImage URL:", catImage);
 
     const [error, toggleError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -28,16 +25,11 @@ function FetchedImageDetail() {
             favorites.push(imageUrl);
             localStorage.setItem("favorites", JSON.stringify(favorites));
             setSuccessMessage("Afbeelding toegevoegd aan favorieten")
-            console.log("Afbeelding opgeslagen")
         } else {
-            console.log("Maximum aantal afbeeldingen overschreden");
             toggleError(true);
             setErrorMessage("Je kunt maximaal 24 afbeeldingen opslaan in Favorieten.")
         }
     }
-
-    console.log("catImage URL:", catImage);
-    console.log("Image URL from state:", imageUrl);
 
     return (
         <div className="fetched-image-button-container">

@@ -16,26 +16,19 @@ function FavoriteImageDetail() {
     const navigate = useNavigate()
 
     useEffect(() => {
-
-        console.log("favorites")
     }, [favorites])
 
 
     if (!favorites[index]) {
-        console.log("Image not found")
         return <p>Afbeelding niet gevonden</p>;
     }
 
     const imageUrl = favorites[index];
-    console.log("Image URL:", imageUrl);
 
     const handleRemoveClick = () => {
         localStorage.setItem("favorites", "")
-        console.log(favorites)
         updateFavorites(favorites.splice(index, 1))
-        console.log(favorites)
         localStorage.setItem("favorites", JSON.stringify(favorites))
-        console.log(index)
         navigate("/favorites");
     };
 

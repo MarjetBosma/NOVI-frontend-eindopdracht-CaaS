@@ -29,14 +29,11 @@ function SignIn() {
         async function onSubmit(data) {
             toggleError(false);
             toggleLoading(true);
-            console.log(data);
 
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", data, {
                 });
                 setErrorMessageSignin("")
-                console.log(response.data.accessToken);
-                console.log("Gebruiker is ingelogd")
                 login(response.data.accessToken)
                 navigate("/images");
 

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import NavigationBar from "./components/NavigationBar";
+import NavigationBar from "./navigation-bar/NavigationBar";
 import Home from "./pages/home/Home";
 import SignUp from "./pages/signup/SignUp";
 import SignIn from "./pages/signin/SignIn";

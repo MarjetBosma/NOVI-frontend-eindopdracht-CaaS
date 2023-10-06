@@ -27,14 +27,11 @@ function SignUp() {
         async function onSubmit(data) {
             toggleError(false);
             toggleLoading(true);
-            console.log(data);
 
             try {
                 const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", data, {
                 });
                 setErrorMessageSignup("")
-                console.log(response.data);
-                console.log("Gebruiker is geregistreerd")
                 navigate("/signin");
 
             } catch(e) {

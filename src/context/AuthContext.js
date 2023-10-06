@@ -44,7 +44,6 @@ function AuthContextProvider ({ children }) {
 
         fetchUserData(accessToken, "/images");
         navigate("/images");
-        console.log("Gebruiker is ingelogd");
     }
 
     function logout() {
@@ -57,7 +56,6 @@ function AuthContextProvider ({ children }) {
             status: "done",
         }));
         navigate("/");
-        console.log("Gebruiker is uitgelogd");
     }
 
     async function fetchUserData(token, redirectUrl) {
@@ -68,7 +66,6 @@ function AuthContextProvider ({ children }) {
                     Authorization: `Bearer ${token}`,
                 },
             } );
-            console.log(response.data);
 
             toggleIsAuth((prevAuth) => ({
                 ...prevAuth,
@@ -102,7 +99,6 @@ function AuthContextProvider ({ children }) {
     }
 
     useEffect( () => {
-        console.log(isAuth);
     }, [isAuth])
 
 

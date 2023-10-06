@@ -11,7 +11,6 @@ function Favorites() {
     const [selectedImages, setSelectedImages] = useState([]);
 
     useEffect(() => {
-        console.log(favorites);
     },[favorites])
 
     function handleImageClick(index) {
@@ -29,11 +28,8 @@ function Favorites() {
 
     function handleDeleteSelection() {
         const updatedFavorites = favorites.filter((item, index) => !selectedImages.includes(index));
-        console.log("Updated favorites:", updatedFavorites);
 
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-        console.log("Favorites in local storage after update:", JSON.parse(localStorage.getItem("favorites")));
-
         setSelectedImages([]);
     }
 
@@ -70,7 +66,7 @@ function Favorites() {
                 <h2>Jouw favoriete katten</h2>
                 <p>Bewaar hier jouw lievelingsplaatjes en bekijk ze opnieuw wanneer je maar wilt! </p>
                 <div className="logo-container">
-                    <img className="logo-large" src={logo} alt="Logo Cat as a Service, cat with glasses and laptop"/>
+                    <img className="logo-large" src={logo} alt="Logo Cat as a Service"/>
                 </div>
             </section>
         </div>
