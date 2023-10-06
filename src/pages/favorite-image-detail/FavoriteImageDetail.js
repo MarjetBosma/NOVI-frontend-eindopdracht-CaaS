@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Button from "./Button";
+import Button from "../../components/Button";
 import "./FavoriteImageDetail.css"
-import logo from "../assets/caas-logo-no-text.jpg";
+import logo from "../../assets/caas-logo-no-text.jpg";
 
 function FavoriteImageDetail() {
 

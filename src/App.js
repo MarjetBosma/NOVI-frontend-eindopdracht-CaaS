@@ -7,8 +7,8 @@ import SignIn from "./pages/signin/SignIn";
 import Images from "./pages/images/Images";
 import Profile from "./pages/profile/Profile";
 import Favorites from "./pages/favorites/Favorites";
-import FavoriteImageDetail from "./components/FavoriteImageDetail";
-import FetchedImageDetail from "./components/FetchedImageDetail";
+import FavoriteImageDetail from "./pages/favorite-image-detail/FavoriteImageDetail";
+import FetchedImageDetail from "./pages/fetched-image-detail/FetchedImageDetail";
 import NotFound from "./pages/notFound/NotFound";
 import { AuthContext } from "./context/AuthContext";
 import logo from "./assets/caas-logo-no-text.jpg"
