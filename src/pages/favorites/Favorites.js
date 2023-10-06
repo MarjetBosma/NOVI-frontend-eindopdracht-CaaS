@@ -70,7 +70,7 @@ function Favorites() {
                 <h2>Jouw favoriete katten</h2>
                 <p>Bewaar hier jouw lievelingsplaatjes en bekijk ze opnieuw wanneer je maar wilt! </p>
                 <div className="logo-container">
-                    <img className="logo-large" src={logo} alt="Logo Cat as a Service"/>
+                    <img className="logo-large" src={logo} alt="Logo Cat as a Service, cat with glasses and laptop"/>
                 </div>
             </section>
         </div>

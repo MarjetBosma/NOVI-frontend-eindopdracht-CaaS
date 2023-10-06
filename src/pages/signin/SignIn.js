@@ -101,7 +101,7 @@ function SignIn() {
                 <h2>Log in op je account</h2>
                 <p>Log snel in voor je dagelijkse dosis kattenliefde!</p>
                 <div className="logo-container">
-                    <img className="logo-large" src={logo} alt="Logo Cat as a Service"/>
+                    <img className="logo-large" src={logo} alt="Logo Cat as a Service, cat with glasses and laptop"/>
                 </div>
             </section>
         </div>

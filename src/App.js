@@ -21,7 +21,7 @@ function App() {
       <header>
         <span className="logo-text-container-header">
             <span className="logo-container-header">
-              <img className="logo-small" src={logo} alt="logo"/>
+              <img className="logo-small" src={logo} alt="Logo Cat as a Service, cat with glasses and laptop"/>
             </span>
             <span className="text-container-header">
                 <h3 className="caas-small">CaaS</h3>
