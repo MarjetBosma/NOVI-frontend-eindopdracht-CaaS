@@ -303,10 +303,6 @@ useEffect(() => {
                                 validate: (value) =>
                                 value || "Selecteer een afbeelding voor je profielfoto",
                             }}
-                           // onChange={(e) => {
-                           //      console.log("InputField onChange triggered");
-                           //      handleProfilePictureUpload(e)
-                           // }}
                            register={register}
                            errors={errors}
                         />
