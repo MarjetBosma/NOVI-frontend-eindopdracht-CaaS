@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css"
 import logo from "../../assets/caas-logo-no-text.jpg";
 import Button from "../../components/Button";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
 
     const navigate = useNavigate();
+    const [showModalWelcome, setShowModalWelcome] = useState(false);
 
     const handleSignInClick = () => {
         navigate("/signin");
@@ -16,7 +17,20 @@ function Home() {
         navigate("/signup");
     }
 
+    const closeWelcomeModal = () => {
+        setShowModalWelcome(false);
+    }
+
+    useEffect(() => {
+        const isFirstRender = !sessionStorage.getItem("hasVisited");
+        if (isFirstRender) {
+            setShowModalWelcome(true);
+            sessionStorage.setItem("hasVisited", "true");
+        }
+    }, []);
+
     return (
+
         <div className="inner-container">
           <section className="logo-container--logo-container-home">
             <img className="logo-large--logo-large-home" src={logo} alt="Logo Cat as a Service, cat with glasses and laptop"/>
@@ -34,6 +48,21 @@ function Home() {
                   Account aanmaken
               </Button>
           </section>
+          {showModalWelcome && (
+              <div className="welcome-modal">
+                  <div className="welcome-modal-content">
+                    <h2>Welkom!</h2>
+                    <p>Deze webapplicatie heb ik gemaakt in het kader van de leerlijn Frontend Development, aan de NOVI Hogeschool. Uiteraard ben ik erg trots op het eindresultaat!</p>
+                    <p>Ik heb alleen de "voorkant" hoeven bouwen, dus het deel dat jij als gebruiker ziet. Dat brengt beperkingen met zich mee: omdat er geen echte server aan de "achterkant" aanwezig is, kunnen gegevens niet langdurig worden opgeslagen. Je favoriete kattenplaatjes worden bewaard zolang de pagina is geopend, en verdwijnen na het afsluiten van de pagina. Je gebruikersnaam en wachtwoord blijven actief zolang de applicatie actief is, en na afsluiten worden deze nog ongeveer een uur bewaard op een soort simulatieserver. Als je deze website dus een dag later opnieuw bezoekt. moet je eerst jezelf opnieuw registreren.</p>
+                    <p>Los daarvan is het zeker de moeite waard om de app te bekijken en uit te proberen. Ik hoop dat alle gezellige kattenplaatjes bij jou ook zorgen voor een glimlach!</p>
+                    <Button className="close-welcome-modal-button"
+                            type="button"
+                            clickHandler={closeWelcomeModal}>
+                        Begrepen!
+                    </Button>
+                  </div>
+                </div>
+            )}
         </div>
     );
 }
